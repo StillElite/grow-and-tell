@@ -1,2 +1,12 @@
 node_modules
 trace
+# dependencies
+node_modules
+
+# Next.js build output
+.next
+
+# logs and system files
+*.log
+.DS_Store
+.env.local
