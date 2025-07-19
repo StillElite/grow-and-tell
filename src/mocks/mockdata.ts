@@ -273,83 +273,12 @@ export const beds: Bed[] = [
 // --------------------
 // Plant Log Mock Data
 // --------------------
-
-export type Outcome = 'Successful' | 'Poor' | 'Failed';
-
-export type PlantingLog = {
+export interface PlantingRecord {
   id: string;
+  cropId: string;
   cropName: string;
-
-  datePlanted: string;
-  harvestedDate: string;
+  bedId: string;
   bedName: string;
+  datePlanted: string;
   notes?: string;
-  outcome?: Outcome;
-};
-
-export const mockPlantings: PlantingLog[] = [
-  {
-    id: '1',
-    cropName: 'Tomatoes',
-    datePlanted: '2025-05-30',
-    harvestedDate: '2025-08-12',
-    bedName: 'Bed 1',
-    notes: 'Possibly not enough sun',
-    outcome: 'Poor',
-  },
-  {
-    id: '2',
-    cropName: 'Broccoli',
-    datePlanted: '2025-04-08',
-    harvestedDate: '2025-06-03',
-    bedName: 'Bed 2',
-    notes: 'May have been overcrowded',
-
-    outcome: 'Successful',
-  },
-  {
-    id: '3',
-    cropName: 'Squash',
-    datePlanted: '2025-06-20',
-    harvestedDate: '2025-08-20',
-    bedName: 'Bed 1',
-    notes: 'Overwatered',
-    outcome: 'Failed',
-  },
-  {
-    id: '4',
-    cropName: 'Tomatoes',
-    datePlanted: '2025-05-15',
-    harvestedDate: '2025-08-10',
-    bedName: 'Bed 3',
-    notes: 'Roma variety',
-    outcome: 'Successful',
-  },
-  {
-    id: '5',
-    cropName: 'Peppers',
-    datePlanted: '2025-05-28',
-    harvestedDate: '2025-08-15',
-    bedName: 'Bed 2',
-    notes: 'Thrived in partial sun',
-    outcome: 'Successful',
-  },
-  {
-    id: '6',
-    cropName: 'Lettuce',
-    datePlanted: '2025-03-20',
-    harvestedDate: '2025-04-15',
-    bedName: 'Bed 1',
-    notes: 'Bolted early',
-    outcome: 'Failed',
-  },
-  {
-    id: '7',
-    cropName: 'Tomatoes',
-    datePlanted: '2025-05-18',
-    harvestedDate: '2025-08-11',
-    bedName: 'Bed 2',
-    notes: 'Heirloom – small fruit',
-    outcome: 'Poor',
-  },
-];
+}

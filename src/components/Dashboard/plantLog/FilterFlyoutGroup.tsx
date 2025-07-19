@@ -1,4 +1,3 @@
-import React from 'react';
 import { getAccentColor } from '../../../utils/getAccentColor';
 import { ViewKey } from '../../../mocks/mockdata';
 

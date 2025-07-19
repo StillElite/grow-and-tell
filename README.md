@@ -36,8 +36,6 @@ Grow & Tell helps home gardeners:
 
 ## 📸 Screenshots
 
-_(Insert screenshots later if you'd like)_
-
 ---
 
 Let me know once you’ve added and committed that, and I’ll walk you through making it look clean on GitHub.

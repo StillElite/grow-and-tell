@@ -1,6 +1,5 @@
-'use client'; // if you're using Next.js 13+
+'use client';
 import Image from 'next/image';
-
 import { useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
