@@ -20,12 +20,10 @@ export const FilterFlyoutGroup: React.FC<FilterFlyoutGroupProps> = ({
   name,
   onChange,
 }) => {
-  const { bgAccent } = getAccentColor(ViewKey.PlantLog);
-
   const inputClasses = [
     'peer appearance-none w-5 h-5 border border-gray-300 bg-white',
     type === 'radio' ? 'rounded-full' : 'rounded',
-    `checked:${bgAccent}`,
+    'checked:bg-[#79B040]',
     'checked:border-[#79B040]',
     'focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#79B040]',
   ].join(' ');
@@ -47,7 +45,7 @@ export const FilterFlyoutGroup: React.FC<FilterFlyoutGroupProps> = ({
   };
 
   return (
-    <div className='mb-6 bg-white rounded-xl p-4 shadow-sm'>
+    <div className='mb-6 bg-white rounded-lg border border-gray-200 p-4 shadow-sm'>
       <h3 className='font-bold text-gray-900 mb-3'>{label}</h3>
       <div className='grid grid-cols-2 gap-3'>
         {options.map((option, index) => (
@@ -80,7 +78,13 @@ export const FilterFlyoutGroup: React.FC<FilterFlyoutGroupProps> = ({
                 <span className='absolute inset-0 m-auto w-2 h-2 rounded-full bg-white opacity-0 scale-75 transition-all duration-200 ease-out peer-checked:opacity-100 peer-checked:scale-100' />
               )}
             </span>
-            <span id={`${name}-${option}`}>{option}</span>
+            <span
+              id={`${name}-${option}`}
+              className='text-[13px] leading-snug break-words max-w-[160px] truncate'
+              title={option}
+            >
+              {option}
+            </span>
           </label>
         ))}
       </div>

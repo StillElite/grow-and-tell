@@ -1,7 +1,6 @@
 // --------------------
 // Interfaces
 // --------------------
-
 export interface FeatureCard {
   title: string;
   description: string;
@@ -79,38 +78,6 @@ export enum ViewKey {
   Compost = 'Compost',
   Tasks = 'Tasks',
 }
-
-export const getPlanningFeatureCards = (beds: Bed[]): PlanningFeatureCard[] => {
-  const totalCrops = beds.reduce((sum, bed) => sum + bed.crops.length, 0);
-
-  return [
-    {
-      title: 'Beds',
-      description: `${beds.length} Active`,
-      image: '/images/garden-bed-icon.png',
-      viewKey: ViewKey.Beds,
-    },
-    {
-      title: 'Plant Log',
-      description: `${totalCrops} Entries`,
-      image: '/images/planting-icon.png',
-      viewKey: ViewKey.PlantLog,
-    },
-    {
-      title: 'Compost',
-      description: '2 Bins',
-      image: '/images/compost-icon3.png',
-      viewKey: ViewKey.Compost,
-    },
-    {
-      title: 'Tasks',
-      description: 'Coming soon',
-      image: '/images/task-icon.png',
-      viewKey: ViewKey.Tasks,
-      comingSoon: true,
-    },
-  ];
-};
 
 //
 // --------------------

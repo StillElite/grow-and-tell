@@ -3,18 +3,21 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
 import { FilterFlyoutGroup } from './FilterFlyoutGroup';
 import { toggleArrayValue } from '../../../utils/toggleArrayValue';
-import { getAccentColor } from '../../../utils/getAccentColor';
-import { ViewKey } from '../../../mocks/mockdata';
-import { clsx } from 'clsx';
 
 interface FilterFlyoutProps {
   isOpen: boolean;
   onClose: () => void;
+  cropOptions: string[];
+  bedOptions: string[];
+  dateOptions: string[];
 }
 
 export const FilterFlyout: React.FC<FilterFlyoutProps> = ({
   isOpen,
   onClose,
+  cropOptions,
+  bedOptions,
+  dateOptions,
 }) => {
   const [shouldRender, setShouldRender] = useState(isOpen);
   const [animateIn, setAnimateIn] = useState(false);
@@ -22,8 +25,6 @@ export const FilterFlyout: React.FC<FilterFlyoutProps> = ({
   const [selectedCrop, setSelectedCrop] = useState<string[]>([]);
   const [selectedBed, setSelectedBed] = useState<string[]>([]);
   const [selectedDate, setSelectedDate] = useState<string[]>([]);
-
-  const { bgAccent } = getAccentColor(ViewKey.PlantLog);
 
   const getFilterPanelClasses = (animateIn: boolean) => `
   bg-gray-50 w-80 max-w-full h-full shadow-lg p-6 relative
@@ -73,16 +74,16 @@ export const FilterFlyout: React.FC<FilterFlyoutProps> = ({
         </button>
         <h2 className='text-xl font-semibold mb-6'>All Filters</h2>
         <FilterFlyoutGroup
-          label='Crop'
-          options={['Tomato', 'Pepper', 'Carrot']}
+          label='Crops'
+          options={cropOptions}
           selected={selectedCrop}
           onChange={(value) =>
             setSelectedCrop((prev) => toggleArrayValue(prev, value))
           }
         />
         <FilterFlyoutGroup
-          label='Bed'
-          options={['Bed 1', 'Bed 2', 'Bed 3']}
+          label='Beds'
+          options={bedOptions}
           selected={selectedBed}
           onChange={(value) =>
             setSelectedBed((prev) => toggleArrayValue(prev, value))
@@ -90,7 +91,7 @@ export const FilterFlyout: React.FC<FilterFlyoutProps> = ({
         />
         <FilterFlyoutGroup
           label='Date'
-          options={['Spring', 'Summer', 'Fall']}
+          options={dateOptions}
           selected={selectedDate}
           type='radio'
           name='date'
@@ -103,10 +104,7 @@ export const FilterFlyout: React.FC<FilterFlyoutProps> = ({
             setSelectedBed([]);
             setSelectedDate([]);
           }}
-          className={clsx(
-            'mt-6 w-full py-2 px-4 text-sm font-semibold text-white rounded-md',
-            bgAccent
-          )}
+          className='mt-6 w-full bg-lime-600 text-white py-2 rounded'
         >
           Clear All
         </button>

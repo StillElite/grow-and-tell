@@ -59,7 +59,7 @@ export const FilterDropdown: React.FC<FilterDropdownProps> = ({
             </ListboxButton>
 
             {open && (
-              <ListboxOptions className='absolute z-10 mt-1 w-full rounded-md bg-white py-1 shadow-lg border border-gray-200'>
+              <ListboxOptions className='absolute z-10 mt-1 max-h-48 w-full overflow-y-auto rounded-md border border-gray-200 bg-white shadow-md focus:outline-none py-1'>
                 <ListboxOption
                   key='all'
                   value=''

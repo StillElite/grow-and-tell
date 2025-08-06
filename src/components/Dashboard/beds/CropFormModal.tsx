@@ -68,10 +68,10 @@ const CropFormModal: React.FC<CropFormModalProps> = ({
       name: name.trim(),
       datePlanted: datePlanted.trim(),
       notes: notes.trim(),
-      id,
+      id: cropToEdit?.id,
     });
     toast.success(
-      cropToEdit ? 'Crop updated successfully!' : 'New crop boo added!'
+      cropToEdit ? 'Crop updated successfully!' : 'New crop added!'
     );
 
     resetForm();

@@ -13,6 +13,9 @@ interface ConfirmModalProps {
   message: React.ReactNode;
   confirmLabel?: string;
   cancelLabel?: string;
+  onSecondaryConfirm?: () => void;
+  secondaryConfirmLabel?: string;
+  secondaryConfirmDisabled?: boolean;
 }
 
 const ConfirmModal: React.FC<ConfirmModalProps> = ({
@@ -23,13 +26,16 @@ const ConfirmModal: React.FC<ConfirmModalProps> = ({
   message = "This action can't be undone. Please confirm if you want to proceed.",
   confirmLabel = 'Confirm',
   cancelLabel = 'Cancel',
+  onSecondaryConfirm,
+  secondaryConfirmLabel,
+  secondaryConfirmDisabled = false,
 }) => {
   return (
     <Modal
       isOpen={isOpen}
       onRequestClose={onClose}
       contentLabel='Confirmation'
-      className='relative w-full max-w-sm mx-auto mt-24 bg-white p-6 rounded-lg shadow border border-gray-200 focus:outline-none'
+      className='relative w-full max-w-lg mx-auto mt-24 bg-white p-6 rounded-lg shadow border border-gray-200 focus:outline-none'
       overlayClassName='fixed inset-0 bg-black bg-opacity-40 flex items-start justify-center z-50'
       shouldCloseOnOverlayClick={false}
     >
@@ -66,6 +72,19 @@ const ConfirmModal: React.FC<ConfirmModalProps> = ({
           >
             {confirmLabel}
           </button>
+          {onSecondaryConfirm && (
+            <button
+              onClick={onSecondaryConfirm}
+              disabled={secondaryConfirmDisabled}
+              className={`px-4 py-2 rounded ${
+                secondaryConfirmDisabled
+                  ? 'bg-gray-300 text-gray-600 cursor-not-allowed'
+                  : 'bg-yellow-600 text-white hover:bg-yellow-700'
+              }`}
+            >
+              {secondaryConfirmLabel}
+            </button>
+          )}
         </div>
       </div>
     </Modal>

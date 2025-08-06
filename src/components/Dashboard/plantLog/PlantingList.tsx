@@ -13,7 +13,8 @@ export const PlantingList: React.FC<PlantingListProps> = ({
         <PlantingCard
           key={planting.id}
           id={planting.id}
-          name={planting.name}
+          cropId={planting.cropId}
+          cropName={planting.cropName}
           bedName={planting.bedName}
           datePlanted={planting.datePlanted}
           notes={planting.notes}

@@ -8,6 +8,7 @@ import { subtractDays } from '../../../utils/dateMatch';
 import { FilterFlyout } from './FilterFlyout';
 import { ViewKey } from '../../../mocks/mockdata';
 import PageHeader from '../../shared/PageHeader';
+import { usePlantingHistoryContext } from '../../../context/PlantingHistoryContext';
 
 export interface PlantingSectionProps {
   onNavigate: (view: ViewKey) => void;
@@ -23,6 +24,7 @@ const PlantingSection: React.FC<PlantingSectionProps> = ({
   const [selectedBed, setSelectedBed] = useState('');
   const [selectedDate, setSelectedDate] = useState('');
   const [isFlyoutOpen, setIsFlyoutOpen] = useState(false);
+  const { plantingRecords } = usePlantingHistoryContext();
 
   const handleLogout = () => {
     window.location.href = '/';
@@ -39,15 +41,13 @@ const PlantingSection: React.FC<PlantingSectionProps> = ({
   };
 
   // flatmap converts all beds and their crops into a single flat array of crop objects
-  const plantingHistory = beds.flatMap((bed) =>
-    bed.crops.map((crop) => ({
-      ...crop,
-      bedName: bed.name,
-    }))
-  );
+  const plantingHistory = plantingRecords.map((record) => ({
+    ...record,
+    bedName: record.bedName?.trim(),
+  }));
 
   const cropOptions = Array.from(
-    new Set(plantingHistory.map((p) => capitalize(p.name)))
+    new Set(plantingHistory.map((p) => capitalize(p.cropName)))
   ).sort();
 
   const bedOptions = Array.from(
@@ -61,9 +61,9 @@ const PlantingSection: React.FC<PlantingSectionProps> = ({
     'Past 6 Months',
   ];
 
-  const filteredPlantings = plantingHistory.filter((p) => {
+  const filteredPlantings = plantingRecords.filter((p) => {
     const matchesCrop = selectedCrop
-      ? capitalize(p.name) === selectedCrop
+      ? capitalize(p.cropName) === selectedCrop
       : true;
     const matchesBed = selectedBed
       ? capitalize(p.bedName) === selectedBed
@@ -116,7 +116,13 @@ const PlantingSection: React.FC<PlantingSectionProps> = ({
         onOpenFilters={handleOpenFilters}
       />
 
-      <FilterFlyout isOpen={isFlyoutOpen} onClose={handleCloseFilters} />
+      <FilterFlyout
+        isOpen={isFlyoutOpen}
+        onClose={handleCloseFilters}
+        cropOptions={cropOptions}
+        bedOptions={bedOptions}
+        dateOptions={dateOptions}
+      />
       <PlantingList plantingHistory={filteredPlantings} />
     </>
   );

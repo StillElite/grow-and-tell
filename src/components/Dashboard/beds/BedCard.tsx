@@ -12,6 +12,7 @@ import { useState } from 'react';
 import CropFormModal from './CropFormModal';
 import ConfirmModal from '../../shared/ConfirmModal';
 import { capitalize } from '../../../utils/capitalize';
+import { usePlantingHistoryContext } from '../../../context/PlantingHistoryContext';
 
 interface BedCardProps {
   bed: Bed;
@@ -31,13 +32,21 @@ export const BedCard = ({
   const [isCropFormModalOpen, setIsCropFormModalOpen] = useState(false);
   const [isConfirmOpen, setIsConfirmOpen] = useState(false);
   const { textAccent } = getAccentColor(ViewKey.Beds);
+  const { addPlantingToHistory, deletePlantingsForBed, plantingRecords } =
+    usePlantingHistoryContext();
+
+  const hasPlantingHistory = plantingRecords.some(
+    (record) => record.bedId === bed.id
+  );
+
   const hasCrops = bed.crops.length > 0;
 
-  const deleteBedMessage = (
+  const confirmMessage = (
     <>
-      Are you sure you want to delete <strong>{bed.name}</strong>?
+      Are you sure you want to remove <strong>{bed.name}</strong>?
     </>
   );
+
   const pillClass =
     'inline-block bg-[#d9e9da] text-[#2a452c] text-xs font-medium px-2 py-0.5 rounded-full';
 
@@ -57,14 +66,38 @@ export const BedCard = ({
       crops: [...bed.crops, newCrop],
     };
 
+    addPlantingToHistory({
+      id: crypto.randomUUID(), // Unique ID for the history entry
+      cropId: newCrop.id, // Link to the crop itself
+      cropName: newCrop.name,
+      bedId: bed.id,
+      bedName: bed.name,
+      datePlanted: newCrop.datePlanted,
+      notes: newCrop.notes,
+    });
+
     onAddCrop(updatedBed);
+  };
+
+  const handleDeleteBedOnly = () => {
+    onDeleteBed(bed.id);
+    setIsConfirmOpen(false);
+  };
+
+  const handleDeleteBedAndHistory = () => {
+    onDeleteBed(bed.id);
+    deletePlantingsForBed(
+      bed.id,
+      bed.crops.map((c) => c.id)
+    );
+    setIsConfirmOpen(false);
   };
 
   return (
     <>
       <div
         key={bed.id}
-        className='rounded-lg border border-gray-200 bg-white p-6 shadow-sm transition flex flex-col'
+        className='rounded-lg border border-gray-200 bg-white p-6 shadow-sm transition flex flex-col '
       >
         {/* Top section */}
         <div className='mb-4 flex items-start justify-between border-b border-gray-300'>
@@ -92,9 +125,13 @@ export const BedCard = ({
           <ConfirmModal
             isOpen={isConfirmOpen}
             onClose={() => setIsConfirmOpen(false)}
-            onConfirm={() => onDeleteBed(bed.id)}
-            title='Delete Bed'
-            message={deleteBedMessage}
+            onConfirm={handleDeleteBedOnly}
+            confirmLabel='Remove bed'
+            onSecondaryConfirm={handleDeleteBedAndHistory}
+            secondaryConfirmLabel='Remove bed from history'
+            secondaryConfirmDisabled={!hasPlantingHistory}
+            title='Remove Bed'
+            message={confirmMessage}
           />
         </div>
         <div className='flex-1'>

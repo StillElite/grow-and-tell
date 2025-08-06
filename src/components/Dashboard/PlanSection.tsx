@@ -1,15 +1,55 @@
 import Image from 'next/image';
-import { getPlanningFeatureCards, ViewKey } from '../../mocks/mockdata';
+import { Bed, PlanningFeatureCard, ViewKey } from '../../mocks/mockdata';
 import { getAccentColor } from '../../utils/getAccentColor';
 import { useBedContext } from '../../context/BedContext';
+import { usePlantingHistoryContext } from '../../context/PlantingHistoryContext';
 
 interface PlanSectionProps {
   onSelect: (view: ViewKey) => void;
 }
+const getPlanningFeatureCards = (
+  beds: Bed[],
+  plantingRecordCount: number
+): PlanningFeatureCard[] => {
+  return [
+    {
+      title: 'Beds',
+      description: `${beds.length} Active`,
+      image: '/images/garden-bed-icon.png',
+      viewKey: ViewKey.Beds,
+    },
+    {
+      title: 'Plant Log',
+      description: `${plantingRecordCount} ${
+        plantingRecordCount === 1 ? 'Entry' : 'Entries'
+      }`,
+      image: '/images/planting-icon.png',
+      viewKey: ViewKey.PlantLog,
+    },
+    {
+      title: 'Compost',
+      description: '2 Bins',
+      image: '/images/compost-icon3.png',
+      viewKey: ViewKey.Compost,
+    },
+    {
+      title: 'Tasks',
+      description: 'Coming soon',
+      image: '/images/task-icon.png',
+      viewKey: ViewKey.Tasks,
+      comingSoon: true,
+    },
+  ];
+};
 
 const PlanSection: React.FC<PlanSectionProps> = ({ onSelect }) => {
   const { beds } = useBedContext();
-  const planningFeatureCards = getPlanningFeatureCards(beds);
+  const { plantingRecords } = usePlantingHistoryContext();
+
+  const planningFeatureCards = getPlanningFeatureCards(
+    beds,
+    plantingRecords.length
+  );
 
   return (
     <section aria-labelledby='plan-heading'>
@@ -19,7 +59,6 @@ const PlanSection: React.FC<PlanSectionProps> = ({ onSelect }) => {
       >
         Plan Your Garden
       </h2>
-
       <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6'>
         {planningFeatureCards.map((feature) => {
           const { bgAccent } = getAccentColor(feature.viewKey);
@@ -27,12 +66,23 @@ const PlanSection: React.FC<PlanSectionProps> = ({ onSelect }) => {
           return (
             <div
               key={feature.title}
+              role='button'
+              tabIndex={feature.comingSoon ? -1 : 0}
+              aria-disabled={feature.comingSoon}
+              onKeyDown={(e) => {
+                if (
+                  !feature.comingSoon &&
+                  (e.key === 'Enter' || e.key === ' ')
+                ) {
+                  onSelect(feature.viewKey);
+                }
+              }}
               onClick={() => {
                 if (!feature.comingSoon && feature.viewKey) {
                   onSelect(feature.viewKey);
                 }
               }}
-              className={`cursor-pointer bg-white rounded-lg shadow overflow-hidden transition hover:shadow-lg ${
+              className={`cursor-pointer bg-white rounded-lg shadow overflow-hidden transition hover:shadow-lg focus:outline-none focus-visible:ring-2 focus-visible:ring-[#79B040] ${
                 feature.comingSoon ? 'opacity-60 pointer-events-none' : ''
               }`}
             >

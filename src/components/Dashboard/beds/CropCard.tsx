@@ -11,6 +11,7 @@ import { useState } from 'react';
 import ConfirmModal from '../../shared/ConfirmModal';
 import { formatDate } from '../../../utils/formatDate';
 import { capitalize } from '../../../utils/capitalize';
+import { usePlantingHistoryContext } from '../../../context/PlantingHistoryContext';
 
 interface CropCardProps {
   crop: Crop;
@@ -25,12 +26,29 @@ export const CropCard: React.FC<CropCardProps> = ({
 }) => {
   const [isConfirmOpen, setIsConfirmOpen] = useState(false);
   const { textAccent } = getAccentColor(ViewKey.Beds);
+  const { plantingRecords, deletePlantingsByCropId } =
+    usePlantingHistoryContext();
 
-  const deleteCropMessage = (
+  const confirmMessage = (
     <>
       Are you sure you want to remove <strong>{crop.name}</strong>?
     </>
   );
+
+  const hasPlantingHistory = plantingRecords.some(
+    (record) => record.cropId === crop.id
+  );
+
+  const handleDeleteCropOnly = () => {
+    onDelete?.();
+    setIsConfirmOpen(false);
+  };
+
+  const handleDeleteCropAndHistory = () => {
+    onDelete?.();
+    deletePlantingsByCropId(crop.id);
+    setIsConfirmOpen(false);
+  };
 
   return (
     <div
@@ -60,13 +78,16 @@ export const CropCard: React.FC<CropCardProps> = ({
             <FontAwesomeIcon icon={faTrash} aria-hidden='true' />
           </button>
         </div>
-
         <ConfirmModal
           isOpen={isConfirmOpen}
           onClose={() => setIsConfirmOpen(false)}
-          onConfirm={onDelete}
-          title='Remove Crop'
-          message={deleteCropMessage}
+          onConfirm={handleDeleteCropOnly}
+          confirmLabel='Remove bed'
+          onSecondaryConfirm={handleDeleteCropAndHistory}
+          secondaryConfirmLabel='Remove bed from history'
+          secondaryConfirmDisabled={!hasPlantingHistory}
+          title='Remove Bed'
+          message={confirmMessage}
         />
       </div>
 

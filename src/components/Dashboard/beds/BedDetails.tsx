@@ -7,6 +7,7 @@ import SectionHeader from '../../shared/SectionHeader';
 import { BreadcrumbItem } from '../../shared/Breadcrumb';
 import PageHeader from '../../shared/PageHeader';
 import toast from 'react-hot-toast';
+import { usePlantingHistoryContext } from '../../../context/PlantingHistoryContext';
 
 interface BedDetailsProps {
   bed: Bed;
@@ -24,6 +25,8 @@ const BedDetails: React.FC<BedDetailsProps> = ({
   const [isCropFormModalOpen, setIsCropFormModalOpen] = useState(false);
   const [cropToEdit, setCropToEdit] = useState<Crop | null>(null);
   const { addCrop, updateCrop, deleteCrop } = useBedContext();
+  const { addPlantingToHistory, updateCropNameInHistory } =
+    usePlantingHistoryContext();
 
   const breadcrumbItems: BreadcrumbItem[] = [
     {
@@ -55,12 +58,25 @@ const BedDetails: React.FC<BedDetailsProps> = ({
 
     if (isEdit) {
       updateCrop(bed.id, newCropData as Crop);
+      updateCropNameInHistory(newCropData.id, newCropData.name);
     } else {
-      addCrop(bed.id, {
+      const newCrop: Crop = {
+        id: crypto.randomUUID(),
         name: newCropData.name,
         datePlanted: newCropData.datePlanted,
         notes: newCropData.notes,
+      };
+
+      addCrop(bed.id, newCrop);
+
+      addPlantingToHistory({
         id: crypto.randomUUID(),
+        cropId: newCrop.id,
+        cropName: newCrop.name,
+        bedId: bed.id,
+        bedName: bed.name,
+        datePlanted: newCrop.datePlanted,
+        notes: newCrop.notes,
       });
     }
 

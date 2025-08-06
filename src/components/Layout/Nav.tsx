@@ -1,6 +1,6 @@
 import Link from 'next/link';
 
-const isLoggedIn = true; // Replace with real auth logic later
+const isLoggedIn = false; // Replace with real auth logic later
 
 const Nav: React.FC = () => {
   return (
