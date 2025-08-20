@@ -1,51 +1,73 @@
-import { FilterDropdown } from './FilterDropdown';
 import { AllFilterButton } from './AllFiltersButton';
+import { getAccentColor } from '../../../utils/getAccentColor';
+import { ViewKey } from '../../../mocks/mockdata';
+import { usePlantingHistoryContext } from '../../../context/PlantingHistoryContext';
+import { MultiSelect } from '../../shared/MultiSelect';
+import { useState } from 'react';
+import { Dropdown } from '../../shared/DropDown';
 
 interface FilterBarProps {
-  crop: string;
-  bed: string;
-  date: string;
-  cropOptions: string[];
-  bedOptions: string[];
-  dateOptions: string[];
-  onCropChange: (value: string) => void;
-  onBedChange: (value: string) => void;
-  onDateChange: (value: string) => void;
   onOpenFilters?: () => void;
 }
 
-export const FilterBar: React.FC<FilterBarProps> = ({
-  crop,
-  bed,
-  date,
-  cropOptions,
-  bedOptions,
-  dateOptions,
-  onCropChange,
-  onBedChange,
-  onDateChange,
-  onOpenFilters,
-}) => {
+export const FilterBar: React.FC<FilterBarProps> = ({ onOpenFilters }) => {
+  const {
+    cropFilter,
+    setCropFilter,
+    bedFilter,
+    setBedFilter,
+    dateFilter,
+    setDateFilter,
+    cropOptions,
+    bedOptions,
+    dateOptions,
+  } = usePlantingHistoryContext();
+
+  const { bgAccent } = getAccentColor(ViewKey.PlantLog);
+
+  type PanelKey = 'crops' | 'beds' | 'date';
+
+  const [openKey, setOpenKey] = useState<PanelKey | null>(null);
+
+  const closeAll = () => setOpenKey(null);
+
+  // one toggler for all buttons
+  const toggle = (key: PanelKey) => {
+    setOpenKey((prev) => (prev === key ? null : key));
+  };
+
   return (
     <div className='flex flex-wrap items-start gap-4 mb-6'>
       <div className='hidden sm:flex gap-4'>
-        <FilterDropdown
+        <MultiSelect
           label='All Crops'
-          value={crop}
-          options={cropOptions}
-          onChange={onCropChange}
+          options={cropOptions.map((opt) => ({ id: opt, label: opt }))}
+          selectedIds={cropFilter}
+          onChange={setCropFilter}
+          onClose={closeAll}
+          bgAccent={bgAccent}
+          open={openKey === 'crops'}
+          onButtonClick={() => toggle('crops')}
         />
-        <FilterDropdown
+        <MultiSelect
           label='All Beds'
-          value={bed}
-          options={bedOptions}
-          onChange={onBedChange}
+          options={bedOptions.map((opt) => ({ id: opt, label: opt }))}
+          selectedIds={bedFilter}
+          onChange={setBedFilter}
+          onClose={closeAll}
+          bgAccent={bgAccent}
+          open={openKey === 'beds'}
+          onButtonClick={() => toggle('beds')}
         />
-        <FilterDropdown
+        <Dropdown
           label='All Dates'
-          value={date}
+          value={dateFilter}
           options={dateOptions}
-          onChange={onDateChange}
+          bgAccent={bgAccent}
+          onChange={setDateFilter}
+          open={openKey === 'date'}
+          onButtonClick={() => toggle('date')}
+          onClose={closeAll}
         />
       </div>
       <AllFilterButton onClick={onOpenFilters} />
