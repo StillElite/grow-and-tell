@@ -1,5 +1,6 @@
-import { getAccentColor } from '../../../utils/getAccentColor';
-import { ViewKey } from '../../../mocks/mockdata';
+import React from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCheck } from '@fortawesome/free-solid-svg-icons';
 
 type InputType = 'checkbox' | 'radio';
 
@@ -10,6 +11,9 @@ interface FilterFlyoutGroupProps {
   type?: InputType;
   name?: string;
   onChange: (value: string) => void;
+  bgAccent: string;
+  checkedBgAccent?: string;
+  borderAccent: string;
 }
 
 export const FilterFlyoutGroup: React.FC<FilterFlyoutGroupProps> = ({
@@ -19,14 +23,17 @@ export const FilterFlyoutGroup: React.FC<FilterFlyoutGroupProps> = ({
   type = 'checkbox',
   name,
   onChange,
+  bgAccent,
+  checkedBgAccent,
+  borderAccent,
 }) => {
-  const inputClasses = [
-    'peer appearance-none w-5 h-5 border border-gray-300 bg-white',
-    type === 'radio' ? 'rounded-full' : 'rounded',
-    'checked:bg-[#79B040]',
-    'checked:border-[#79B040]',
-    'focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#79B040]',
-  ].join(' ');
+  const inputClasses = `
+    peer appearance-none w-5 h-5 border bg-white
+    ${type === 'radio' ? 'rounded-full' : 'rounded'}
+    ${type === 'checkbox' ? checkedBgAccent : ''}
+    focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2
+    focus-visible:outline-${borderAccent}
+  `;
 
   const isChecked = (option: string) =>
     type === 'checkbox' ? selected.includes(option) : selected[0] === option;
@@ -65,17 +72,14 @@ export const FilterFlyoutGroup: React.FC<FilterFlyoutGroupProps> = ({
                 tabIndex={getTabIndex(option, index)}
               />
               {type === 'checkbox' ? (
-                <svg
-                  className='w-4 h-4 text-white absolute pointer-events-none opacity-0 scale-75 transition-all duration-200 ease-out peer-checked:opacity-100 peer-checked:scale-100 left-0 top-0 m-0.5'
-                  fill='none'
-                  stroke='currentColor'
-                  strokeWidth='3'
-                  viewBox='0 0 24 24'
-                >
-                  <path d='M5 13l4 4L19 7' />
-                </svg>
+                <FontAwesomeIcon
+                  icon={faCheck}
+                  className='w-4 h-4 text-white absolute pointer-events-none opacity-0 scale-75 transition-all duration-200 ease-out peer-checked:opacity-100 left-0 top-0 m-0.5'
+                />
               ) : (
-                <span className='absolute inset-0 m-auto w-2 h-2 rounded-full bg-white opacity-0 scale-75 transition-all duration-200 ease-out peer-checked:opacity-100 peer-checked:scale-100' />
+                <span
+                  className={`absolute inset-0 m-auto w-2.5 h-2.5 rounded-full opacity-0 scale-75 transition-all duration-200 ease-out peer-checked:opacity-100 peer-checked:scale-100 ${bgAccent}`}
+                />
               )}
             </span>
             <span

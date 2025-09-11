@@ -1,11 +1,9 @@
-import { useState } from 'react';
 import SectionHeader from '../../shared/SectionHeader';
-import { FilterBar } from './FilterBar';
 import { PlantingList } from './PlantingList';
-import { FilterFlyout } from './FilterFlyout';
 import { ViewKey } from '../../../mocks/mockdata';
 import PageHeader from '../../shared/PageHeader';
 import { usePlantingHistoryContext } from '../../../context/PlantingHistoryContext';
+import PlantingHistoryFilterWrapper from './PlantingHistoryFilterWrapper ';
 
 export interface PlantingSectionProps {
   onNavigate: (view: ViewKey) => void;
@@ -16,9 +14,7 @@ const PlantingSection: React.FC<PlantingSectionProps> = ({
   onNavigate,
   onOpenMenu,
 }) => {
-  const [isFlyoutOpen, setIsFlyoutOpen] = useState(false);
-  const { filteredPlantings, cropOptions, bedOptions, dateOptions } =
-    usePlantingHistoryContext();
+  const { filteredPlantings } = usePlantingHistoryContext();
 
   const handleLogout = () => {
     window.location.href = '/';
@@ -28,11 +24,6 @@ const PlantingSection: React.FC<PlantingSectionProps> = ({
     { label: 'Dashboard', onClick: () => onNavigate?.(ViewKey.Dashboard) },
     { label: 'Plant Log' },
   ];
-
-  const handleCloseFilters = () => setIsFlyoutOpen(false);
-  const handleOpenFilters = () => {
-    setIsFlyoutOpen(true);
-  };
 
   return (
     <>
@@ -46,16 +37,7 @@ const PlantingSection: React.FC<PlantingSectionProps> = ({
         description='Review past plantings to learn what worked where.'
         imageSrc='/images/planting.png'
       />
-
-      <FilterBar onOpenFilters={handleOpenFilters} />
-
-      <FilterFlyout
-        isOpen={isFlyoutOpen}
-        onClose={handleCloseFilters}
-        cropOptions={cropOptions}
-        bedOptions={bedOptions}
-        dateOptions={dateOptions}
-      />
+      <PlantingHistoryFilterWrapper />
       <PlantingList plantingHistory={filteredPlantings} />
     </>
   );

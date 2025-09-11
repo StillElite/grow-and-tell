@@ -1,15 +1,14 @@
 import { useRef, useId } from 'react';
-import { DateRangeKey } from '../../context/PlantingHistoryContext';
 import { useClickOutsideClose } from '../../utils/useClickOutsideClose';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronDown, faCheck } from '@fortawesome/free-solid-svg-icons';
 
 interface DropdownProps {
   label: string;
-  value: DateRangeKey | null;
-  options: DateRangeKey[];
+  value: string | null;
+  options: string[];
   bgAccent: string;
-  onChange: (value: DateRangeKey | null) => void;
+  onChange: (value: string | null) => void;
   open: boolean;
   onButtonClick: () => void;
   onClose: () => void;
@@ -51,14 +50,14 @@ export const Dropdown: React.FC<DropdownProps> = ({
     isActive ? `${bgAccent} border-transparent text-white` : BUTTON_INACTIVE
   }`;
 
-  const handleOptionClick = (option: DateRangeKey) => {
+  const handleOptionClick = (option: string) => {
     onChange(option);
     onClose();
   };
 
   const handleOptionKeyDown = (
     e: React.KeyboardEvent<HTMLDivElement>,
-    option: DateRangeKey | null
+    option: string | null
   ) => {
     if (e.key === 'Enter' || e.key === ' ') {
       e.preventDefault();

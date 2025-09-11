@@ -8,13 +8,14 @@ interface PlantingHistoryContextType {
   filteredPlantings: PlantingRecord[];
   cropFilter: string[];
   bedFilter: string[];
-  dateFilter: DateRangeKey;
+  dateFilter: DateRangeKey | null;
   cropOptions: string[];
   bedOptions: string[];
-  dateOptions: DateRangeKey[];
+  dateOptions: string[];
+  hasActiveFilters: boolean;
   setCropFilter: (value: string[]) => void;
   setBedFilter: (value: string[]) => void;
-  setDateFilter: (value: DateRangeKey) => void;
+  setDateFilter: (value: DateRangeKey | null) => void;
   clearFilters: () => void;
   addPlantingToHistory: (record: PlantingRecord) => void;
   updateBedNameInHistory: (bedId: string, newName: string) => void;
@@ -55,12 +56,6 @@ export const PlantingHistoryProvider = ({
   const [cropFilter, setCropFilter] = useState<string[]>([]);
   const [bedFilter, setBedFilter] = useState<string[]>([]);
   const [dateFilter, setDateFilter] = useState<DateRangeKey | null>(null);
-
-  const clearFilters = () => {
-    setCropFilter([]);
-    setBedFilter([]);
-    setDateFilter(null);
-  };
 
   const cropOptions = Array.from(
     new Set(plantingRecords.map((p) => capitalize(p.cropName)))
@@ -114,6 +109,15 @@ export const PlantingHistoryProvider = ({
     setPlantingRecords((prev) => prev.filter((p) => p.cropId !== cropId));
   };
 
+  const clearFilters = () => {
+    setCropFilter([]);
+    setBedFilter([]);
+    setDateFilter(null);
+  };
+
+  const hasActiveFilters =
+    cropFilter.length > 0 || bedFilter.length > 0 || dateFilter !== null;
+
   const filteredPlantings = plantingRecords.filter((p) => {
     const matchesCrop = cropFilter.length
       ? cropFilter.includes(capitalize(p.cropName))
@@ -156,6 +160,7 @@ export const PlantingHistoryProvider = ({
         cropOptions,
         bedOptions,
         dateOptions,
+        hasActiveFilters,
         setCropFilter,
         setBedFilter,
         setDateFilter,

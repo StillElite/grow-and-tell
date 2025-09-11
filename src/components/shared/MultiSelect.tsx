@@ -15,6 +15,7 @@ interface MultiSelectProps {
   open: boolean;
   onButtonClick: () => void;
   bgAccent: string;
+  altCheckedBgAccent: string;
   onClose: () => void;
 }
 
@@ -32,6 +33,7 @@ export const MultiSelect: React.FC<MultiSelectProps> = ({
   open,
   onButtonClick,
   bgAccent,
+  altCheckedBgAccent,
   onClose,
 }: MultiSelectProps) => {
   const rootRef = useRef<HTMLDivElement>(null);
@@ -134,7 +136,7 @@ export const MultiSelect: React.FC<MultiSelectProps> = ({
                           readOnly
                           tabIndex={-1}
                           aria-hidden='true'
-                          className='peer appearance-none w-5 h-5 border border-gray-300 bg-white rounded checked:bg-[#478143] checked:border-[#478143]'
+                          className={`peer appearance-none w-5 h-5 border border-gray-300 rounded ${altCheckedBgAccent} checked:border-transparent `}
                         />
                         <FontAwesomeIcon
                           icon={faCheck}
