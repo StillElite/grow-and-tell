@@ -1,5 +1,5 @@
 import { clsx } from 'clsx';
-import { getFormLabelClasses } from '../../utils/getFormLabelClasses';
+import { getFormLabelClasses } from '../../../utils/getFormLabelClasses';
 
 interface FormFieldProps {
   id: string;

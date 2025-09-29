@@ -3,13 +3,15 @@ import { Bed, PlanningFeatureCard, ViewKey } from '../../mocks/mockdata';
 import { getAccentColor } from '../../utils/getAccentColor';
 import { useBedContext } from '../../context/BedContext';
 import { usePlantingHistoryContext } from '../../context/PlantingHistoryContext';
+import { useCompostContext } from '../../context/CompostContext';
 
 interface PlanSectionProps {
   onSelect: (view: ViewKey) => void;
 }
 const getPlanningFeatureCards = (
   beds: Bed[],
-  plantingRecordCount: number
+  plantingRecordCount: number,
+  compostBinCount: number
 ): PlanningFeatureCard[] => {
   return [
     {
@@ -28,7 +30,9 @@ const getPlanningFeatureCards = (
     },
     {
       title: 'Compost',
-      description: '2 Bins',
+      description: `${compostBinCount} ${
+        compostBinCount === 1 ? 'Bin' : 'Bins'
+      }`,
       image: '/images/compost-icon3.png',
       viewKey: ViewKey.Compost,
     },
@@ -45,10 +49,12 @@ const getPlanningFeatureCards = (
 const PlanSection: React.FC<PlanSectionProps> = ({ onSelect }) => {
   const { beds } = useBedContext();
   const { plantingRecords } = usePlantingHistoryContext();
+  const { compostBins } = useCompostContext();
 
   const planningFeatureCards = getPlanningFeatureCards(
     beds,
-    plantingRecords.length
+    plantingRecords.length,
+    compostBins.length
   );
 
   return (

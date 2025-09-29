@@ -249,3 +249,54 @@ export interface PlantingRecord {
   datePlanted: string;
   notes?: string;
 }
+
+// (Compost)
+
+export type CompostType = 'Worm' | 'Leaf' | 'Hot' | 'Cold';
+export type CompostStatus = 'Active' | 'Ready';
+
+export interface CompostBin {
+  id: string;
+  type: CompostType;
+  name: string;
+  status: CompostStatus;
+  notes?: string;
+}
+
+export const compostBins: CompostBin[] = [
+  {
+    id: 'bin-001',
+    type: 'Hot',
+    name: 'Back Corner Hot Pile',
+    status: 'Active',
+    notes: 'Turned last week; running warm.',
+  },
+  {
+    id: 'bin-002',
+    type: 'Leaf',
+    name: 'Leaf Mold Bin',
+    status: 'Active',
+    notes: 'Mostly shredded oak leaves.',
+  },
+  {
+    id: 'bin-003',
+    type: 'Worm',
+    name: 'Vermi Tower',
+    status: 'Ready',
+    notes: 'Casting tray nearly full.',
+  },
+  {
+    id: 'bin-004',
+    type: 'Cold',
+    name: 'Yard Waste Pile',
+    status: 'Active',
+    notes: 'Slow build; minimal maintenance.',
+  },
+  {
+    id: 'bin-005',
+    type: 'Hot',
+    name: 'Chip & Manure Mix',
+    status: 'Active',
+    notes: 'Needs browns soon.',
+  },
+];

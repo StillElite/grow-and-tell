@@ -1,40 +1,41 @@
 import Modal from 'react-modal';
 import { useEffect, useState } from 'react';
-import { faTimes, faPlus, faSeedling } from '@fortawesome/free-solid-svg-icons';
+import { faTimes, faPlus, faRecycle } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { Bed } from '../../../mocks/mockdata';
-import { FormField } from '../../shared/forms/FormField';
 import { toast } from 'react-hot-toast';
+import { FormField } from '../../shared/forms/FormField';
+import { SelectFormField } from '../../shared/forms/SelectFormField';
+import { CompostBin, CompostType } from '../../../mocks/mockdata';
 
-interface BedFormModalProps {
+interface CompostBinFormModalProps {
   isOpen: boolean;
   onClose: () => void;
-  onSaveBed: (name: string, size: string, notes: string) => void;
-  bedToEdit?: Bed | null;
+  onSaveCompostBin: (name: string, type: CompostType, notes: string) => void;
+  compostBinToEdit?: CompostBin | null;
 }
 
-const BedFormModal: React.FC<BedFormModalProps> = ({
+const CompostBinFormModal: React.FC<CompostBinFormModalProps> = ({
   isOpen,
   onClose,
-  onSaveBed,
-  bedToEdit,
+  onSaveCompostBin,
+  compostBinToEdit,
 }) => {
   const [name, setName] = useState('');
-  const [size, setSize] = useState('');
+  const [type, setType] = useState<CompostType | ''>('');
   const [notes, setNotes] = useState('');
   const [errors, setErrors] = useState<{ [key: string]: string }>({});
 
   useEffect(() => {
-    if (bedToEdit) {
-      setName(bedToEdit.name);
-      setSize(bedToEdit.size);
-      setNotes(bedToEdit.notes);
+    if (compostBinToEdit && isOpen) {
+      setName(compostBinToEdit.name);
+      setType(compostBinToEdit.type);
+      setNotes(compostBinToEdit.notes);
     } else {
       setName('');
-      setSize('');
+      setType('');
       setNotes('');
     }
-  }, [bedToEdit, isOpen]);
+  }, [compostBinToEdit, isOpen]);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -42,48 +43,49 @@ const BedFormModal: React.FC<BedFormModalProps> = ({
     const newErrors: { [key: string]: string } = {};
 
     if (!name.trim()) {
-      newErrors.name = 'Please enter a bed name.';
+      newErrors.name = 'Please enter a bin name.';
     }
 
-    if (!size.trim()) {
-      newErrors.size = 'Please enter a bed size.';
+    if (!type) {
+      newErrors.type = 'Please enter a bin type.';
     }
 
     if (Object.keys(newErrors).length > 0) {
       setErrors(newErrors);
       return;
     }
-
-    onSaveBed(name.trim(), size.trim(), notes.trim());
-    toast.success(bedToEdit ? 'Bed updated successfully!' : 'New bed added!');
+    onSaveCompostBin(name.trim(), type as CompostType, notes.trim());
+    toast.success(
+      compostBinToEdit ? 'Bin updated successfully!' : 'New bin added!'
+    );
 
     setName('');
-    setSize('');
+    setType('');
     setNotes('');
     onClose();
   };
 
   const handleClose = () => {
     setName('');
-    setSize('');
+    setType('');
     setNotes('');
     setErrors({});
     onClose();
   };
 
   const modalText = {
-    title: bedToEdit ? 'Edit Bed' : 'Add New Bed',
-    button: bedToEdit ? 'Update Bed' : 'Add Bed',
-    description: bedToEdit
-      ? 'Update the details of this garden bed.'
-      : 'Start planning a new garden bed for your space.',
+    title: compostBinToEdit ? 'Edit Bin' : 'Add New Bin',
+    button: compostBinToEdit ? 'Update Bin' : 'Add Bin',
+    description: compostBinToEdit
+      ? 'Update the details of this compost bin.'
+      : 'Start planning a new compost bin for your space.',
   };
 
   return (
     <Modal
       isOpen={isOpen}
       onRequestClose={onClose}
-      contentLabel='Add New Bed'
+      contentLabel='Add New Bin'
       className='relative w-full max-w-md mx-auto mt-24 bg-white p-8 rounded-lg shadow border border-gray-200 focus:outline-none'
       overlayClassName='fixed inset-0 bg-black bg-opacity-40 flex items-start justify-center z-50'
       shouldCloseOnOverlayClick={false}
@@ -104,11 +106,7 @@ const BedFormModal: React.FC<BedFormModalProps> = ({
         id='modal-title'
         className='text-2xl font-bold text-center text-[#2a452c] mt-6 mb-2'
       >
-        <FontAwesomeIcon
-          icon={faSeedling}
-          className='mr-1'
-          aria-hidden='true'
-        />
+        <FontAwesomeIcon icon={faRecycle} className='mr-1' aria-hidden='true' />
         {modalText.title}
       </h2>
       <p
@@ -129,20 +127,22 @@ const BedFormModal: React.FC<BedFormModalProps> = ({
           error={errors.name}
           maxLength={24}
         />
-        <FormField
-          id='bed-size'
-          label='Size (e.g. 4x4)'
-          value={size}
-          onChange={(value) => {
-            setSize(value);
-            setErrors((prev) => ({ ...prev, size: '' }));
-          }}
-          error={errors.size}
-          maxLength={24}
+
+        <SelectFormField
+          id='compost-type'
+          label='Select type'
+          value={type} // "" initially
+          onChange={(value) => setType(value)}
+          options={[
+            { value: 'Worm', label: 'Worm' },
+            { value: 'Leaf', label: 'Leaf' },
+            { value: 'Hot', label: 'Hot' },
+            { value: 'Cold', label: 'Cold' },
+          ]}
         />
 
         <FormField
-          id='bed-notes'
+          id='bin-notes'
           label='Notes (Optional)'
           value={notes}
           onChange={setNotes}
@@ -161,4 +161,4 @@ const BedFormModal: React.FC<BedFormModalProps> = ({
   );
 };
 
-export default BedFormModal;
+export default CompostBinFormModal;

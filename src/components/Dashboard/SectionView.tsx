@@ -1,5 +1,6 @@
 import { ViewKey } from '../../mocks/mockdata';
 import BedSection from './beds/BedSection';
+import CompostSection from './compost/CompostSection';
 import PlantingSection from './plantLog/PlantingSection';
 
 interface SectionViewProps {
@@ -32,7 +33,7 @@ const SectionView: React.FC<SectionViewProps> = ({
         <PlantingSection onNavigate={onNavigate} onOpenMenu={onOpenMenu} />
       );
     case 'Compost':
-      return <p>Compost Coming Soon!</p>;
+      return <CompostSection onNavigate={onNavigate} onOpenMenu={onOpenMenu} />;
     case 'Tasks':
       return <p>Tasks Coming Soon!</p>;
     default:

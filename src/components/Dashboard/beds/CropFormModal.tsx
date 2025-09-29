@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import { faTimes, faPlus, faSeedling } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Crop } from '../../../mocks/mockdata';
-import { FormField } from '../../shared/FormField';
+import { FormField } from '../../shared/forms/FormField';
 import { toast } from 'react-hot-toast';
 
 interface CropFormModalProps {
