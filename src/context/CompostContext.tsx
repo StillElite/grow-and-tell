@@ -35,8 +35,8 @@ export const CompostProvider = ({ children }: CompostProviderProps) => {
       id: crypto.randomUUID(),
       name,
       type,
-      notes,
       status: 'Active',
+      notes,
     };
     setCompostBins((prev) => [...prev, newBin]);
   };

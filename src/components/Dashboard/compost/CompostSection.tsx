@@ -1,5 +1,10 @@
 import SectionHeader from '../../shared/SectionHeader';
-import { CompostBin, CompostType, ViewKey } from '../../../mocks/mockdata';
+import {
+  CompostBin,
+  CompostStatus,
+  CompostType,
+  ViewKey,
+} from '../../../mocks/mockdata';
 import PageHeader from '../../shared/PageHeader';
 import CompostList from './CompostList';
 import { useCompostContext } from '../../../context/CompostContext';
@@ -31,10 +36,11 @@ const CompostSection: React.FC<CompostSectionProps> = ({
   const handleSaveCompostBin = (
     name: string,
     type: CompostType,
+    status: CompostStatus,
     notes: string
   ) => {
     if (compostBinToEdit) {
-      const updated = { ...compostBinToEdit, name, type, notes };
+      const updated = { ...compostBinToEdit, name, type, status, notes };
       updateCompostBin(updated);
       setCompostBinToEdit(null);
     } else {

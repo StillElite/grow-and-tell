@@ -5,12 +5,23 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { toast } from 'react-hot-toast';
 import { FormField } from '../../shared/forms/FormField';
 import { SelectFormField } from '../../shared/forms/SelectFormField';
-import { CompostBin, CompostType } from '../../../mocks/mockdata';
+import {
+  CompostBin,
+  CompostStatus,
+  compostStatusOptions,
+  CompostType,
+} from '../../../mocks/mockdata';
+import { RadioGroup } from '../../shared/forms/RadioGroup';
 
 interface CompostBinFormModalProps {
   isOpen: boolean;
   onClose: () => void;
-  onSaveCompostBin: (name: string, type: CompostType, notes: string) => void;
+  onSaveCompostBin: (
+    name: string,
+    type: CompostType,
+    status: CompostStatus,
+    notes: string
+  ) => void;
   compostBinToEdit?: CompostBin | null;
 }
 
@@ -20,22 +31,28 @@ const CompostBinFormModal: React.FC<CompostBinFormModalProps> = ({
   onSaveCompostBin,
   compostBinToEdit,
 }) => {
-  const [name, setName] = useState('');
-  const [type, setType] = useState<CompostType | ''>('');
-  const [notes, setNotes] = useState('');
+  const [name, setName] = useState(compostBinToEdit?.name ?? '');
+  const [type, setType] = useState<CompostType | ''>(
+    compostBinToEdit?.type ?? ''
+  );
+  const [status, setStatus] = useState<CompostStatus>(compostBinToEdit?.status);
+  const [notes, setNotes] = useState(compostBinToEdit?.notes ?? '');
   const [errors, setErrors] = useState<{ [key: string]: string }>({});
 
   useEffect(() => {
-    if (compostBinToEdit && isOpen) {
+    if (compostBinToEdit) {
       setName(compostBinToEdit.name);
       setType(compostBinToEdit.type);
+      setStatus(compostBinToEdit.status);
       setNotes(compostBinToEdit.notes);
     } else {
       setName('');
       setType('');
+      setStatus('');
       setNotes('');
     }
-  }, [compostBinToEdit, isOpen]);
+    setErrors({});
+  }, [compostBinToEdit]);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -54,13 +71,19 @@ const CompostBinFormModal: React.FC<CompostBinFormModalProps> = ({
       setErrors(newErrors);
       return;
     }
-    onSaveCompostBin(name.trim(), type as CompostType, notes.trim());
+    onSaveCompostBin(
+      name.trim(),
+      type as CompostType,
+      (status || 'Active') as CompostStatus,
+      notes.trim()
+    );
     toast.success(
       compostBinToEdit ? 'Bin updated successfully!' : 'New bin added!'
     );
 
     setName('');
     setType('');
+    setStatus('');
     setNotes('');
     onClose();
   };
@@ -69,6 +92,7 @@ const CompostBinFormModal: React.FC<CompostBinFormModalProps> = ({
     setName('');
     setType('');
     setNotes('');
+    setStatus('');
     setErrors({});
     onClose();
   };
@@ -86,7 +110,7 @@ const CompostBinFormModal: React.FC<CompostBinFormModalProps> = ({
       isOpen={isOpen}
       onRequestClose={onClose}
       contentLabel='Add New Bin'
-      className='relative w-full max-w-md mx-auto mt-24 bg-white p-8 rounded-lg shadow border border-gray-200 focus:outline-none'
+      className='relative w-full max-w-md mx-auto mt-16 bg-white p-8 rounded-lg shadow border border-gray-200 focus:outline-none'
       overlayClassName='fixed inset-0 bg-black bg-opacity-40 flex items-start justify-center z-50'
       shouldCloseOnOverlayClick={false}
       aria={{
@@ -140,6 +164,16 @@ const CompostBinFormModal: React.FC<CompostBinFormModalProps> = ({
             { value: 'Cold', label: 'Cold' },
           ]}
         />
+
+        {compostBinToEdit && (
+          <RadioGroup<CompostStatus>
+            name='compost-status'
+            value={status}
+            className='pb-5'
+            onChange={(value) => setStatus(value as CompostStatus)}
+            options={compostStatusOptions}
+          />
+        )}
 
         <FormField
           id='bin-notes'

@@ -253,7 +253,13 @@ export interface PlantingRecord {
 // (Compost)
 
 export type CompostType = 'Worm' | 'Leaf' | 'Hot' | 'Cold';
-export type CompostStatus = 'Active' | 'Ready';
+export type CompostStatus = 'Active' | 'Ready' | 'Emptied' | '';
+
+export const compostStatusOptions: { value: CompostStatus; label: string }[] = [
+  { value: 'Active', label: 'Active' },
+  { value: 'Ready', label: 'Ready' },
+  { value: 'Emptied', label: 'Emptied' },
+];
 
 export interface CompostBin {
   id: string;
