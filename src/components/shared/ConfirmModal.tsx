@@ -35,16 +35,23 @@ const ConfirmModal: React.FC<ConfirmModalProps> = ({
       isOpen={isOpen}
       onRequestClose={onClose}
       contentLabel='Confirmation'
+      role='dialog'
       className='relative w-full max-w-lg mx-auto mt-24 bg-white p-6 rounded-lg shadow border border-gray-200 focus:outline-none'
       overlayClassName='fixed inset-0 bg-black bg-opacity-40 flex items-start justify-center z-50'
       shouldCloseOnOverlayClick={false}
+      shouldCloseOnEsc={true}
+      aria={{
+        modal: true,
+        labelledby: 'modal-title',
+        describedby: 'modal-description',
+      }}
     >
       <button
         onClick={onClose}
         aria-label='Close'
         className='absolute top-4 right-4 text-gray-500 hover:text-gray-700 focus:outline-none'
       >
-        <FontAwesomeIcon icon={faTimes} />
+        <FontAwesomeIcon icon={faTimes} aria-hidden='true' />
       </button>
 
       <div className='flex flex-col items-center text-center mt-4'>

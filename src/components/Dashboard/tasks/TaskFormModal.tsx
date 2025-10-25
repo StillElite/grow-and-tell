@@ -2,61 +2,66 @@ import Modal from 'react-modal';
 import { useEffect, useState } from 'react';
 import { faTimes, faPlus, faSeedling } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { Crop } from '../../../mocks/mockdata';
+import { Task, TaskCategory, TaskFrequency } from '../../../mocks/mockdata';
 import { FormField } from '../../shared/forms/FormField';
 import { toast } from 'react-hot-toast';
+import { SelectFormField } from '../../shared/forms/SelectFormField';
 
-interface CropFormModalProps {
+interface TaskFormModalProps {
   isOpen: boolean;
   onClose: () => void;
-  onSaveCrop: (crop: {
-    name: string;
-    datePlanted: string;
-    notes: string;
-    id?: string;
-  }) => void;
-  cropToEdit?: Crop;
+  onSaveTask: (
+    name: string,
+    category: TaskCategory,
+    frequency: TaskFrequency,
+    id?: string
+  ) => void;
+  taskToEdit?: Task | null;
 }
 
-const CropFormModal: React.FC<CropFormModalProps> = ({
+const TaskFormModal: React.FC<TaskFormModalProps> = ({
   isOpen,
   onClose,
-  onSaveCrop,
-  cropToEdit,
+  onSaveTask,
+  taskToEdit,
 }) => {
-  const [name, setName] = useState('');
-  const [datePlanted, setDatePlanted] = useState('');
-  const [notes, setNotes] = useState('');
-  const [id, setId] = useState('');
+  const [name, setName] = useState(taskToEdit?.name ?? '');
+  const [category, setCategory] = useState<TaskCategory | ''>(
+    taskToEdit?.category || ''
+  );
+  const [frequency, setFrequency] = useState<TaskFrequency | ''>(
+    taskToEdit?.frequency || ''
+  );
   const [errors, setErrors] = useState<{ [key: string]: string }>({});
 
   useEffect(() => {
-    if (cropToEdit && isOpen) {
-      setName(cropToEdit.name);
-      setDatePlanted(cropToEdit.datePlanted);
-      setNotes(cropToEdit.notes);
-      setId(cropToEdit.id);
+    if (taskToEdit) {
+      setName(taskToEdit.name);
+      setCategory(taskToEdit.category);
+      setFrequency(taskToEdit.frequency);
+    } else {
+      setName('');
+      setCategory('');
+      setFrequency('');
     }
-  }, [cropToEdit, isOpen]);
-
-  const resetForm = () => {
-    setName('');
-    setDatePlanted('');
-    setNotes('');
-    setId('');
-  };
+  }, [taskToEdit, isOpen]);
 
   const handleSubmit = (e: React.FormEvent) => {
+    console.log('Submitting form:', { name, category, frequency });
     e.preventDefault();
 
     const newErrors: { [key: string]: string } = {};
 
     if (!name.trim()) {
-      newErrors.name = 'Please enter a crop name.';
+      newErrors.name = 'Please enter a bed name.';
     }
 
-    if (!datePlanted.trim()) {
-      newErrors.datePlanted = 'Please enter a planted date.';
+    if (!category) {
+      newErrors.category = 'Please select a category.';
+    }
+
+    if (!frequency) {
+      newErrors.frequency = 'Please select a frequency.';
     }
 
     if (Object.keys(newErrors).length > 0) {
@@ -64,51 +69,45 @@ const CropFormModal: React.FC<CropFormModalProps> = ({
       return;
     }
 
-    onSaveCrop({
-      name: name.trim(),
-      datePlanted: datePlanted.trim(),
-      notes: notes.trim(),
-      id: cropToEdit?.id,
-    });
+    onSaveTask(
+      name.trim(),
+      category as TaskCategory,
+      frequency as TaskFrequency
+    );
     toast.success(
-      cropToEdit ? 'Crop updated successfully!' : 'New crop added!'
+      taskToEdit ? 'Task updated successfully!' : 'New task added!'
     );
 
-    resetForm();
+    setName('');
+    setCategory('');
+    setFrequency('');
     onClose();
   };
 
   const handleClose = () => {
     setName('');
-    setDatePlanted;
-    setNotes('');
+    setCategory('');
+    setFrequency('');
     setErrors({});
     onClose();
   };
 
-  // Reset form when modal closes
-  useEffect(() => {
-    if (!isOpen) {
-      resetForm();
-    }
-  }, [isOpen]);
-
   const modalText = {
-    title: cropToEdit ? 'Edit Crop' : 'Add New Crop',
-    button: cropToEdit ? 'Update Crop' : 'Add Crop',
-    description: cropToEdit
-      ? 'Update the details of this crop.'
-      : 'Start planning a new crop for your garden bed.',
+    title: taskToEdit ? 'Edit Task' : 'Add New Task',
+    button: taskToEdit ? 'Update Task' : 'Add Task',
+    description: taskToEdit
+      ? 'Update the details of this gardening task.'
+      : 'Start planning a new gardening task for your space.',
   };
+
   return (
     <Modal
       isOpen={isOpen}
-      onRequestClose={onClose}
-      role='dialog'
+      onRequestClose={handleClose}
       contentLabel={modalText.title}
+      role='dialog'
       className='relative w-full max-w-md mx-auto mt-24 bg-white p-8 rounded-lg shadow border border-gray-200 focus:outline-none'
       overlayClassName='fixed inset-0 bg-black bg-opacity-40 flex items-start justify-center z-50'
-      shouldCloseOnEsc={true}
       shouldCloseOnOverlayClick={false}
       aria={{
         modal: true,
@@ -141,10 +140,9 @@ const CropFormModal: React.FC<CropFormModalProps> = ({
       >
         {modalText.description}
       </p>
-
       <form onSubmit={handleSubmit} className='space-y-4'>
         <FormField
-          id='crop-name'
+          id='name'
           label='Name'
           value={name}
           onChange={(value) => {
@@ -154,24 +152,37 @@ const CropFormModal: React.FC<CropFormModalProps> = ({
           error={errors.name}
           maxLength={24}
         />
-        <FormField
-          id='crop-datePlanted'
-          label='Date Planted'
-          value={datePlanted}
+        <SelectFormField
+          id='task-category'
+          label='Select category'
+          value={category}
           onChange={(value) => {
-            setDatePlanted(value);
-            setErrors((prev) => ({ ...prev, datePlanted: '' }));
+            setCategory(value);
+            setErrors((prev) => ({ ...prev, category: '' }));
           }}
-          type='date'
-          error={errors.datePlanted}
+          options={[
+            { value: 'plant-care', label: 'Plant Care' },
+            { value: 'growth-support', label: 'Growth Support' },
+            { value: 'soil-compost', label: 'Soil & Compost' },
+            { value: 'harvest', label: 'Harvest' },
+            { value: 'misc', label: 'Miscellaneous' },
+          ]}
+          error={errors.category}
         />
-        <FormField
-          id='crop-notes'
-          label='Notes (Optional)'
-          value={notes}
-          onChange={setNotes}
-          type='textarea'
-          maxLength={500}
+        <SelectFormField
+          id='task-frequency'
+          label='Select frequency'
+          value={frequency}
+          onChange={(value) => {
+            setFrequency(value);
+            setErrors((prev) => ({ ...prev, frequency: '' }));
+          }}
+          options={[
+            { value: 'daily', label: 'Daily' },
+            { value: 'weekly', label: 'Weekly' },
+            { value: 'monthly', label: 'Monthly' },
+          ]}
+          error={errors.frequency}
         />
         <button
           type='submit'
@@ -185,4 +196,4 @@ const CropFormModal: React.FC<CropFormModalProps> = ({
   );
 };
 
-export default CropFormModal;
+export default TaskFormModal;

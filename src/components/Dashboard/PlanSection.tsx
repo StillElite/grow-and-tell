@@ -1,18 +1,24 @@
 import Image from 'next/image';
-import { Bed, PlanningFeatureCard, ViewKey } from '../../mocks/mockdata';
+import { Bed, PlanningFeatureCard, Task, ViewKey } from '../../mocks/mockdata';
 import { getAccentColor } from '../../utils/getAccentColor';
 import { useBedContext } from '../../context/BedContext';
 import { usePlantingHistoryContext } from '../../context/PlantingHistoryContext';
 import { useCompostContext } from '../../context/CompostContext';
+import { useTaskContext } from '../../context/TaskContext';
 
 interface PlanSectionProps {
   onSelect: (view: ViewKey) => void;
 }
+
 const getPlanningFeatureCards = (
   beds: Bed[],
   plantingRecordCount: number,
-  compostBinCount: number
+  compostBinCount: number,
+  tasks: Task[]
 ): PlanningFeatureCard[] => {
+  const taskCompleteCount = tasks.filter((task) => task.completed).length;
+  const taskCount = tasks.length;
+
   return [
     {
       title: 'Beds',
@@ -38,10 +44,12 @@ const getPlanningFeatureCards = (
     },
     {
       title: 'Tasks',
-      description: 'Coming soon',
+      description:
+        taskCount === 0
+          ? 'All caught up'
+          : `${taskCompleteCount} of ${taskCount} Done`,
       image: '/images/task-icon.png',
       viewKey: ViewKey.Tasks,
-      comingSoon: true,
     },
   ];
 };
@@ -50,11 +58,13 @@ const PlanSection: React.FC<PlanSectionProps> = ({ onSelect }) => {
   const { beds } = useBedContext();
   const { plantingRecords } = usePlantingHistoryContext();
   const { compostBins } = useCompostContext();
+  const { tasks } = useTaskContext();
 
   const planningFeatureCards = getPlanningFeatureCards(
     beds,
     plantingRecords.length,
-    compostBins.length
+    compostBins.length,
+    tasks
   );
 
   return (

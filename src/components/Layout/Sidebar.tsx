@@ -92,7 +92,7 @@ const Sidebar: React.FC<SidebarProps> = ({
           }}
           className='block hover:underline'
         >
-          Seasonal Tasks
+          Tasks
         </button>
       </nav>
     </aside>

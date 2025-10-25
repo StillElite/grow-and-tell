@@ -7,6 +7,7 @@ import { Toaster } from 'react-hot-toast';
 import { toastOptions } from '../src/utils/toastOptions';
 import { PlantingHistoryProvider } from '../src/context/PlantingHistoryContext';
 import { CompostProvider } from '../src/context/CompostContext';
+import { TaskProvider } from '../src/context/TaskContext';
 Modal.setAppElement('#__next');
 
 const App = ({ Component, pageProps }: AppProps) => {
@@ -15,8 +16,10 @@ const App = ({ Component, pageProps }: AppProps) => {
       <BedProvider>
         <CompostProvider>
           <PlantingHistoryProvider>
-            <Component {...pageProps} />
-            <Toaster position='bottom-right' toastOptions={toastOptions} />
+            <TaskProvider>
+              <Component {...pageProps} />
+              <Toaster position='bottom-right' toastOptions={toastOptions} />
+            </TaskProvider>
           </PlantingHistoryProvider>
         </CompostProvider>
       </BedProvider>

@@ -82,12 +82,15 @@ const BedFormModal: React.FC<BedFormModalProps> = ({
   return (
     <Modal
       isOpen={isOpen}
-      onRequestClose={onClose}
-      contentLabel='Add New Bed'
+      onRequestClose={handleClose}
+      contentLabel={modalText.title}
+      role='dialog'
       className='relative w-full max-w-md mx-auto mt-24 bg-white p-8 rounded-lg shadow border border-gray-200 focus:outline-none'
       overlayClassName='fixed inset-0 bg-black bg-opacity-40 flex items-start justify-center z-50'
       shouldCloseOnOverlayClick={false}
+      shouldCloseOnEsc={true}
       aria={{
+        modal: true,
         labelledby: 'modal-title',
         describedby: 'modal-description',
       }}
@@ -97,7 +100,7 @@ const BedFormModal: React.FC<BedFormModalProps> = ({
         aria-label='Close'
         className='absolute top-4 right-4 text-gray-500 hover:text-gray-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#2a452c] focus-visible:rounded-md w-5 h-5'
       >
-        <FontAwesomeIcon icon={faTimes} />
+        <FontAwesomeIcon icon={faTimes} aria-hidden='true' />
       </button>
 
       <h2

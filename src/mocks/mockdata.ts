@@ -306,3 +306,99 @@ export const compostBins: CompostBin[] = [
     notes: 'Needs browns soon.',
   },
 ];
+
+// --------------------
+// Seasonal Tasks Mock Data
+// mocks/tasks.ts
+export type TaskCategory =
+  | 'plant-care'
+  | 'growth-support'
+  | 'harvest'
+  | 'soil-compost'
+  | 'misc';
+export type TaskFrequency = 'daily' | 'weekly' | 'monthly';
+export type TaskKind = 'default' | 'custom';
+
+export type Task = {
+  id: string;
+  name: string;
+  category: TaskCategory;
+  frequency: TaskFrequency;
+  completed: boolean;
+  kind: TaskKind;
+};
+
+export const tasks: Task[] = [
+  {
+    id: '1',
+    name: 'Check soil moisture / water plants',
+    category: 'plant-care',
+    frequency: 'daily',
+    completed: false,
+    kind: 'default',
+  },
+  {
+    id: '2',
+    name: 'Inspect plants for pests or helpers',
+    category: 'plant-care',
+    frequency: 'daily',
+    completed: false,
+    kind: 'default',
+  },
+  {
+    id: '3',
+    name: 'Prune and remove spent blooms',
+    category: 'plant-care',
+    frequency: 'weekly',
+    completed: false,
+    kind: 'default',
+  },
+  {
+    id: '4',
+    name: 'Check leaves for signs of disease',
+    category: 'plant-care',
+    frequency: 'weekly',
+    completed: false,
+    kind: 'default',
+  },
+  {
+    id: '5',
+    name: 'Hand-pollinate blossoms if needed',
+    category: 'growth-support',
+    frequency: 'weekly',
+    completed: false,
+    kind: 'default',
+  },
+  {
+    id: '6',
+    name: 'Secure vines or stems to trellis',
+    category: 'growth-support',
+    frequency: 'weekly',
+    completed: false,
+    kind: 'default',
+  },
+  {
+    id: '7',
+    name: 'Thin overcrowded seedlings',
+    category: 'growth-support',
+    frequency: 'monthly',
+    completed: false,
+    kind: 'default',
+  },
+  {
+    id: '8',
+    name: 'Harvest ripe produce',
+    category: 'harvest',
+    frequency: 'weekly',
+    completed: false,
+    kind: 'default',
+  },
+  {
+    id: '9',
+    name: 'Check compost moisture and progress',
+    category: 'soil-compost',
+    frequency: 'weekly',
+    completed: false,
+    kind: 'default',
+  },
+];

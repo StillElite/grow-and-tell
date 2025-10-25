@@ -66,7 +66,7 @@ export const CompostBinCard = ({
               className='text-red-700'
               aria-label={`Delete ${compostBin.name}`}
             >
-              <FontAwesomeIcon icon={faTrash} />
+              <FontAwesomeIcon icon={faTrash} aria-hidden='true' />
             </button>
           </div>
           <ConfirmModal
@@ -103,6 +103,7 @@ export const CompostBinCard = ({
               <p className='flex items-start gap-2 text-sm text-gray-700'>
                 <FontAwesomeIcon
                   icon={faNoteSticky}
+                  aria-hidden='true'
                   className={`mt-[2px] ${textAccent}`}
                 />
                 <span>

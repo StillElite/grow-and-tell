@@ -69,8 +69,9 @@ export const PlantingCard: React.FC<PlantingCardProps> = ({
             onClick={() => setIsConfirmOpen(true)}
             disabled={isCropStillActive}
             className={isCropStillActive ? 'text-gray-400' : 'text-[#2a452c]'}
+            aria-label={`Delete planting of ${cropName}`}
           >
-            <FontAwesomeIcon icon={faTrash} />
+            <FontAwesomeIcon icon={faTrash} aria-hidden='true' />
           </button>
 
           {isCropStillActive && (

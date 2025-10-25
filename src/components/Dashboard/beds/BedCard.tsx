@@ -112,14 +112,14 @@ export const BedCard = ({
               }}
               aria-label={`Edit ${bed.name}`}
             >
-              <FontAwesomeIcon icon={faPen} />
+              <FontAwesomeIcon aria-hidden='true' icon={faPen} />
             </button>
             <button
               onClick={() => setIsConfirmOpen(true)}
               className='text-red-700'
               aria-label={`Delete ${bed.name}`}
             >
-              <FontAwesomeIcon icon={faTrash} />
+              <FontAwesomeIcon aria-hidden='true' icon={faTrash} />
             </button>
           </div>
           <ConfirmModal
@@ -167,6 +167,7 @@ export const BedCard = ({
               <p className='flex items-start gap-2 text-sm text-gray-700'>
                 <FontAwesomeIcon
                   icon={faNoteSticky}
+                  aria-hidden='true'
                   className={`mt-[2px] ${textAccent}`}
                 />
                 <span>
