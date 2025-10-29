@@ -18,7 +18,7 @@ interface CompostBinCardProps {
   onEditCompostBin?: (compostBin: CompostBin) => void;
 }
 
-export const CompostBinCard = ({
+export const CompostBinCard: React.FC = ({
   compostBin,
   onDeleteBin,
   onEditCompostBin,

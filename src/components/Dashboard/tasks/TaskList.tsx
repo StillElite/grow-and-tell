@@ -8,7 +8,7 @@ export interface TaskListProps {
   toggleComplete: (id: string, next: boolean) => void;
 }
 
-export const TaskList = ({
+export const TaskList: React.FC<TaskListProps> = ({
   tasks,
   onEditTask,
   onDeleteTask,

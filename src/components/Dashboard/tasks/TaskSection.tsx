@@ -7,13 +7,12 @@ import {
 } from '../../../mocks/mockdata';
 import PageHeader from '../../shared/PageHeader';
 import { TaskList } from './TaskList';
-import { TaskSidebar } from './TaskSideBar';
+import { TaskSummary } from './TaskSummary';
 import { useTaskContext } from '../../../context/TaskContext';
 import TaskFormModal from './TaskFormModal';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
-
-// import PlantingHistoryFilterWrapper from './PlantingHistoryFilterWrapper ';
+import { TaskSummaryFlyout } from './TaskSummaryFlyout';
 
 export interface PlantingSectionProps {
   onNavigate: (view: ViewKey) => void;
@@ -24,11 +23,11 @@ const TaskSection: React.FC<PlantingSectionProps> = ({
   onNavigate,
   onOpenMenu,
 }) => {
-  //   const { filteredPlantings } = usePlantingHistoryContext();
   const { tasks, addTask, updateTask, deleteTask, toggleComplete } =
     useTaskContext();
   const [isTaskFormModalOpen, setIsTaskFormModalOpen] = useState(false);
   const [taskToEdit, setTaskToEdit] = useState<Task | null>(null);
+  const [isSummaryOpen, setIsSummaryOpen] = useState(false);
 
   // Open in ADD mode
   const handleAddTask = () => {
@@ -70,6 +69,25 @@ const TaskSection: React.FC<PlantingSectionProps> = ({
     { label: 'Tasks' },
   ];
 
+  useEffect(() => {
+    // Guard for SSR
+    if (typeof window === 'undefined') return;
+
+    // Use matchMedia instead of window.innerWidth so this only fires when crossing Tailwind's lg breakpoint
+    // and stays in sync with CSS media queries (less noisy than resize)
+
+    const mql = window.matchMedia('(min-width: 1024px)');
+    const onChange = (e: MediaQueryListEvent) => {
+      if (e.matches) setIsSummaryOpen(false);
+    };
+
+    // If we land on desktop while open, close immediately
+    if (mql.matches) setIsSummaryOpen(false);
+
+    mql.addEventListener('change', onChange);
+    return () => mql.removeEventListener('change', onChange);
+  }, [setIsSummaryOpen]);
+
   return (
     <>
       <PageHeader
@@ -82,15 +100,23 @@ const TaskSection: React.FC<PlantingSectionProps> = ({
         description='Manage your gardening tasks and to-dos.'
         imageSrc='/images/planting.png'
       />
-      <div className='flex justify-end mb-4'>
+      <div className='flex justify-end items-center gap-2 mb-4'>
         <button
           type='button'
           onClick={handleAddTask}
-          aria-haspopup='dialog'
-          aria-expanded={isTaskFormModalOpen}
-          className='bg-[#244225] text-white text-sm px-4 py-2 rounded hover:bg-[#356a3c] transition'
+          className='h-9 bg-[#244225] text-white text-sm px-4 rounded-md hover:bg-[#356a3c] transition'
         >
           + Add Task
+        </button>
+        <button
+          type='button'
+          onClick={() => setIsSummaryOpen(true)}
+          aria-haspopup='dialog'
+          aria-expanded={isSummaryOpen}
+          className='text-sm px-4 py-2 rounded-md border border-gray-300 bg-white hover:bg-gray-50
+             dark:bg-dark-bg dark:border-gray-600 dark:hover:bg-gray-800 lg:hidden'
+        >
+          Task Summary
         </button>
       </div>
       <TaskFormModal
@@ -108,9 +134,15 @@ const TaskSection: React.FC<PlantingSectionProps> = ({
           toggleComplete={toggleComplete}
         />
         <aside className='hidden lg:block'>
-          <TaskSidebar />
+          <div className=' rounded-lg border bg-white p-4 shadow-sm'>
+            <TaskSummary />
+          </div>
         </aside>
       </div>
+      <TaskSummaryFlyout
+        isOpen={isSummaryOpen}
+        onClose={() => setIsSummaryOpen(false)}
+      />
     </>
   );
 };

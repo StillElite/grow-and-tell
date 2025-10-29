@@ -42,7 +42,7 @@ export const TaskProvider = ({ children }: TaskProviderProps) => {
       category,
       frequency,
       completed: false,
-      kind: 'custom',
+      type: 'custom',
     };
     setTasks((prevTasks) => [...prevTasks, newTask]);
   };

@@ -101,7 +101,7 @@ export const TaskCard: React.FC<TaskCardProps> = ({
       </div>
 
       {/* Right: actions for user-created tasks */}
-      {task.kind === 'custom' && (
+      {task.type === 'custom' && (
         <div className='flex items-center gap-2 text-gray-500'>
           <button
             type='button'

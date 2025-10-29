@@ -22,7 +22,7 @@ interface BedCardProps {
   onDeleteBed: (bedId: string) => void;
 }
 
-export const BedCard = ({
+export const BedCard: React.FC = ({
   bed,
   onView,
   onAddCrop,

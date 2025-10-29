@@ -317,7 +317,7 @@ export type TaskCategory =
   | 'soil-compost'
   | 'misc';
 export type TaskFrequency = 'daily' | 'weekly' | 'monthly';
-export type TaskKind = 'default' | 'custom';
+export type TaskType = 'default' | 'custom';
 
 export type Task = {
   id: string;
@@ -325,7 +325,7 @@ export type Task = {
   category: TaskCategory;
   frequency: TaskFrequency;
   completed: boolean;
-  kind: TaskKind;
+  type: TaskType;
 };
 
 export const tasks: Task[] = [
@@ -335,7 +335,7 @@ export const tasks: Task[] = [
     category: 'plant-care',
     frequency: 'daily',
     completed: false,
-    kind: 'default',
+    type: 'default',
   },
   {
     id: '2',
@@ -343,7 +343,7 @@ export const tasks: Task[] = [
     category: 'plant-care',
     frequency: 'daily',
     completed: false,
-    kind: 'default',
+    type: 'default',
   },
   {
     id: '3',
@@ -351,7 +351,7 @@ export const tasks: Task[] = [
     category: 'plant-care',
     frequency: 'weekly',
     completed: false,
-    kind: 'default',
+    type: 'default',
   },
   {
     id: '4',
@@ -359,7 +359,7 @@ export const tasks: Task[] = [
     category: 'plant-care',
     frequency: 'weekly',
     completed: false,
-    kind: 'default',
+    type: 'default',
   },
   {
     id: '5',
@@ -367,7 +367,7 @@ export const tasks: Task[] = [
     category: 'growth-support',
     frequency: 'weekly',
     completed: false,
-    kind: 'default',
+    type: 'default',
   },
   {
     id: '6',
@@ -375,7 +375,7 @@ export const tasks: Task[] = [
     category: 'growth-support',
     frequency: 'weekly',
     completed: false,
-    kind: 'default',
+    type: 'default',
   },
   {
     id: '7',
@@ -383,7 +383,7 @@ export const tasks: Task[] = [
     category: 'growth-support',
     frequency: 'monthly',
     completed: false,
-    kind: 'default',
+    type: 'default',
   },
   {
     id: '8',
@@ -391,7 +391,7 @@ export const tasks: Task[] = [
     category: 'harvest',
     frequency: 'weekly',
     completed: false,
-    kind: 'default',
+    type: 'default',
   },
   {
     id: '9',
@@ -399,6 +399,6 @@ export const tasks: Task[] = [
     category: 'soil-compost',
     frequency: 'weekly',
     completed: false,
-    kind: 'default',
+    type: 'default',
   },
 ];
