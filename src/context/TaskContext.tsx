@@ -12,6 +12,8 @@ interface TaskContextType {
   updateTask?: (task: Task) => void;
   deleteTask?: (taskId: string) => void;
   toggleComplete: (id: string, next: boolean) => void;
+  toggleDefaultTaskVisibility?: (taskId: string, hidden: boolean) => void;
+  setTaskCompleted: (taskId: string, completed: boolean) => void;
 }
 
 const TaskContext = createContext<TaskContextType | undefined>(undefined);
@@ -43,6 +45,8 @@ export const TaskProvider = ({ children }: TaskProviderProps) => {
       frequency,
       completed: false,
       type: 'custom',
+      hidden: false,
+      factoryHidden: false,
     };
     setTasks((prevTasks) => [...prevTasks, newTask]);
   };
@@ -62,6 +66,18 @@ export const TaskProvider = ({ children }: TaskProviderProps) => {
     setTasks((prevTasks) => prevTasks.filter((task) => task.id !== taskId));
   };
 
+  const setTaskCompleted = (taskId: string, completed: boolean) => {
+    setTasks((prev) =>
+      prev.map((task) => (task.id === taskId ? { ...task, completed } : task))
+    );
+  };
+
+  const toggleDefaultTaskVisibility = (taskId: string, hidden: boolean) => {
+    setTasks((prevTasks) =>
+      prevTasks.map((task) => (task.id === taskId ? { ...task, hidden } : task))
+    );
+  };
+
   return (
     <TaskContext.Provider
       value={{
@@ -70,6 +86,8 @@ export const TaskProvider = ({ children }: TaskProviderProps) => {
         updateTask,
         deleteTask,
         toggleComplete,
+        toggleDefaultTaskVisibility,
+        setTaskCompleted,
       }}
     >
       {children}

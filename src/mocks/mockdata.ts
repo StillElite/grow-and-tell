@@ -326,6 +326,8 @@ export type Task = {
   frequency: TaskFrequency;
   completed: boolean;
   type: TaskType;
+  hidden?: boolean;
+  factoryHidden: boolean; // immutable baseline
 };
 
 export const tasks: Task[] = [
@@ -336,6 +338,8 @@ export const tasks: Task[] = [
     frequency: 'daily',
     completed: false,
     type: 'default',
+    hidden: false,
+    factoryHidden: false,
   },
   {
     id: '2',
@@ -344,6 +348,8 @@ export const tasks: Task[] = [
     frequency: 'daily',
     completed: false,
     type: 'default',
+    hidden: false,
+    factoryHidden: false,
   },
   {
     id: '3',
@@ -352,6 +358,8 @@ export const tasks: Task[] = [
     frequency: 'weekly',
     completed: false,
     type: 'default',
+    hidden: false,
+    factoryHidden: false,
   },
   {
     id: '4',
@@ -360,6 +368,8 @@ export const tasks: Task[] = [
     frequency: 'weekly',
     completed: false,
     type: 'default',
+    hidden: false,
+    factoryHidden: false,
   },
   {
     id: '5',
@@ -368,6 +378,8 @@ export const tasks: Task[] = [
     frequency: 'weekly',
     completed: false,
     type: 'default',
+    hidden: true,
+    factoryHidden: true,
   },
   {
     id: '6',
@@ -376,6 +388,8 @@ export const tasks: Task[] = [
     frequency: 'weekly',
     completed: false,
     type: 'default',
+    hidden: true,
+    factoryHidden: true,
   },
   {
     id: '7',
@@ -384,6 +398,8 @@ export const tasks: Task[] = [
     frequency: 'monthly',
     completed: false,
     type: 'default',
+    hidden: true,
+    factoryHidden: true,
   },
   {
     id: '8',
@@ -392,6 +408,8 @@ export const tasks: Task[] = [
     frequency: 'weekly',
     completed: false,
     type: 'default',
+    hidden: false,
+    factoryHidden: false,
   },
   {
     id: '9',
@@ -400,5 +418,7 @@ export const tasks: Task[] = [
     frequency: 'weekly',
     completed: false,
     type: 'default',
+    hidden: false,
+    factoryHidden: false,
   },
 ];

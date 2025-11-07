@@ -1,5 +1,6 @@
 import TaskCard from './TaskCard';
 import { Task } from '../../../mocks/mockdata';
+import { useMemo } from 'react';
 
 export interface TaskListProps {
   tasks: Task[];
@@ -14,13 +15,18 @@ export const TaskList: React.FC<TaskListProps> = ({
   onDeleteTask,
   toggleComplete,
 }: TaskListProps) => {
+  const visibleTasks = useMemo(
+    () => tasks.filter((t) => !t.hidden), // ← hide hidden ones
+    [tasks]
+  );
+
   return (
     <ul
       className='w-full space-y-3'
       aria-live='polite'
       aria-relevant='additions removals'
     >
-      {tasks.map((task: Task) => (
+      {visibleTasks.map((task: Task) => (
         <TaskCard
           key={task.id}
           task={task}

@@ -47,7 +47,6 @@ const TaskFormModal: React.FC<TaskFormModalProps> = ({
   }, [taskToEdit, isOpen]);
 
   const handleSubmit = (e: React.FormEvent) => {
-    console.log('Submitting form:', { name, category, frequency });
     e.preventDefault();
 
     const newErrors: { [key: string]: string } = {};

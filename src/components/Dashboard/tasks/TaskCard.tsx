@@ -8,6 +8,7 @@ import {
 } from '../../../utils/taskFormatter';
 import { useState } from 'react';
 import ConfirmModal from '../../shared/ConfirmModal';
+import { capitalize } from '../../../utils/capitalize';
 
 interface TaskCardProps {
   task: Task;
@@ -75,7 +76,7 @@ export const TaskCard: React.FC<TaskCardProps> = ({
               isDone ? 'line-through opacity-70' : ''
             }`}
           >
-            {task.name}
+            {capitalize(task.name)}
           </div>
 
           <div
@@ -96,6 +97,11 @@ export const TaskCard: React.FC<TaskCardProps> = ({
             <span className='rounded-full border px-2 bg-gray-100 text-gray-700 dark:bg-gray-800 dark:text-gray-200'>
               {getFrequencyLabel(task.frequency)}
             </span>
+            {task.type === 'default' && (
+              <span className='px-2 py-0.5 text-xs rounded-full bg-[#dff5e1] text-[#2a452c]'>
+                default
+              </span>
+            )}
           </div>
         </div>
       </div>

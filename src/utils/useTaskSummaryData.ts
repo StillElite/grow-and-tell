@@ -1,16 +1,29 @@
+import { useMemo } from 'react';
 import { useTaskContext } from '../context/TaskContext';
 
 export const useTaskSummaryData = () => {
   const { tasks } = useTaskContext();
-  const totalTasks = tasks.length;
-  const completedTasks = tasks.filter((task) => task.completed).length;
+
+  const visibleTasks = useMemo(
+    () => tasks.filter((task) => !task.hidden),
+    [tasks]
+  );
+
+  const totalTasks = visibleTasks.length;
+  const completedTasks = visibleTasks.filter((task) => task.completed).length;
+
   const percentage = totalTasks > 0 ? (completedTasks / totalTasks) * 100 : 0;
+
   const taskFrequencyNotComplete = {
-    daily: tasks.filter((t) => t.frequency === 'daily' && !t.completed).length,
-    weekly: tasks.filter((t) => t.frequency === 'weekly' && !t.completed)
-      .length,
-    monthly: tasks.filter((t) => t.frequency === 'monthly' && !t.completed)
-      .length,
+    daily: visibleTasks.filter(
+      (task) => task.frequency === 'daily' && !task.completed
+    ).length,
+    weekly: visibleTasks.filter(
+      (task) => task.frequency === 'weekly' && !task.completed
+    ).length,
+    monthly: visibleTasks.filter(
+      (task) => task.frequency === 'monthly' && !task.completed
+    ).length,
   };
 
   const isEmpty = totalTasks === 0;
