@@ -1,5 +1,5 @@
 import TaskCard from './TaskCard';
-import { Task } from '../../../mocks/mockdata';
+import { Task } from '../../../../mocks/mockdata';
 import { useMemo } from 'react';
 
 export interface TaskListProps {

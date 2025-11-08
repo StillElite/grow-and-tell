@@ -14,6 +14,7 @@ interface TaskContextType {
   toggleComplete: (id: string, next: boolean) => void;
   toggleDefaultTaskVisibility?: (taskId: string, hidden: boolean) => void;
   setTaskCompleted: (taskId: string, completed: boolean) => void;
+  clearCompletedTasks?: () => void;
 }
 
 const TaskContext = createContext<TaskContextType | undefined>(undefined);
@@ -48,7 +49,7 @@ export const TaskProvider = ({ children }: TaskProviderProps) => {
       hidden: false,
       factoryHidden: false,
     };
-    setTasks((prevTasks) => [...prevTasks, newTask]);
+    setTasks((prev) => [...prev, newTask]);
   };
   const toggleComplete = (id: string, next: boolean) => {
     setTasks((prev) =>
@@ -57,13 +58,13 @@ export const TaskProvider = ({ children }: TaskProviderProps) => {
   };
 
   const updateTask = (updatedTask: Task) => {
-    setTasks((prevTasks) =>
-      prevTasks.map((task) => (task.id === updatedTask.id ? updatedTask : task))
+    setTasks((prev) =>
+      prev.map((task) => (task.id === updatedTask.id ? updatedTask : task))
     );
   };
 
   const deleteTask = (taskId: string) => {
-    setTasks((prevTasks) => prevTasks.filter((task) => task.id !== taskId));
+    setTasks((prev) => prev.filter((task) => task.id !== taskId));
   };
 
   const setTaskCompleted = (taskId: string, completed: boolean) => {
@@ -73,8 +74,16 @@ export const TaskProvider = ({ children }: TaskProviderProps) => {
   };
 
   const toggleDefaultTaskVisibility = (taskId: string, hidden: boolean) => {
-    setTasks((prevTasks) =>
-      prevTasks.map((task) => (task.id === taskId ? { ...task, hidden } : task))
+    setTasks((prev) =>
+      prev.map((task) => (task.id === taskId ? { ...task, hidden } : task))
+    );
+  };
+
+  const clearCompletedTasks = () => {
+    setTasks((prev) =>
+      prev.map((task) =>
+        task.completed ? { ...task, completed: false } : task
+      )
     );
   };
 
@@ -88,6 +97,7 @@ export const TaskProvider = ({ children }: TaskProviderProps) => {
         toggleComplete,
         toggleDefaultTaskVisibility,
         setTaskCompleted,
+        clearCompletedTasks,
       }}
     >
       {children}

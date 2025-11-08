@@ -1,13 +1,13 @@
-import { Bed, Crop, ViewKey } from '../../../mocks/mockdata';
+import { Bed, Crop, ViewKey } from '../../../../mocks/mockdata';
 import { CropCard } from './CropCard';
 import { useState } from 'react';
 import CropFormModal from './CropFormModal';
-import { useBedContext } from '../../../context/BedContext';
-import SectionHeader from '../../shared/SectionHeader';
-import { BreadcrumbItem } from '../../shared/Breadcrumb';
-import PageHeader from '../../shared/PageHeader';
+import { useBedContext } from '../../../../context/BedContext';
+import SectionHeader from '../../../shared/SectionHeader';
+import { BreadcrumbItem } from '../../../shared/Breadcrumb';
+import PageHeader from '../../../shared/PageHeader';
 import toast from 'react-hot-toast';
-import { usePlantingHistoryContext } from '../../../context/PlantingHistoryContext';
+import { usePlantingHistoryContext } from '../../../../context/PlantingHistoryContext';
 
 interface BedDetailsProps {
   bed: Bed;

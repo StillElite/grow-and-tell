@@ -2,39 +2,49 @@ import Modal from 'react-modal';
 import { useEffect, useState } from 'react';
 import { faTimes, faPlus, faSeedling } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { Bed } from '../../../mocks/mockdata';
-import { FormField } from '../../shared/forms/FormField';
+import { Task, TaskCategory, TaskFrequency } from '../../../../mocks/mockdata';
+import { FormField } from '../../../shared/forms/FormField';
 import { toast } from 'react-hot-toast';
+import { SelectFormField } from '../../../shared/forms/SelectFormField';
 
-interface BedFormModalProps {
+interface TaskFormModalProps {
   isOpen: boolean;
   onClose: () => void;
-  onSaveBed: (name: string, size: string, notes: string) => void;
-  bedToEdit?: Bed | null;
+  onSaveTask: (
+    name: string,
+    category: TaskCategory,
+    frequency: TaskFrequency,
+    id?: string
+  ) => void;
+  taskToEdit?: Task | null;
 }
 
-const BedFormModal: React.FC<BedFormModalProps> = ({
+const TaskFormModal: React.FC<TaskFormModalProps> = ({
   isOpen,
   onClose,
-  onSaveBed,
-  bedToEdit,
+  onSaveTask,
+  taskToEdit,
 }) => {
-  const [name, setName] = useState('');
-  const [size, setSize] = useState('');
-  const [notes, setNotes] = useState('');
+  const [name, setName] = useState(taskToEdit?.name ?? '');
+  const [category, setCategory] = useState<TaskCategory | ''>(
+    taskToEdit?.category || ''
+  );
+  const [frequency, setFrequency] = useState<TaskFrequency | ''>(
+    taskToEdit?.frequency || ''
+  );
   const [errors, setErrors] = useState<{ [key: string]: string }>({});
 
   useEffect(() => {
-    if (bedToEdit) {
-      setName(bedToEdit.name);
-      setSize(bedToEdit.size);
-      setNotes(bedToEdit.notes);
+    if (taskToEdit) {
+      setName(taskToEdit.name);
+      setCategory(taskToEdit.category);
+      setFrequency(taskToEdit.frequency);
     } else {
       setName('');
-      setSize('');
-      setNotes('');
+      setCategory('');
+      setFrequency('');
     }
-  }, [bedToEdit, isOpen]);
+  }, [taskToEdit, isOpen]);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -45,8 +55,12 @@ const BedFormModal: React.FC<BedFormModalProps> = ({
       newErrors.name = 'Please enter a bed name.';
     }
 
-    if (!size.trim()) {
-      newErrors.size = 'Please enter a bed size.';
+    if (!category) {
+      newErrors.category = 'Please select a category.';
+    }
+
+    if (!frequency) {
+      newErrors.frequency = 'Please select a frequency.';
     }
 
     if (Object.keys(newErrors).length > 0) {
@@ -54,29 +68,35 @@ const BedFormModal: React.FC<BedFormModalProps> = ({
       return;
     }
 
-    onSaveBed(name.trim(), size.trim(), notes.trim());
-    toast.success(bedToEdit ? 'Bed updated successfully!' : 'New bed added!');
+    onSaveTask(
+      name.trim(),
+      category as TaskCategory,
+      frequency as TaskFrequency
+    );
+    toast.success(
+      taskToEdit ? 'Task updated successfully!' : 'New task added!'
+    );
 
     setName('');
-    setSize('');
-    setNotes('');
+    setCategory('');
+    setFrequency('');
     onClose();
   };
 
   const handleClose = () => {
     setName('');
-    setSize('');
-    setNotes('');
+    setCategory('');
+    setFrequency('');
     setErrors({});
     onClose();
   };
 
   const modalText = {
-    title: bedToEdit ? 'Edit Bed' : 'Add New Bed',
-    button: bedToEdit ? 'Update Bed' : 'Add Bed',
-    description: bedToEdit
-      ? 'Update the details of this garden bed.'
-      : 'Start planning a new garden bed for your space.',
+    title: taskToEdit ? 'Edit Task' : 'Add New Task',
+    button: taskToEdit ? 'Update Task' : 'Add Task',
+    description: taskToEdit
+      ? 'Update the details of this gardening task.'
+      : 'Start planning a new gardening task for your space.',
   };
 
   return (
@@ -88,7 +108,6 @@ const BedFormModal: React.FC<BedFormModalProps> = ({
       className='relative w-full max-w-md mx-auto mt-24 bg-white p-8 rounded-lg shadow border border-gray-200 focus:outline-none'
       overlayClassName='fixed inset-0 bg-black bg-opacity-40 flex items-start justify-center z-50'
       shouldCloseOnOverlayClick={false}
-      shouldCloseOnEsc={true}
       aria={{
         modal: true,
         labelledby: 'modal-title',
@@ -132,25 +151,37 @@ const BedFormModal: React.FC<BedFormModalProps> = ({
           error={errors.name}
           maxLength={24}
         />
-        <FormField
-          id='bed-size'
-          label='Size (e.g. 4x4)'
-          value={size}
+        <SelectFormField
+          id='task-category'
+          label='Select category'
+          value={category}
           onChange={(value) => {
-            setSize(value);
-            setErrors((prev) => ({ ...prev, size: '' }));
+            setCategory(value);
+            setErrors((prev) => ({ ...prev, category: '' }));
           }}
-          error={errors.size}
-          maxLength={24}
+          options={[
+            { value: 'plant-care', label: 'Plant Care' },
+            { value: 'growth-support', label: 'Growth Support' },
+            { value: 'soil-compost', label: 'Soil & Compost' },
+            { value: 'harvest', label: 'Harvest' },
+            { value: 'misc', label: 'Miscellaneous' },
+          ]}
+          error={errors.category}
         />
-
-        <FormField
-          id='bed-notes'
-          label='Notes (Optional)'
-          value={notes}
-          onChange={setNotes}
-          type='textarea'
-          maxLength={500}
+        <SelectFormField
+          id='task-frequency'
+          label='Select frequency'
+          value={frequency}
+          onChange={(value) => {
+            setFrequency(value);
+            setErrors((prev) => ({ ...prev, frequency: '' }));
+          }}
+          options={[
+            { value: 'daily', label: 'Daily' },
+            { value: 'weekly', label: 'Weekly' },
+            { value: 'monthly', label: 'Monthly' },
+          ]}
+          error={errors.frequency}
         />
         <button
           type='submit'
@@ -164,4 +195,4 @@ const BedFormModal: React.FC<BedFormModalProps> = ({
   );
 };
 
-export default BedFormModal;
+export default TaskFormModal;

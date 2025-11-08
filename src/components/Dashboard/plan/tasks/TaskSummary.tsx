@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useTaskSummaryData } from '../../../utils/useTaskSummaryData';
+import { useTaskSummaryData } from '../../../../utils/useTaskSummaryData';
 import TaskManagementModal from './TaskManagementModal';
 
 export const TaskSummary: React.FC = () => {

@@ -1,7 +1,6 @@
-import { AllFilterButton } from '../../Dashboard/plantLog/AllFiltersButton';
+import { AllFilterButton } from '../../Dashboard/plan/plantLog/AllFiltersButton';
 import { MultiSelect } from '../MultiSelect';
 import { useState } from 'react';
-
 import { FilterController, FilterGroupConfig } from './filterConfig';
 import { Dropdown } from '../Dropdown';
 

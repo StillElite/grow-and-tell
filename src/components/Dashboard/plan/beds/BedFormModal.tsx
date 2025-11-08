@@ -2,49 +2,39 @@ import Modal from 'react-modal';
 import { useEffect, useState } from 'react';
 import { faTimes, faPlus, faSeedling } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { Task, TaskCategory, TaskFrequency } from '../../../mocks/mockdata';
-import { FormField } from '../../shared/forms/FormField';
+import { Bed } from '../../../../mocks/mockdata';
+import { FormField } from '../../../shared/forms/FormField';
 import { toast } from 'react-hot-toast';
-import { SelectFormField } from '../../shared/forms/SelectFormField';
 
-interface TaskFormModalProps {
+interface BedFormModalProps {
   isOpen: boolean;
   onClose: () => void;
-  onSaveTask: (
-    name: string,
-    category: TaskCategory,
-    frequency: TaskFrequency,
-    id?: string
-  ) => void;
-  taskToEdit?: Task | null;
+  onSaveBed: (name: string, size: string, notes: string) => void;
+  bedToEdit?: Bed | null;
 }
 
-const TaskFormModal: React.FC<TaskFormModalProps> = ({
+const BedFormModal: React.FC<BedFormModalProps> = ({
   isOpen,
   onClose,
-  onSaveTask,
-  taskToEdit,
+  onSaveBed,
+  bedToEdit,
 }) => {
-  const [name, setName] = useState(taskToEdit?.name ?? '');
-  const [category, setCategory] = useState<TaskCategory | ''>(
-    taskToEdit?.category || ''
-  );
-  const [frequency, setFrequency] = useState<TaskFrequency | ''>(
-    taskToEdit?.frequency || ''
-  );
+  const [name, setName] = useState('');
+  const [size, setSize] = useState('');
+  const [notes, setNotes] = useState('');
   const [errors, setErrors] = useState<{ [key: string]: string }>({});
 
   useEffect(() => {
-    if (taskToEdit) {
-      setName(taskToEdit.name);
-      setCategory(taskToEdit.category);
-      setFrequency(taskToEdit.frequency);
+    if (bedToEdit) {
+      setName(bedToEdit.name);
+      setSize(bedToEdit.size);
+      setNotes(bedToEdit.notes);
     } else {
       setName('');
-      setCategory('');
-      setFrequency('');
+      setSize('');
+      setNotes('');
     }
-  }, [taskToEdit, isOpen]);
+  }, [bedToEdit, isOpen]);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -55,12 +45,8 @@ const TaskFormModal: React.FC<TaskFormModalProps> = ({
       newErrors.name = 'Please enter a bed name.';
     }
 
-    if (!category) {
-      newErrors.category = 'Please select a category.';
-    }
-
-    if (!frequency) {
-      newErrors.frequency = 'Please select a frequency.';
+    if (!size.trim()) {
+      newErrors.size = 'Please enter a bed size.';
     }
 
     if (Object.keys(newErrors).length > 0) {
@@ -68,35 +54,29 @@ const TaskFormModal: React.FC<TaskFormModalProps> = ({
       return;
     }
 
-    onSaveTask(
-      name.trim(),
-      category as TaskCategory,
-      frequency as TaskFrequency
-    );
-    toast.success(
-      taskToEdit ? 'Task updated successfully!' : 'New task added!'
-    );
+    onSaveBed(name.trim(), size.trim(), notes.trim());
+    toast.success(bedToEdit ? 'Bed updated successfully!' : 'New bed added!');
 
     setName('');
-    setCategory('');
-    setFrequency('');
+    setSize('');
+    setNotes('');
     onClose();
   };
 
   const handleClose = () => {
     setName('');
-    setCategory('');
-    setFrequency('');
+    setSize('');
+    setNotes('');
     setErrors({});
     onClose();
   };
 
   const modalText = {
-    title: taskToEdit ? 'Edit Task' : 'Add New Task',
-    button: taskToEdit ? 'Update Task' : 'Add Task',
-    description: taskToEdit
-      ? 'Update the details of this gardening task.'
-      : 'Start planning a new gardening task for your space.',
+    title: bedToEdit ? 'Edit Bed' : 'Add New Bed',
+    button: bedToEdit ? 'Update Bed' : 'Add Bed',
+    description: bedToEdit
+      ? 'Update the details of this garden bed.'
+      : 'Start planning a new garden bed for your space.',
   };
 
   return (
@@ -108,6 +88,7 @@ const TaskFormModal: React.FC<TaskFormModalProps> = ({
       className='relative w-full max-w-md mx-auto mt-24 bg-white p-8 rounded-lg shadow border border-gray-200 focus:outline-none'
       overlayClassName='fixed inset-0 bg-black bg-opacity-40 flex items-start justify-center z-50'
       shouldCloseOnOverlayClick={false}
+      shouldCloseOnEsc={true}
       aria={{
         modal: true,
         labelledby: 'modal-title',
@@ -151,37 +132,25 @@ const TaskFormModal: React.FC<TaskFormModalProps> = ({
           error={errors.name}
           maxLength={24}
         />
-        <SelectFormField
-          id='task-category'
-          label='Select category'
-          value={category}
+        <FormField
+          id='bed-size'
+          label='Size (e.g. 4x4)'
+          value={size}
           onChange={(value) => {
-            setCategory(value);
-            setErrors((prev) => ({ ...prev, category: '' }));
+            setSize(value);
+            setErrors((prev) => ({ ...prev, size: '' }));
           }}
-          options={[
-            { value: 'plant-care', label: 'Plant Care' },
-            { value: 'growth-support', label: 'Growth Support' },
-            { value: 'soil-compost', label: 'Soil & Compost' },
-            { value: 'harvest', label: 'Harvest' },
-            { value: 'misc', label: 'Miscellaneous' },
-          ]}
-          error={errors.category}
+          error={errors.size}
+          maxLength={24}
         />
-        <SelectFormField
-          id='task-frequency'
-          label='Select frequency'
-          value={frequency}
-          onChange={(value) => {
-            setFrequency(value);
-            setErrors((prev) => ({ ...prev, frequency: '' }));
-          }}
-          options={[
-            { value: 'daily', label: 'Daily' },
-            { value: 'weekly', label: 'Weekly' },
-            { value: 'monthly', label: 'Monthly' },
-          ]}
-          error={errors.frequency}
+
+        <FormField
+          id='bed-notes'
+          label='Notes (Optional)'
+          value={notes}
+          onChange={setNotes}
+          type='textarea'
+          maxLength={500}
         />
         <button
           type='submit'
@@ -195,4 +164,4 @@ const TaskFormModal: React.FC<TaskFormModalProps> = ({
   );
 };
 
-export default TaskFormModal;
+export default BedFormModal;

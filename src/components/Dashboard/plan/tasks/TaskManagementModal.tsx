@@ -1,7 +1,7 @@
 import Modal from 'react-modal';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
-import { useTaskContext } from '../../../context/TaskContext';
+import { useTaskContext } from '../../../../context/TaskContext';
 import { useEffect, useMemo, useState } from 'react';
 
 export interface TaskManagementModalProps {

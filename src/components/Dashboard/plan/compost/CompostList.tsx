@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { CompostBin } from '../../../mocks/mockdata';
+import { CompostBin } from '../../../../mocks/mockdata';
 import { CompostBinCard } from './CompostBinCard';
 import CompostBinFormModal from './CompostBinFormModal';
 

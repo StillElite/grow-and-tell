@@ -6,11 +6,11 @@ import {
   faPen,
   faCircleCheck,
 } from '@fortawesome/free-solid-svg-icons';
-import { getAccentColor } from '../../../utils/getAccentColor';
-import { CompostBin, ViewKey } from '../../../mocks/mockdata';
+import { getAccentColor } from '../../../../utils/getAccentColor';
+import { CompostBin, ViewKey } from '../../../../mocks/mockdata';
 import { useState } from 'react';
-import ConfirmModal from '../../shared/ConfirmModal';
-import { capitalize } from '../../../utils/capitalize';
+import ConfirmModal from '../../../shared/ConfirmModal';
+import { capitalize } from '../../../../utils/capitalize';
 
 interface CompostBinCardProps {
   compostBin: CompostBin;
@@ -18,11 +18,11 @@ interface CompostBinCardProps {
   onEditCompostBin?: (compostBin: CompostBin) => void;
 }
 
-export const CompostBinCard: React.FC = ({
+export const CompostBinCard: React.FC<CompostBinCardProps> = ({
   compostBin,
   onDeleteBin,
   onEditCompostBin,
-}: CompostBinCardProps) => {
+}) => {
   const [isConfirmOpen, setIsConfirmOpen] = useState(false);
   const { textAccent } = getAccentColor(ViewKey.Compost);
 

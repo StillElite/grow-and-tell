@@ -1,14 +1,14 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheck, faTrash, faPen } from '@fortawesome/free-solid-svg-icons';
-import { Task } from '../../../mocks/mockdata';
+import { Task } from '../../../../mocks/mockdata';
 import {
   getCategoryColor,
   getCategoryLabel,
   getFrequencyLabel,
-} from '../../../utils/taskFormatter';
+} from '../../../../utils/taskFormatter';
 import { useState } from 'react';
-import ConfirmModal from '../../shared/ConfirmModal';
-import { capitalize } from '../../../utils/capitalize';
+import ConfirmModal from '../../../shared/ConfirmModal';
+import { capitalize } from '../../../../utils/capitalize';
 
 interface TaskCardProps {
   task: Task;

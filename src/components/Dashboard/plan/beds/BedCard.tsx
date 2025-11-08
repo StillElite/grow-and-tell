@@ -6,13 +6,14 @@ import {
   faTrash,
   faPen,
 } from '@fortawesome/free-solid-svg-icons';
-import { getAccentColor } from '../../../utils/getAccentColor';
-import { Bed, Crop, ViewKey } from '../../../mocks/mockdata';
+
 import { useState } from 'react';
 import CropFormModal from './CropFormModal';
-import ConfirmModal from '../../shared/ConfirmModal';
-import { capitalize } from '../../../utils/capitalize';
-import { usePlantingHistoryContext } from '../../../context/PlantingHistoryContext';
+import { Bed, Crop, ViewKey } from '../../../../mocks/mockdata';
+import { getAccentColor } from '../../../../utils/getAccentColor';
+import { usePlantingHistoryContext } from '../../../../context/PlantingHistoryContext';
+import { capitalize } from '../../../../utils/capitalize';
+import ConfirmModal from '../../../shared/ConfirmModal';
 
 interface BedCardProps {
   bed: Bed;
@@ -22,13 +23,13 @@ interface BedCardProps {
   onDeleteBed: (bedId: string) => void;
 }
 
-export const BedCard: React.FC = ({
+export const BedCard: React.FC<BedCardProps> = ({
   bed,
   onView,
   onAddCrop,
-  onDeleteBed,
   onEditBed,
-}: BedCardProps) => {
+  onDeleteBed,
+}) => {
   const [isCropFormModalOpen, setIsCropFormModalOpen] = useState(false);
   const [isConfirmOpen, setIsConfirmOpen] = useState(false);
   const { textAccent } = getAccentColor(ViewKey.Beds);

@@ -3,15 +3,15 @@ import { useEffect, useState } from 'react';
 import { faTimes, faPlus, faRecycle } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { toast } from 'react-hot-toast';
-import { FormField } from '../../shared/forms/FormField';
-import { SelectFormField } from '../../shared/forms/SelectFormField';
+import { FormField } from '../../../shared/forms/FormField';
+import { SelectFormField } from '../../../shared/forms/SelectFormField';
 import {
   CompostBin,
   CompostStatus,
   compostStatusOptions,
   CompostType,
-} from '../../../mocks/mockdata';
-import { RadioGroup } from '../../shared/forms/RadioGroup';
+} from '../../../../mocks/mockdata';
+import { RadioGroup } from '../../../shared/forms/RadioGroup';
 
 interface CompostBinFormModalProps {
   isOpen: boolean;

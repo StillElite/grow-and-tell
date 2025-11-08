@@ -1,10 +1,11 @@
-import SectionHeader from '../../shared/SectionHeader';
+import SectionHeader from '../../../shared/SectionHeader';
 import BedFormModal from './BedFormModal';
-import { BedCard } from './BedCard';
+
 import { useState } from 'react';
-import { Bed, ViewKey } from '../../../mocks/mockdata';
-import PageHeader from '../../shared/PageHeader';
-import { BreadcrumbItem } from '../../shared/Breadcrumb';
+import { Bed, ViewKey } from '../../../../mocks/mockdata';
+import PageHeader from '../../../shared/PageHeader';
+import { BreadcrumbItem } from '../../../shared/Breadcrumb';
+import { BedCard } from './BedCard';
 
 interface BedListProps {
   beds: Bed[];
@@ -17,7 +18,7 @@ interface BedListProps {
   onOpenMenu?: () => void;
 }
 
-const BedList: React.FC<BedListProps> = ({
+export const BedList: React.FC<BedListProps> = ({
   onView,
   beds,
   onAddCrop,
@@ -83,5 +84,3 @@ const BedList: React.FC<BedListProps> = ({
     </>
   );
 };
-
-export default BedList;

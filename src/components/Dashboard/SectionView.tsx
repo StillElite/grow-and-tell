@@ -1,8 +1,8 @@
 import { ViewKey } from '../../mocks/mockdata';
-import BedSection from './beds/BedSection';
-import CompostSection from './compost/CompostSection';
-import PlantingSection from './plantLog/PlantingSection';
-import TaskSection from './tasks/TaskSection';
+import BedSection from './plan/beds/BedSection';
+import CompostSection from './plan/compost/CompostSection';
+import PlantingSection from './plan/plantLog/PlantingSection';
+import TaskSection from './plan/tasks/TaskSection';
 
 interface SectionViewProps {
   activeView: ViewKey;

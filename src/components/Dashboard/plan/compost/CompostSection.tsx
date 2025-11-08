@@ -1,13 +1,13 @@
-import SectionHeader from '../../shared/SectionHeader';
+import SectionHeader from '../../../shared/SectionHeader';
 import {
   CompostBin,
   CompostStatus,
   CompostType,
   ViewKey,
-} from '../../../mocks/mockdata';
-import PageHeader from '../../shared/PageHeader';
+} from '../../../../mocks/mockdata';
+import PageHeader from '../../../shared/PageHeader';
 import CompostList from './CompostList';
-import { useCompostContext } from '../../../context/CompostContext';
+import { useCompostContext } from '../../../../context/CompostContext';
 import toast from 'react-hot-toast';
 import { useState } from 'react';
 import CompostBinFormModal from './CompostBinFormModal';

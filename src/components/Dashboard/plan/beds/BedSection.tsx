@@ -1,11 +1,11 @@
 import { useState } from 'react';
 import BedDetails from './BedDetails';
-import BedList from './BedList';
-import { Bed, ViewKey } from '../../../mocks/mockdata';
-import { useBedContext } from '../../../context/BedContext';
 import BedFormModal from './BedFormModal';
 import toast from 'react-hot-toast';
-import { usePlantingHistoryContext } from '../../../context/PlantingHistoryContext';
+import { Bed, ViewKey } from '../../../../mocks/mockdata';
+import { useBedContext } from '../../../../context/BedContext';
+import { usePlantingHistoryContext } from '../../../../context/PlantingHistoryContext';
+import { BedList } from './BedList';
 
 interface BedSectionProps {
   selectedBedId: string | null;

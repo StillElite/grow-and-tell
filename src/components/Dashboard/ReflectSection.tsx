@@ -1,4 +1,4 @@
-const ReflectSection: React.FC = () => {
+export const ReflectSection: React.FC = () => {
   return (
     <section aria-labelledby='reflect-heading' className='mt-12'>
       <h2

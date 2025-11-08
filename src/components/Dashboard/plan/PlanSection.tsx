@@ -1,10 +1,15 @@
 import Image from 'next/image';
-import { Bed, PlanningFeatureCard, Task, ViewKey } from '../../mocks/mockdata';
-import { getAccentColor } from '../../utils/getAccentColor';
-import { useBedContext } from '../../context/BedContext';
-import { usePlantingHistoryContext } from '../../context/PlantingHistoryContext';
-import { useCompostContext } from '../../context/CompostContext';
-import { useTaskContext } from '../../context/TaskContext';
+import {
+  Bed,
+  PlanningFeatureCard,
+  Task,
+  ViewKey,
+} from '../../../mocks/mockdata';
+import { getAccentColor } from '../../../utils/getAccentColor';
+import { useBedContext } from '../../../context/BedContext';
+import { usePlantingHistoryContext } from '../../../context/PlantingHistoryContext';
+import { useCompostContext } from '../../../context/CompostContext';
+import { useTaskContext } from '../../../context/TaskContext';
 
 interface PlanSectionProps {
   onSelect: (view: ViewKey) => void;

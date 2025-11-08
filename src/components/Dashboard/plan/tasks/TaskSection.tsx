@@ -1,18 +1,20 @@
-import SectionHeader from '../../shared/SectionHeader';
+import SectionHeader from '../../../shared/SectionHeader';
 import {
   Task,
   TaskCategory,
   TaskFrequency,
   ViewKey,
-} from '../../../mocks/mockdata';
-import PageHeader from '../../shared/PageHeader';
+} from '../../../../mocks/mockdata';
+import PageHeader from '../../../shared/PageHeader';
 import { TaskList } from './TaskList';
 import { TaskSummary } from './TaskSummary';
-import { useTaskContext } from '../../../context/TaskContext';
+import { useTaskContext } from '../../../../context/TaskContext';
 import TaskFormModal from './TaskFormModal';
 import { useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
 import { TaskSummaryFlyout } from './TaskSummaryFlyout';
+import ConfirmModal from '../../../shared/ConfirmModal';
+import { getAccentColor } from '../../../../utils/getAccentColor';
 
 export interface PlantingSectionProps {
   onNavigate: (view: ViewKey) => void;
@@ -23,11 +25,28 @@ const TaskSection: React.FC<PlantingSectionProps> = ({
   onNavigate,
   onOpenMenu,
 }) => {
-  const { tasks, addTask, updateTask, deleteTask, toggleComplete } =
-    useTaskContext();
+  const {
+    tasks,
+    addTask,
+    updateTask,
+    deleteTask,
+    toggleComplete,
+    clearCompletedTasks,
+  } = useTaskContext();
   const [isTaskFormModalOpen, setIsTaskFormModalOpen] = useState(false);
   const [taskToEdit, setTaskToEdit] = useState<Task | null>(null);
   const [isSummaryOpen, setIsSummaryOpen] = useState(false);
+  const [isConfirmOpen, setIsConfirmOpen] = useState(false);
+
+  const { bgAccent } = getAccentColor(ViewKey.Tasks);
+
+  const hasCompletedTasks = tasks.some((task) => task.completed);
+
+  const confirmMessage = (
+    <>
+      Are you sure you want to <strong>clear all completed tasks</strong>?
+    </>
+  );
 
   // Open in ADD mode
   const handleAddTask = () => {
@@ -69,6 +88,12 @@ const TaskSection: React.FC<PlantingSectionProps> = ({
     { label: 'Tasks' },
   ];
 
+  const handleClearCompletedTasks = () => {
+    clearCompletedTasks();
+    setIsConfirmOpen(false);
+    toast.success('All completed tasks have been cleared');
+  };
+
   useEffect(() => {
     // Guard for SSR
     if (typeof window === 'undefined') return;
@@ -101,6 +126,37 @@ const TaskSection: React.FC<PlantingSectionProps> = ({
         imageSrc='/images/planting.png'
       />
       <div className='flex justify-end items-center gap-2 mb-4'>
+        <div className='relative group'>
+          <button
+            type='button'
+            disabled={!hasCompletedTasks}
+            onClick={() => setIsConfirmOpen(true)}
+            className={`text-sm px-3 py-2 rounded-md border border-gray-300
+              focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#2a452c]
+              ${
+                hasCompletedTasks
+                  ? 'bg-white hover:bg-gray-50 text-[#2a452c]'
+                  : 'bg-gray-200 text-gray-400'
+              }`}
+            aria-label='Clear all completed task checkmarks'
+          >
+            Clear All
+          </button>
+          {!hasCompletedTasks && (
+            <span
+              className={`absolute left-1/2 -translate-x-1/2 bottom-full mb-1 whitespace-nowrap rounded ${bgAccent} px-2 py-1 text-xs text-white opacity-0 translate-y-1 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-200 ease-out z-10`}
+            >
+              No completed tasks to clear
+            </span>
+          )}
+        </div>
+        <ConfirmModal
+          isOpen={isConfirmOpen}
+          onClose={() => setIsConfirmOpen(false)}
+          onConfirm={handleClearCompletedTasks}
+          title='Clear All Tasks'
+          message={confirmMessage}
+        />
         <button
           type='button'
           onClick={handleAddTask}
