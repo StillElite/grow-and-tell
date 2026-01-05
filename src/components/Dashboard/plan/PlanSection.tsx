@@ -78,7 +78,7 @@ const PlanSection: React.FC<PlanSectionProps> = ({ onSelect }) => {
         id='plan-heading'
         className='text-2xl md:text-3xl font-bold text-[#2a452c] mb-6'
       >
-        Plan Your Garden
+        Grow Your Garden
       </h2>
       <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6'>
         {planningFeatureCards.map((feature) => {

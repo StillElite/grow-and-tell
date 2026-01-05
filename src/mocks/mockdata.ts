@@ -68,7 +68,7 @@ export const features: FeatureCard[] = [
 
 //
 // --------------------
-// Dashboard – Plan Your Garden Section
+// Dashboard – Grow Your Garden Section
 // --------------------
 
 export enum ViewKey {

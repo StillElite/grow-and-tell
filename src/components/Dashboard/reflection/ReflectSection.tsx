@@ -1,3 +1,5 @@
+import { HarvestSummary } from './harvest/HarvestSummary';
+
 export const ReflectSection: React.FC = () => {
   return (
     <section aria-labelledby='reflect-heading' className='mt-12'>
@@ -8,15 +10,8 @@ export const ReflectSection: React.FC = () => {
         Reflect on Your Progress
       </h2>
 
-      <div className='mt-10 grid grid-cols-1 md:grid-cols-2 gap-6'>
-        <div className='bg-white rounded-lg shadow p-4 flex flex-col justify-between'>
-          <h3 className='text-lg font-semibold text-[#2a452c] mb-2'>
-            Harvest Log
-          </h3>
-          <p className='text-sm text-gray-600'>
-            Track what you harvested and when — coming soon!
-          </p>
-        </div>
+      <div className='grid grid-cols-1 lg:grid-cols-2 gap-6'>
+        <HarvestSummary />
 
         <div className='bg-white rounded-lg shadow p-4 flex flex-col justify-between'>
           <h3 className='text-lg font-semibold text-[#2a452c] mb-2'>

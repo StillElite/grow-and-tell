@@ -10,7 +10,7 @@ export const TaskSummary: React.FC = () => {
     useState(false);
 
   return (
-    <div className='relative flex flex-col bg-white shadow-sm'>
+    <div className='relative flex flex-col'>
       {/* Header */}
       <div className='px-6 py-4'>
         <h2
