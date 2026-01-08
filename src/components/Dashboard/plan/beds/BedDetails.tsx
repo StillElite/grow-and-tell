@@ -116,6 +116,7 @@ const BedDetails: React.FC<BedDetailsProps> = ({
       <div>
         <div className='flex items-center justify-end mb-4'>
           <button
+            type='button'
             onClick={handleOpenModal}
             className='bg-[#244225] text-white text-sm px-4 py-2 rounded hover:bg-[#356a3c] transition'
           >

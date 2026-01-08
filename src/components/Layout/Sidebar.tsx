@@ -34,6 +34,7 @@ const Sidebar: React.FC<SidebarProps> = ({
       `}
     >
       <button
+        type='button'
         onClick={onClose}
         className='absolute top-4 right-4 text-white md:hidden'
         aria-label='Close menu'

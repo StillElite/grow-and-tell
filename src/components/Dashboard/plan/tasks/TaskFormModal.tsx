@@ -115,6 +115,7 @@ const TaskFormModal: React.FC<TaskFormModalProps> = ({
       }}
     >
       <button
+        type='button'
         onClick={handleClose}
         aria-label='Close'
         className='absolute top-4 right-4 text-gray-500 hover:text-gray-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#2a452c] focus-visible:rounded-md w-5 h-5'

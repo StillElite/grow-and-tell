@@ -17,6 +17,7 @@ const PageHeader: React.FC<PageHeaderProps> = ({
     <div className='flex items-center gap-4'>
       {onOpenMenu && (
         <button
+          type='button'
           onClick={onOpenMenu}
           className='md:hidden text-[#2a452c] -ml-2'
           aria-label='Open menu'
@@ -31,6 +32,7 @@ const PageHeader: React.FC<PageHeaderProps> = ({
 
     {onLogout && (
       <button
+        type='button'
         onClick={onLogout}
         className='text-sm text-orange-700 hover:text-orange-800 font-semibold flex items-center gap-2 transition-colors'
       >

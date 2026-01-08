@@ -12,6 +12,7 @@ const Nav: React.FC = () => {
             <span className='absolute bottom-0 left-1/2 -translate-x-1/2 w-0 h-0.5 bg-orange-600 transition-all duration-300 group-hover:w-full'></span>
           </Link>
           <button
+            type='button'
             onClick={() => console.log('Logout')}
             className='group relative bg-transparent border-none p-0 cursor-pointer'
           >

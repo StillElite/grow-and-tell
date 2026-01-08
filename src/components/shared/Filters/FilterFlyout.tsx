@@ -103,6 +103,7 @@ export const FilterFlyout: React.FC<GenericFilterFlyoutProps> = ({
         aria-modal='true'
       >
         <button
+          type='button'
           onClick={onClose}
           aria-label='Close filters'
           className='absolute top-4 right-4 text-gray-500 hover:text-gray-700'
@@ -157,12 +158,14 @@ export const FilterFlyout: React.FC<GenericFilterFlyoutProps> = ({
 
         <div className='flex-shrink-0 flex justify-between mt-6 pt-4 border-t border-gray-200'>
           <button
+            type='button'
             onClick={handleClearAll}
             className='text-gray-600 font-medium hover:underline'
           >
             Clear All
           </button>
           <button
+            type='button'
             onClick={handleApply}
             className={`text-white ${bgAccent} px-6 py-2 rounded-lg font-medium shadow-md hover:brightness-110 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-lime-500`}
           >

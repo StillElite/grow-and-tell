@@ -53,6 +53,7 @@ export const CompostBinCard: React.FC<CompostBinCardProps> = ({
           </h3>
           <div className='flex gap-3 text-sm'>
             <button
+              type='button'
               className='text-[#244225]'
               onClick={() => {
                 onEditCompostBin(compostBin);
@@ -62,6 +63,7 @@ export const CompostBinCard: React.FC<CompostBinCardProps> = ({
               <FontAwesomeIcon icon={faPen} />
             </button>
             <button
+              type='button'
               onClick={() => setIsConfirmOpen(true)}
               className='text-red-700'
               aria-label={`Delete ${compostBin.name}`}

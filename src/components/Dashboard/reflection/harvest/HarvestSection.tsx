@@ -68,6 +68,7 @@ const HarvestSection: React.FC<HarvestSectionProps> = ({
 
       <div className='flex justify-end mb-4'>
         <button
+          type='button'
           onClick={handleOpenModal}
           className='bg-[#244225] text-white text-sm px-4 py-2 rounded hover:bg-[#356a3c] transition'
         >

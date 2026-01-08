@@ -51,6 +51,7 @@ export const HarvestCard: React.FC<HarvestCardProps> = ({
 
         <div className='flex gap-3 text-sm'>
           <button
+            type='button'
             onClick={() => onEditHarvest(harvest)}
             aria-label='Edit harvest entry'
             className='text-[#244225]'
@@ -59,6 +60,7 @@ export const HarvestCard: React.FC<HarvestCardProps> = ({
           </button>
 
           <button
+            type='button'
             onClick={() => setIsConfirmOpen(true)}
             aria-label={`Delete ${harvest.name} harvest`}
             className='text-red-700'

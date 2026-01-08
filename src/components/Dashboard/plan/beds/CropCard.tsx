@@ -64,6 +64,7 @@ export const CropCard: React.FC<CropCardProps> = ({
         </h3>
         <div className='flex gap-3 text-sm'>
           <button
+            type='button'
             onClick={() => onEditCrop(crop)}
             aria-label={`Edit ${crop.name}`}
             className='text-[#244225]'
@@ -71,6 +72,7 @@ export const CropCard: React.FC<CropCardProps> = ({
             <FontAwesomeIcon icon={faPen} aria-hidden='true' />
           </button>
           <button
+            type='button'
             onClick={() => setIsConfirmOpen(true)}
             aria-label={`Delete ${crop.name}`}
             className='text-red-700'

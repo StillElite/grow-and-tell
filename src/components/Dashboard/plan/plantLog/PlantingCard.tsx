@@ -66,6 +66,7 @@ export const PlantingCard: React.FC<PlantingCardProps> = ({
 
         <div className='relative inline-block group'>
           <button
+            type='button'
             onClick={() => setIsConfirmOpen(true)}
             disabled={isCropStillActive}
             className={isCropStillActive ? 'text-gray-400' : 'text-[#2a452c]'}
