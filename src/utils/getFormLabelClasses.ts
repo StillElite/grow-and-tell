@@ -1,4 +1,4 @@
-export const getFormLabelClasses = (value: string): string => {
+export const getFormLabelClasses = (value: string | number): string => {
   const base =
     'absolute left-4 transition-all duration-200 ease-in-out text-[14px]';
   const float = 'top-1.5 text-orange-700';

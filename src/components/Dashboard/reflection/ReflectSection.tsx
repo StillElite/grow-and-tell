@@ -1,6 +1,13 @@
+import { ViewKey } from '../../../mocks/mockdata';
 import { HarvestSummary } from './harvest/HarvestSummary';
 
-export const ReflectSection: React.FC = () => {
+interface ReflectionSectionProps {
+  onSelect: (view: ViewKey) => void;
+}
+
+export const ReflectSection: React.FC<ReflectionSectionProps> = ({
+  onSelect,
+}) => {
   return (
     <section aria-labelledby='reflect-heading' className='mt-12'>
       <h2
@@ -11,7 +18,7 @@ export const ReflectSection: React.FC = () => {
       </h2>
 
       <div className='grid grid-cols-1 lg:grid-cols-2 gap-6'>
-        <HarvestSummary />
+        <HarvestSummary onSelect={onSelect} />
 
         <div className='bg-white rounded-lg shadow p-4 flex flex-col justify-between'>
           <h3 className='text-lg font-semibold text-[#2a452c] mb-2'>

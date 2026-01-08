@@ -65,7 +65,7 @@ const Dashboard: React.FC = () => {
             />
             <Welcome />
             <PlanSection onSelect={(section) => setActiveView(section)} />
-            <ReflectSection />
+            <ReflectSection onSelect={(section) => setActiveView(section)} />
           </>
         ) : (
           <SectionView

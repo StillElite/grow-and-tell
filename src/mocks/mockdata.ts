@@ -77,6 +77,7 @@ export enum ViewKey {
   PlantLog = 'Plant Log',
   Compost = 'Compost',
   Tasks = 'Tasks',
+  Harvest = 'Harvest',
 }
 
 //
@@ -422,3 +423,15 @@ export const tasks: Task[] = [
     factoryHidden: false,
   },
 ];
+
+// --------------------
+// Harvest
+// --------------------
+
+export interface Harvest {
+  id: string;
+  name: string;
+  quantity: number;
+  dateHarvested: string;
+  notes?: string;
+}

@@ -17,6 +17,15 @@ const Sidebar: React.FC<SidebarProps> = ({
   onNavigate,
   onDeselectBed,
 }) => {
+  const sidebarItems = [
+    { label: 'Dashboard', viewKey: ViewKey.Dashboard },
+    { label: 'Beds', viewKey: ViewKey.Beds },
+    { label: 'Plant Log', viewKey: ViewKey.PlantLog },
+    { label: 'Compost', viewKey: ViewKey.Compost },
+    { label: 'Tasks', viewKey: ViewKey.Tasks },
+    { label: 'Harvest', viewKey: ViewKey.Harvest },
+  ];
+
   return (
     <aside
       className={`
@@ -44,56 +53,20 @@ const Sidebar: React.FC<SidebarProps> = ({
       </Link>
 
       <nav className='space-y-2 text-sm'>
-        <button
-          onClick={() => {
-            onNavigate(ViewKey.Dashboard);
-            onDeselectBed();
-            onClose();
-          }}
-          className='block hover:underline'
-        >
-          Dashboard
-        </button>
-        <button
-          onClick={() => {
-            onNavigate(ViewKey.Beds);
-            onDeselectBed();
-            onClose();
-          }}
-          className='block hover:underline'
-        >
-          Beds
-        </button>
-        <button
-          onClick={() => {
-            onNavigate(ViewKey.PlantLog);
-            onDeselectBed();
-            onClose();
-          }}
-          className='block hover:underline'
-        >
-          Plant Log
-        </button>
-        <button
-          onClick={() => {
-            onNavigate(ViewKey.Compost);
-            onDeselectBed();
-            onClose();
-          }}
-          className='block hover:underline'
-        >
-          Compost
-        </button>
-        <button
-          onClick={() => {
-            onNavigate(ViewKey.Tasks);
-            onDeselectBed();
-            onClose();
-          }}
-          className='block hover:underline'
-        >
-          Tasks
-        </button>
+        {sidebarItems.map((item) => (
+          <button
+            type='button'
+            key={item.viewKey}
+            onClick={() => {
+              onNavigate(item.viewKey);
+              onDeselectBed();
+              onClose();
+            }}
+            className='block hover:underline'
+          >
+            {item.label}
+          </button>
+        ))}
       </nav>
     </aside>
   );

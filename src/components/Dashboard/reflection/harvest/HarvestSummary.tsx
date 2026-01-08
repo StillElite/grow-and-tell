@@ -1,8 +1,13 @@
 import React from 'react';
 import { HarvestCategories } from './HarvestCategories';
 import { HarvestRecentEntries } from './HarvestRecentEntries';
+import { ViewKey } from '../../../../mocks/mockdata';
 
-export const HarvestSummary: React.FC = () => {
+interface HarvestSummaryProps {
+  onSelect: (view: ViewKey) => void;
+}
+
+export const HarvestSummary: React.FC<HarvestSummaryProps> = ({ onSelect }) => {
   return (
     <section className='rounded-lg bg-white shadow p-6'>
       <h2 className='text-lg font-semibold text-neutral-900'>
@@ -20,6 +25,7 @@ export const HarvestSummary: React.FC = () => {
         <button
           type='button'
           className='w-full bg-[#244225] text-white text-sm px-4 py-2 rounded hover:bg-[#356a3c] transition'
+          onClick={() => onSelect(ViewKey.Harvest)}
         >
           View harvest log
         </button>

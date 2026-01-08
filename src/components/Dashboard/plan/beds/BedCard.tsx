@@ -107,6 +107,7 @@ export const BedCard: React.FC<BedCardProps> = ({
           </h3>
           <div className='flex gap-3 text-sm'>
             <button
+              type='button'
               className='text-[#244225]'
               onClick={() => {
                 onEditBed(bed);
@@ -116,6 +117,7 @@ export const BedCard: React.FC<BedCardProps> = ({
               <FontAwesomeIcon aria-hidden='true' icon={faPen} />
             </button>
             <button
+              type='button'
               onClick={() => setIsConfirmOpen(true)}
               className='text-red-700'
               aria-label={`Delete ${bed.name}`}
@@ -182,6 +184,7 @@ export const BedCard: React.FC<BedCardProps> = ({
         {/* Bottom buttons */}
         <div className='flex items-center justify-between mt-10'>
           <button
+            type='button'
             className='bg-[#244225] text-white text-sm px-4 py-1 rounded hover:bg-[#356a3c] transition'
             onClick={() => onView(bed.id)}
             aria-label={`View details for ${bed.name}`}
@@ -189,6 +192,7 @@ export const BedCard: React.FC<BedCardProps> = ({
             View
           </button>
           <button
+            type='button'
             onClick={() => setIsCropFormModalOpen(true)}
             className='text-sm text-orange-700 hover:underline'
           >

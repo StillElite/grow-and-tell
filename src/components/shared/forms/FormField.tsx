@@ -8,8 +8,9 @@ interface FormFieldProps {
   onChange: (value: string) => void;
   error?: string;
   maxLength?: number;
-  type?: 'text' | 'textarea' | 'date';
+  type?: 'text' | 'textarea' | 'date' | 'number';
   placeholder?: string;
+  min?;
 }
 
 export const FormField: React.FC<FormFieldProps> = ({
@@ -21,6 +22,7 @@ export const FormField: React.FC<FormFieldProps> = ({
   maxLength,
   type = 'text',
   placeholder = ' ',
+  min,
 }) => {
   const inputBaseClasses =
     'peer w-full border border-gray-300 rounded-md px-4 pt-6 pb-2 text-base text-gray-900 placeholder-transparent shadow-sm focus:outline-none focus:ring-2 focus:ring-[#2a452c] focus:border-[#2a452c]';
@@ -39,6 +41,7 @@ export const FormField: React.FC<FormFieldProps> = ({
     'aria-describedby': error ? `${id}-error` : undefined,
     placeholder,
     maxLength,
+    ...(type === 'number' && min !== undefined && { min }),
     className: clsx(
       inputBaseClasses,
       error && 'border-red-500 focus:ring-red-500'
@@ -46,13 +49,13 @@ export const FormField: React.FC<FormFieldProps> = ({
   };
 
   return (
-    <div className='relative mb-4'>
+    <div className='relative'>
       {type === 'textarea' ? (
         <textarea {...sharedProps} rows={3} />
       ) : (
         <input {...sharedProps} type={type} />
       )}
-      <label htmlFor={id} className={getFormLabelClasses(value)}>
+      <label htmlFor={id} className={getFormLabelClasses(String(value ?? ''))}>
         {label}
       </label>
       <div className={clsx('flex justify-between text-xs', maxLengthSpacing)}>
@@ -62,11 +65,12 @@ export const FormField: React.FC<FormFieldProps> = ({
         >
           {error}
         </p>
-        {maxLength && (
+        {maxLength && type !== 'number' && (
           <p className='text-gray-500'>
             {value.length}/{maxLength}
           </p>
         )}
+        {type === 'number' && <p className='text-gray-500 invisible'>0/0</p>}
       </div>
     </div>
   );
