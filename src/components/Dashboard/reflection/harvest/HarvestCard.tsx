@@ -5,15 +5,16 @@ import {
   faPen,
   faTrash,
   faShoppingBasket,
-  faNoteSticky,
+  faTags,
 } from '@fortawesome/free-solid-svg-icons';
 import { Harvest } from '../../../../mocks/mockdata';
 import { capitalize } from '../../../../utils/capitalize';
 import { formatDate } from '../../../../utils/formatDate';
 import { useState } from 'react';
 import ConfirmModal from '../../../shared/ConfirmModal';
+import { formatHarvestUnit } from '../../../../utils/formatHarvestUnit';
 
-interface HarvestCardProps {
+export interface HarvestCardProps {
   harvest: Harvest;
   onEditHarvest?: (harvest: Harvest) => void;
   onDeleteHarvest: (harvestId) => void;
@@ -87,7 +88,7 @@ export const HarvestCard: React.FC<HarvestCardProps> = ({
             className='text-[#244225] pb-1'
           />
           <strong className='text-gray-800'>Amount:</strong>
-          {harvest.quantity} units
+          {harvest.quantity} {formatHarvestUnit(harvest.quantity, harvest.unit)}
         </p>
 
         <p className='flex items-start gap-2'>
@@ -96,26 +97,21 @@ export const HarvestCard: React.FC<HarvestCardProps> = ({
             aria-hidden='true'
             className='text-[#244225] pt-[2px]'
           />
-          <span>
-            <strong className='text-gray-800'>Harvested:</strong>{' '}
-            {formatDate(harvest.dateHarvested)}
-          </span>
+          <strong className='text-gray-800'>Harvested: </strong>{' '}
+          {formatDate(harvest.dateHarvested)}
         </p>
-        {harvest.notes && (
-          <div className='min-h-[24px] mt-2'>
-            <p className='flex items-start gap-2 text-sm '>
-              <FontAwesomeIcon
-                icon={faNoteSticky}
-                aria-hidden='true'
-                className='text-[#244225] pt-[2px]'
-              />
-              <span>
-                <strong className='text-gray-800'>Notes:</strong>{' '}
-                {harvest.notes}
-              </span>
-            </p>
-          </div>
-        )}
+
+        <div className='min-h-[24px] mt-2'>
+          <p className='flex items-start gap-2 text-sm '>
+            <FontAwesomeIcon
+              icon={faTags}
+              aria-hidden='true'
+              className='text-[#244225] pt-[2px]'
+            />
+            <strong className='text-gray-800'>Category: </strong>{' '}
+            {harvest.category}
+          </p>
+        </div>
       </div>
     </div>
   );

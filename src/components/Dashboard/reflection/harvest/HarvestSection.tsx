@@ -1,10 +1,11 @@
-import { Harvest, ViewKey } from '../../../../mocks/mockdata';
+import { Harvest, HarvestCategory, ViewKey } from '../../../../mocks/mockdata';
 import PageHeader from '../../../shared/PageHeader';
 import SectionHeader from '../../../shared/SectionHeader';
 import { HarvestCard } from './HarvestCard';
 import HarvestFormModal from './HarvestFormModal';
 import { useState } from 'react';
 import { useHarvestContext } from '../../../../context/HarvestContext';
+import { getHarvestUnit } from '../../../../utils/getHarvestUnit';
 
 export interface HarvestSectionProps {
   onNavigate: (view: ViewKey) => void;
@@ -37,19 +38,22 @@ const HarvestSection: React.FC<HarvestSectionProps> = ({
     name: string,
     quantity: number,
     dateHarvested: string,
-    notes: string
+    category: HarvestCategory
   ) => {
+    const unit = getHarvestUnit(category);
+
     if (harvestToEdit) {
       const updated: Harvest = {
         ...harvestToEdit,
         name,
         quantity,
         dateHarvested,
-        notes,
+        unit,
+        category,
       };
       updateHarvest(updated);
     } else {
-      addHarvest(name, quantity, dateHarvested, notes);
+      addHarvest(name, quantity, dateHarvested, unit, category);
     }
   };
 

@@ -11,6 +11,7 @@ interface FormFieldProps {
   type?: 'text' | 'textarea' | 'date' | 'number';
   placeholder?: string;
   min?;
+  disabled?: boolean;
 }
 
 export const FormField: React.FC<FormFieldProps> = ({
@@ -23,6 +24,7 @@ export const FormField: React.FC<FormFieldProps> = ({
   type = 'text',
   placeholder = ' ',
   min,
+  disabled = false,
 }) => {
   const inputBaseClasses =
     'peer w-full border border-gray-300 rounded-md px-4 pt-6 pb-2 text-base text-gray-900 placeholder-transparent shadow-sm focus:outline-none focus:ring-2 focus:ring-[#2a452c] focus:border-[#2a452c]';
@@ -46,6 +48,7 @@ export const FormField: React.FC<FormFieldProps> = ({
       inputBaseClasses,
       error && 'border-red-500 focus:ring-red-500'
     ),
+    disabled,
   };
 
   return (

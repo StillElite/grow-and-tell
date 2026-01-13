@@ -1,5 +1,5 @@
 import { createContext, useContext, useState, ReactNode } from 'react';
-import { Harvest } from '../mocks/mockdata';
+import { Harvest, HarvestCategory, HarvestUnit } from '../mocks/mockdata';
 
 interface HarvestContextType {
   harvests: Harvest[];
@@ -7,7 +7,8 @@ interface HarvestContextType {
     name: string,
     quantity: number,
     dateHarvested: string,
-    notes: string
+    unit: HarvestUnit,
+    category: HarvestCategory
   ) => void;
   updateHarvest: (updatedHarvest: Harvest) => void;
   deleteHarvest: (harvestId: string) => void;
@@ -33,14 +34,16 @@ export const HarvestProvider = ({ children }: HarvestProviderProps) => {
     name: string,
     quantity: number,
     dateHarvested: string,
-    notes: string
+    unit: HarvestUnit,
+    category: HarvestCategory
   ) => {
     const newHarvest: Harvest = {
       id: crypto.randomUUID(),
       name,
       quantity,
       dateHarvested,
-      notes,
+      unit,
+      category,
     };
     setHarvests([...harvests, newHarvest]);
   };

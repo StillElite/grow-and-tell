@@ -428,10 +428,19 @@ export const tasks: Task[] = [
 // Harvest
 // --------------------
 
+export type HarvestCategory =
+  | 'Leafy greens'
+  | 'Fruiting veggies'
+  | 'Herbs'
+  | 'Roots';
+
+export type HarvestUnit = 'lbs' | 'bunches' | 'count';
+
 export interface Harvest {
   id: string;
   name: string;
   quantity: number;
+  unit: HarvestUnit;
+  category: HarvestCategory;
   dateHarvested: string;
-  notes?: string;
 }

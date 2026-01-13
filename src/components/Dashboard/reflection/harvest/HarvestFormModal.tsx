@@ -8,7 +8,9 @@ import {
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { FormField } from '../../../shared/forms/FormField';
 import { toast } from 'react-hot-toast';
-import { Harvest } from '../../../../mocks/mockdata';
+import { Harvest, HarvestCategory } from '../../../../mocks/mockdata';
+import { SelectFormField } from '../../../shared/forms/SelectFormField';
+import { getHarvestUnit } from '../../../../utils/getHarvestUnit';
 
 interface HarvestFormModalProps {
   isOpen: boolean;
@@ -17,7 +19,7 @@ interface HarvestFormModalProps {
     name: string,
     quantity: number,
     dateHarvested: string,
-    notes: string
+    category: HarvestCategory
   ) => void;
   harvestToEdit?: Harvest | null;
 }
@@ -30,8 +32,11 @@ const HarvestFormModal: React.FC<HarvestFormModalProps> = ({
 }) => {
   const [name, setName] = useState('');
   const [quantity, setQuantity] = useState('');
+  const [category, setCategory] = useState<HarvestCategory | ''>(
+    harvestToEdit?.category ?? ''
+  );
   const [dateHarvested, setDateHarvested] = useState('');
-  const [notes, setNotes] = useState('');
+
   const [errors, setErrors] = useState<{ [key: string]: string }>({});
 
   useEffect(() => {
@@ -39,12 +44,12 @@ const HarvestFormModal: React.FC<HarvestFormModalProps> = ({
       setName(harvestToEdit.name);
       setQuantity(harvestToEdit.quantity.toString());
       setDateHarvested(harvestToEdit.dateHarvested);
-      setNotes(harvestToEdit.notes);
+      setCategory(harvestToEdit.category);
     } else {
       setName('');
       setQuantity('');
       setDateHarvested('');
-      setNotes('');
+      setCategory('');
     }
   }, [harvestToEdit, isOpen]);
 
@@ -67,6 +72,10 @@ const HarvestFormModal: React.FC<HarvestFormModalProps> = ({
       newErrors.dateHarvested = 'Please enter a harvested date.';
     }
 
+    if (!category) {
+      newErrors.type = 'Please select a category.';
+    }
+
     if (Object.keys(newErrors).length > 0) {
       setErrors(newErrors);
       return;
@@ -76,7 +85,7 @@ const HarvestFormModal: React.FC<HarvestFormModalProps> = ({
       name.trim(),
       numericQuantity,
       dateHarvested.trim(),
-      notes.trim()
+      category as HarvestCategory
     );
 
     toast.success(
@@ -86,7 +95,7 @@ const HarvestFormModal: React.FC<HarvestFormModalProps> = ({
     setName('');
     setQuantity('');
     setDateHarvested('');
-    setNotes('');
+    setCategory('');
     onClose();
   };
 
@@ -94,7 +103,7 @@ const HarvestFormModal: React.FC<HarvestFormModalProps> = ({
     setName('');
     setQuantity('');
     setDateHarvested('');
-    setNotes('');
+    setCategory('');
     setErrors({});
     onClose();
   };
@@ -160,11 +169,28 @@ const HarvestFormModal: React.FC<HarvestFormModalProps> = ({
           error={errors.name}
           maxLength={24}
         />
-        <div className='flex gap-4'>
-          <div className='flex-1'>
+        <SelectFormField
+          id='harvest-category'
+          label='Select category'
+          value={category}
+          onChange={(value) => {
+            setCategory(value as HarvestCategory);
+            setErrors((prev) => ({ ...prev, type: '' }));
+          }}
+          options={[
+            { value: 'Leafy greens', label: 'Leafy greens' },
+            { value: 'Fruiting veggies', label: 'Fruiting veggies' },
+            { value: 'Herbs', label: 'Herbs' },
+            { value: 'Roots', label: 'Roots' },
+          ]}
+          error={errors.type}
+        />
+
+        <div className='grid grid-cols-1 sm:grid-cols-2 gap-4'>
+          <div className={category ? '' : 'opacity-60'}>
             <FormField
               id='harvest-quantity'
-              label='Quantity'
+              label={`Qty ${category ? `(${getHarvestUnit(category)})` : ''}`}
               value={quantity}
               onChange={(value) => {
                 setQuantity(value);
@@ -174,31 +200,23 @@ const HarvestFormModal: React.FC<HarvestFormModalProps> = ({
               min={0}
               error={errors.quantity}
               maxLength={24}
+              disabled={!category}
             />
           </div>
 
-          <div className='flex-1'>
-            <FormField
-              id='harvest-dateHarvested'
-              label='Date Harvested'
-              value={dateHarvested}
-              onChange={(value) => {
-                setDateHarvested(value);
-                setErrors((prev) => ({ ...prev, dateHarvested: '' }));
-              }}
-              type='date'
-              error={errors.dateHarvested}
-            />
-          </div>
+          <FormField
+            id='harvest-dateHarvested'
+            label='Date Harvested'
+            value={dateHarvested}
+            onChange={(value) => {
+              setDateHarvested(value);
+              setErrors((prev) => ({ ...prev, dateHarvested: '' }));
+            }}
+            type='date'
+            error={errors.dateHarvested}
+          />
         </div>
-        <FormField
-          id='harvest-notes'
-          label='Notes (Optional)'
-          value={notes}
-          onChange={setNotes}
-          type='textarea'
-          maxLength={500}
-        />
+
         <button
           type='submit'
           className='mt-2 w-full bg-[#e9541e] text-white font-semibold text-sm py-2 rounded hover:bg-[#d34712] transition flex items-center justify-center'
