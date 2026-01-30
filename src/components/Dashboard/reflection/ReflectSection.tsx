@@ -1,5 +1,6 @@
 import { ViewKey } from '../../../mocks/mockdata';
 import { HarvestSummary } from './harvest/HarvestSummary';
+import { SoilSummary } from './soil/SoilSummary';
 
 interface ReflectionSectionProps {
   onSelect: (view: ViewKey) => void;
@@ -19,15 +20,7 @@ export const ReflectSection: React.FC<ReflectionSectionProps> = ({
 
       <div className='grid grid-cols-1 lg:grid-cols-2 gap-6'>
         <HarvestSummary onSelect={onSelect} />
-
-        <div className='bg-white rounded-lg shadow p-4 flex flex-col justify-between'>
-          <h3 className='text-lg font-semibold text-[#2a452c] mb-2'>
-            Soil Notes
-          </h3>
-          <p className='text-sm text-gray-600'>
-            Add notes about soil health and amendments — feature in progress.
-          </p>
-        </div>
+        <SoilSummary onSelect={onSelect} />
 
         <div className='bg-white rounded-lg shadow p-4 flex flex-col justify-between'>
           <h3 className='text-lg font-semibold text-[#2a452c] mb-2'>

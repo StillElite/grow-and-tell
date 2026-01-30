@@ -14,6 +14,7 @@ import { getAccentColor } from '../../../../utils/getAccentColor';
 import { usePlantingHistoryContext } from '../../../../context/PlantingHistoryContext';
 import { capitalize } from '../../../../utils/capitalize';
 import ConfirmModal from '../../../shared/ConfirmModal';
+import { getPillClass } from '../../../../utils/getPillClass';
 
 interface BedCardProps {
   bed: Bed;
@@ -47,9 +48,6 @@ export const BedCard: React.FC<BedCardProps> = ({
       Are you sure you want to remove <strong>{bed.name}</strong>?
     </>
   );
-
-  const pillClass =
-    'inline-block bg-[#d9e9da] text-[#2a452c] text-xs font-medium px-2 py-0.5 rounded-full';
 
   const handleAddCrop = (newCropData: {
     name: string;
@@ -98,7 +96,7 @@ export const BedCard: React.FC<BedCardProps> = ({
     <>
       <div
         key={bed.id}
-        className='rounded-lg border border-gray-200 bg-white p-6 shadow-sm transition flex flex-col '
+        className='rounded-lg border border-gray-200 bg-white p-5 shadow-sm transition flex flex-col '
       >
         {/* Top section */}
         <div className='mb-4 flex items-start justify-between border-b border-gray-300'>
@@ -137,6 +135,8 @@ export const BedCard: React.FC<BedCardProps> = ({
             message={confirmMessage}
           />
         </div>
+
+        {/* Details */}
         <div className='flex-1'>
           <p className='flex items-center gap-2 mb-2 text-sm text-gray-700'>
             <FontAwesomeIcon
@@ -157,7 +157,7 @@ export const BedCard: React.FC<BedCardProps> = ({
                 />
                 <strong className='text-gray-800'>Crops:</strong>
                 {bed.crops.map((crop) => (
-                  <span key={crop.id} className={pillClass}>
+                  <span key={crop.id} className={getPillClass()}>
                     {capitalize(crop.name)}
                   </span>
                 ))}

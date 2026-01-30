@@ -39,8 +39,17 @@ export const getAccentColor = (viewKey?: ViewKey): AccentClasses => {
         bgAccent: 'bg-[#d1a052]',
         checkedBgAccent: 'checked:bg-[#d1a052]',
         altCheckedBgAccent: 'checked:bg-[#a37c3f]',
-        textAccent: 'text-[#d1a052]',
+        textAccent: 'text-[#6F8368]',
         borderAccent: 'border-[#d1a052]',
+      };
+    case 'Harvest':
+    case 'Soil Record':
+      return {
+        bgAccent: 'bg-[#1E6635]',
+        checkedBgAccent: 'checked:bg-[#1e9544]',
+        altCheckedBgAccent: '',
+        textAccent: 'text-[#1E6635]',
+        borderAccent: 'border-[#1E6635]',
       };
     default:
       return {

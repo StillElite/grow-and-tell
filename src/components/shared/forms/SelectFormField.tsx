@@ -61,7 +61,6 @@ export function SelectFormField<T extends string = string>({
         aria-describedby={error ? `${id}-error` : undefined}
         className={clsx(
           selectClasses,
-          !hasValue && 'text-gray-400', // dim when empty
           error && 'border-red-500 focus:ring-red-500'
         )}
       >

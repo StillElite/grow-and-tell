@@ -135,7 +135,7 @@ export const MultiSelect: React.FC<MultiSelectProps> = ({
                           checked={selected}
                           readOnly
                           tabIndex={-1}
-                          aria-hidden='true'
+                          role='presentation'
                           className={`peer appearance-none w-5 h-5 border border-gray-300 rounded ${altCheckedBgAccent} checked:border-transparent `}
                         />
                         <FontAwesomeIcon

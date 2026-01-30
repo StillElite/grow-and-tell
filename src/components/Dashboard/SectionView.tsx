@@ -4,6 +4,7 @@ import CompostSection from './plan/compost/CompostSection';
 import PlantingSection from './plan/plantLog/PlantingSection';
 import TaskSection from './plan/tasks/TaskSection';
 import HarvestSection from './reflection/harvest/HarvestSection';
+import SoilSection from './reflection/soil/SoilSection';
 
 interface SectionViewProps {
   activeView: ViewKey;
@@ -40,6 +41,8 @@ const SectionView: React.FC<SectionViewProps> = ({
       return <TaskSection onNavigate={onNavigate} onOpenMenu={onOpenMenu} />;
     case 'Harvest':
       return <HarvestSection onNavigate={onNavigate} onOpenMenu={onOpenMenu} />;
+    case 'Soil Record':
+      return <SoilSection onNavigate={onNavigate} onOpenMenu={onOpenMenu} />;
     default:
       return null;
   }

@@ -78,6 +78,7 @@ export enum ViewKey {
   Compost = 'Compost',
   Tasks = 'Tasks',
   Harvest = 'Harvest',
+  SoilRecord = 'Soil Record',
 }
 
 //
@@ -94,7 +95,7 @@ export const beds: Bed[] = [
       {
         id: 'crop-1a',
         name: 'Tomatoes',
-        datePlanted: '2025-06-15',
+        datePlanted: '2025-10-15',
         notes: 'Started from seeds in the Bounty',
       },
       {
@@ -443,4 +444,37 @@ export interface Harvest {
   unit: HarvestUnit;
   category: HarvestCategory;
   dateHarvested: string;
+}
+
+// --------------------
+// Soil Record
+// --------------------
+
+export interface SoilTest {
+  id: string;
+  pHLevel: number;
+  nutrients: {
+    nitrogen: number;
+    phosphorus: number;
+    potassium: number;
+  };
+  dateTested?: string;
+}
+
+export type Season = 'Spring' | 'Summer' | 'Fall' | 'Winter';
+
+export type SoilAmendmentType =
+  | 'Compost'
+  | 'Manure'
+  | 'Worm Tea'
+  | 'Mulch'
+  | 'Cover Crop'
+  | 'Leaf mold';
+
+export interface SoilRecord {
+  id: string;
+  name: string;
+  season: Season;
+  amendments: SoilAmendmentType[];
+  tests: SoilTest[];
 }

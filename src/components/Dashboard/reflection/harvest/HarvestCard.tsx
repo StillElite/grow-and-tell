@@ -7,12 +7,14 @@ import {
   faShoppingBasket,
   faTags,
 } from '@fortawesome/free-solid-svg-icons';
-import { Harvest } from '../../../../mocks/mockdata';
+import { Harvest, ViewKey } from '../../../../mocks/mockdata';
 import { capitalize } from '../../../../utils/capitalize';
 import { formatDate } from '../../../../utils/formatDate';
 import { useState } from 'react';
 import ConfirmModal from '../../../shared/ConfirmModal';
 import { formatHarvestUnit } from '../../../../utils/formatHarvestUnit';
+import toast from 'react-hot-toast';
+import { getAccentColor } from '../../../../utils/getAccentColor';
 
 export interface HarvestCardProps {
   harvest: Harvest;
@@ -26,6 +28,7 @@ export const HarvestCard: React.FC<HarvestCardProps> = ({
   onDeleteHarvest,
 }) => {
   const [isConfirmOpen, setIsConfirmOpen] = useState(false);
+  const { textAccent } = getAccentColor(ViewKey.Harvest);
 
   const confirmMessage = (
     <>
@@ -36,13 +39,14 @@ export const HarvestCard: React.FC<HarvestCardProps> = ({
   const handleDeleteHarvest = () => {
     onDeleteHarvest(harvest.id);
     setIsConfirmOpen(false);
+    toast.success('Harvest deleted successfully');
   };
 
   return (
     <div
       role='group'
       aria-label='Harvest entry card'
-      className='rounded-lg border border-gray-200 bg-white p-6 shadow-sm transition flex flex-col'
+      className='rounded-lg border border-gray-200 bg-white p-5 shadow-sm transition flex flex-col'
     >
       {/* Title + actions */}
       <div className='mb-4 flex items-start justify-between border-b border-gray-300 pb-2'>
@@ -85,7 +89,7 @@ export const HarvestCard: React.FC<HarvestCardProps> = ({
           <FontAwesomeIcon
             icon={faShoppingBasket}
             aria-hidden='true'
-            className='text-[#244225] pb-1'
+            className={`${textAccent} pb-1`}
           />
           <strong className='text-gray-800'>Amount:</strong>
           {harvest.quantity} {formatHarvestUnit(harvest.quantity, harvest.unit)}
@@ -95,23 +99,21 @@ export const HarvestCard: React.FC<HarvestCardProps> = ({
           <FontAwesomeIcon
             icon={faCalendarDays}
             aria-hidden='true'
-            className='text-[#244225] pt-[2px]'
+            className={`${textAccent} pt-[2px]`}
           />
           <strong className='text-gray-800'>Harvested: </strong>{' '}
           {formatDate(harvest.dateHarvested)}
         </p>
 
-        <div className='min-h-[24px] mt-2'>
-          <p className='flex items-start gap-2 text-sm '>
-            <FontAwesomeIcon
-              icon={faTags}
-              aria-hidden='true'
-              className='text-[#244225] pt-[2px]'
-            />
-            <strong className='text-gray-800'>Category: </strong>{' '}
-            {harvest.category}
-          </p>
-        </div>
+        <p className='flex items-start gap-2 text-sm '>
+          <FontAwesomeIcon
+            icon={faTags}
+            aria-hidden='true'
+            className={`${textAccent} pt-[2px]`}
+          />
+          <strong className='text-gray-800'>Category: </strong>{' '}
+          {harvest.category}
+        </p>
       </div>
     </div>
   );

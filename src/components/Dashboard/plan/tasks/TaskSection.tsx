@@ -68,7 +68,7 @@ const TaskSection: React.FC<PlantingSectionProps> = ({
   const handleSaveTask = (
     name: string,
     category: TaskCategory,
-    frequency: TaskFrequency
+    frequency: TaskFrequency,
   ) => {
     if (taskToEdit) {
       updateTask({ ...taskToEdit, name, category, frequency });
@@ -123,7 +123,7 @@ const TaskSection: React.FC<PlantingSectionProps> = ({
       <SectionHeader
         title='Tasks'
         description='Manage your gardening tasks and to-dos.'
-        imageSrc='/images/planting.png'
+        imageSrc='/images/clock-icon2.png'
       />
       <div className='flex justify-end items-center gap-2 mb-4'>
         <div className='relative group'>

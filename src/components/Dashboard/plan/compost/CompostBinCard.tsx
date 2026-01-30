@@ -44,7 +44,7 @@ export const CompostBinCard: React.FC<CompostBinCardProps> = ({
     <>
       <div
         key={compostBin.id}
-        className='rounded-lg border border-gray-200 bg-white p-6 shadow-sm transition flex flex-col '
+        className='rounded-lg border border-gray-200 bg-white p-5 shadow-sm transition flex flex-col '
       >
         {/* Top section */}
         <div className='mb-4 flex items-start justify-between border-b border-gray-300'>

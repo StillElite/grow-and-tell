@@ -4,7 +4,7 @@ import { getFormLabelClasses } from '../../../utils/getFormLabelClasses';
 interface FormFieldProps {
   id: string;
   label: string;
-  value: string;
+  value: string | number | undefined;
   onChange: (value: string) => void;
   error?: string;
   maxLength?: number;
@@ -68,7 +68,7 @@ export const FormField: React.FC<FormFieldProps> = ({
         >
           {error}
         </p>
-        {maxLength && type !== 'number' && (
+        {maxLength && type !== 'number' && typeof value === 'string' && (
           <p className='text-gray-500'>
             {value.length}/{maxLength}
           </p>

@@ -38,7 +38,7 @@ const HarvestSection: React.FC<HarvestSectionProps> = ({
     name: string,
     quantity: number,
     dateHarvested: string,
-    category: HarvestCategory
+    category: HarvestCategory,
   ) => {
     const unit = getHarvestUnit(category);
 
@@ -67,7 +67,7 @@ const HarvestSection: React.FC<HarvestSectionProps> = ({
       <SectionHeader
         title='Harvest'
         description='Review your harvests and track your garden productivity.'
-        imageSrc='/images/planting.png'
+        imageSrc='/images/harvest-icon.png'
       />
 
       <div className='flex justify-end mb-4'>

@@ -24,6 +24,7 @@ const Sidebar: React.FC<SidebarProps> = ({
     { label: 'Compost', viewKey: ViewKey.Compost },
     { label: 'Tasks', viewKey: ViewKey.Tasks },
     { label: 'Harvest', viewKey: ViewKey.Harvest },
+    { label: 'Soil Records', viewKey: ViewKey.SoilRecord },
   ];
 
   return (

@@ -55,7 +55,7 @@ export const CropCard: React.FC<CropCardProps> = ({
       key={crop.id}
       role='group'
       aria-label={`Crop card for ${crop.name}`}
-      className='rounded-lg border border-gray-200 bg-white p-6 shadow-sm transition flex flex-col'
+      className='rounded-lg border border-gray-200 bg-white p-5 shadow-sm transition flex flex-col'
     >
       {/* Title with icons */}
       <div className='mb-4 flex items-start justify-between border-b border-gray-300'>

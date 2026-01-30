@@ -9,6 +9,7 @@ import { PlantingHistoryProvider } from '../src/context/PlantingHistoryContext';
 import { CompostProvider } from '../src/context/CompostContext';
 import { TaskProvider } from '../src/context/TaskContext';
 import { HarvestProvider } from '../src/context/HarvestContext';
+import { SoilRecordProvider } from '../src/context/SoilRecordContext';
 Modal.setAppElement('#__next');
 
 const App = ({ Component, pageProps }: AppProps) => {
@@ -19,8 +20,13 @@ const App = ({ Component, pageProps }: AppProps) => {
           <PlantingHistoryProvider>
             <TaskProvider>
               <HarvestProvider>
-                <Component {...pageProps} />
-                <Toaster position='bottom-right' toastOptions={toastOptions} />
+                <SoilRecordProvider>
+                  <Component {...pageProps} />
+                  <Toaster
+                    position='bottom-right'
+                    toastOptions={toastOptions}
+                  />
+                </SoilRecordProvider>
               </HarvestProvider>
             </TaskProvider>
           </PlantingHistoryProvider>
