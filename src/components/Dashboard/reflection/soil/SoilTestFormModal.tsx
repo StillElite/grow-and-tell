@@ -1,0 +1,262 @@
+import Modal from 'react-modal';
+import { useEffect, useState } from 'react';
+import { faTimes, faPlus, faSeedling } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { FormField } from '../../../shared/forms/FormField';
+import { SelectFormField } from '../../../shared/forms/SelectFormField';
+
+interface SoilTestFormModalProps {
+  isOpen: boolean;
+  onClose: () => void;
+  onSaveSoilTest: (soilTest: {
+    dateTested: string;
+    pH: string;
+    nitrogen: string;
+    phosphorus: string;
+    potassium: string;
+  }) => void;
+  //   soilRecordToEdit?: SoilRecord | null;
+}
+
+const SoilTestFormModal: React.FC<SoilTestFormModalProps> = ({
+  isOpen,
+  onClose,
+  onSaveSoilTest,
+  //   soilRecordToEdit,
+}) => {
+  const [pH, setPH] = useState('');
+  const [nitrogen, setNitrogen] = useState('');
+  const [phosphorus, setPhosphorus] = useState('');
+  const [potassium, setPotassium] = useState('');
+  const [dateTested, setDateTested] = useState('');
+
+  const [errors, setErrors] = useState<{ [key: string]: string }>({});
+
+  //   useEffect(() => {
+  //     if (soilRecordToEdit) {
+  //       setName(soilRecordToEdit.name);
+  //       setSeason(soilRecordToEdit.season);
+  //     } else {
+  //       setName('');
+  //       setSeason('');
+  //     }
+  //   }, [soilRecordToEdit, isOpen]);
+
+  const resetForm = () => {
+    setDateTested('');
+    setPH('');
+    setNitrogen('');
+    setPhosphorus('');
+    setPotassium('');
+  };
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+
+    const newErrors: { [key: string]: string } = {};
+
+    if (!dateTested.trim()) {
+      newErrors.dateTested = 'Please enter a date tested.';
+    }
+
+    if (!pH.trim()) {
+      newErrors.pH = 'Please enter a pH value.';
+    }
+
+    if (!nitrogen.trim()) {
+      newErrors.nitrogen = 'Please enter a nitrogen value.';
+    }
+
+    if (!phosphorus.trim()) {
+      newErrors.phosphorus = 'Please enter a phosphorus value.';
+    }
+
+    if (!potassium.trim()) {
+      newErrors.potassium = 'Please enter a potassium value.';
+    }
+
+    if (Object.keys(newErrors).length > 0) {
+      setErrors(newErrors);
+      return;
+    }
+
+    onSaveSoilTest({
+      dateTested: dateTested.trim(),
+      pH: pH.trim(),
+      nitrogen: nitrogen.trim(),
+      phosphorus: phosphorus.trim(),
+      potassium: potassium.trim(),
+    });
+
+    // toast.success(
+    //   soilRecordToEdit
+    //     ? 'Soil record updated successfully!'
+    //     : 'Soil record added successfully!',
+    // );
+
+    resetForm;
+    onClose();
+  };
+
+  const handleClose = () => {
+    setDateTested('');
+    setPH('');
+    setNitrogen('');
+    setPhosphorus('');
+    setPotassium('');
+    setErrors({});
+    onClose();
+  };
+
+  // Reset form when modal closes
+  useEffect(() => {
+    if (!isOpen) {
+      resetForm();
+    }
+  }, [isOpen]);
+
+  const modalText = {
+    title: 'Add New Soil Test',
+    button: 'Add Soil Test',
+    description: 'Record a new soil test entry for your garden.',
+  };
+
+  return (
+    <Modal
+      isOpen={isOpen}
+      onRequestClose={handleClose}
+      contentLabel={modalText.title}
+      role='dialog'
+      className='relative w-full max-w-md mx-auto mt-24 bg-white p-8 rounded-lg shadow border border-gray-200 focus:outline-none'
+      overlayClassName='fixed inset-0 bg-black bg-opacity-40 flex items-start justify-center z-50'
+      shouldCloseOnOverlayClick={false}
+      shouldCloseOnEsc={true}
+      aria={{
+        modal: true,
+        labelledby: 'modal-title',
+        describedby: 'modal-description',
+      }}
+    >
+      <button
+        type='button'
+        onClick={handleClose}
+        aria-label='Close'
+        className='absolute top-4 right-4 text-gray-500 hover:text-gray-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#2a452c] rounded w-5 h-5'
+      >
+        <FontAwesomeIcon icon={faTimes} aria-hidden='true' />
+      </button>
+
+      <h2
+        id='modal-title'
+        className='text-2xl font-bold text-center text-[#2a452c] mt-6 mb-2'
+      >
+        <FontAwesomeIcon
+          icon={faSeedling}
+          className='mr-1'
+          aria-hidden='true'
+        />
+        {modalText.title}
+      </h2>
+      <p
+        id='modal-description'
+        className='text-sm text-center text-gray-600 mb-8'
+      >
+        {modalText.description}
+      </p>
+      <form onSubmit={handleSubmit} className='space-y-4'>
+        <FormField
+          id='soil-dateTested'
+          label='Date Tested'
+          value={dateTested}
+          onChange={(value) => {
+            setDateTested(value);
+            setErrors((prev) => ({ ...prev, dateTested: '' }));
+          }}
+          type='date'
+          error={errors.dateTested}
+        />
+        <div className='grid grid-cols-1 md:grid-cols-2 gap-4'>
+          <SelectFormField
+            id='soil-pH'
+            label='pH'
+            value={pH}
+            onChange={(value) => {
+              setPH(value as string);
+              setErrors((prev) => ({ ...prev, pH: '' }));
+            }}
+            options={[
+              { value: '7.5', label: 'Alkaline (7.5)' },
+              { value: '7.0', label: 'Neutral (7.0)' },
+              { value: '6.5', label: 'Slight Acidic (6.5)' },
+              { value: '6.0', label: 'Acidic (5.5-6.0)' },
+              { value: '5.0', label: 'Very Acidic (4.5-5.0)' },
+            ]}
+            error={errors.pH}
+          />
+          <SelectFormField
+            id='soil-nitrogen'
+            label='Nitrogen'
+            value={nitrogen}
+            onChange={(value) => {
+              setNitrogen(value as string);
+              setErrors((prev) => ({ ...prev, nitrogen: '' }));
+            }}
+            options={[
+              { value: '4', label: 'Surplus (4)' },
+              { value: '3', label: 'Sufficient (3)' },
+              { value: '2', label: 'Adequate (2)' },
+              { value: '1', label: 'Deficient (1)' },
+              { value: '0', label: 'Depleted (0)' },
+            ]}
+            error={errors.nitrogen}
+          />
+        </div>
+        <div className='grid grid-cols-1 md:grid-cols-2 gap-4'>
+          <SelectFormField
+            id='soil-phosphorus'
+            label='Phosphorus'
+            value={phosphorus}
+            onChange={(value) => {
+              setPhosphorus(value as string);
+              setErrors((prev) => ({ ...prev, phosphorus: '' }));
+            }}
+            options={[
+              { value: '4', label: 'Surplus (4)' },
+              { value: '3', label: 'Sufficient (3)' },
+              { value: '2', label: 'Adequate (2)' },
+              { value: '1', label: 'Deficient (1)' },
+              { value: '0', label: 'Depleted (0)' },
+            ]}
+            error={errors.phosphorus}
+          />
+          <SelectFormField
+            id='soil-potassium'
+            label='Potassium'
+            value={potassium}
+            onChange={(value) => {
+              setPotassium(value as string);
+              setErrors((prev) => ({ ...prev, potassium: '' }));
+            }}
+            options={[
+              { value: '4', label: 'Surplus (4)' },
+              { value: '3', label: 'Sufficient (3)' },
+              { value: '2', label: 'Adequate (2)' },
+              { value: '1', label: 'Deficient (1)' },
+              { value: '0', label: 'Depleted (0)' },
+            ]}
+            error={errors.potassium}
+          />
+        </div>
+        <button
+          type='submit'
+          className='mt-2 w-full bg-[#e9541e] text-white font-semibold text-sm py-2 rounded hover:bg-[#d34712] transition flex items-center justify-center focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#d34712] '
+        >
+          <FontAwesomeIcon icon={faPlus} className='mr-2' aria-hidden='true' />
+          {modalText.button}
+        </button>
+      </form>
+    </Modal>
+  );
+};
+
+export default SoilTestFormModal;

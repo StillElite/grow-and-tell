@@ -10,6 +10,7 @@ import {
 import {
   SoilAmendmentType,
   SoilRecord,
+  SoilTest,
   ViewKey,
 } from '../../../../mocks/mockdata';
 import { capitalize } from '../../../../utils/capitalize';
@@ -19,9 +20,11 @@ import toast from 'react-hot-toast';
 import { getPillClass } from '../../../../utils/getPillClass';
 import { SoilAmendmentDropdown } from './SoilAmendmentDropdown';
 import { getAccentColor } from '../../../../utils/getAccentColor';
+import SoilTestFormModal from './SoilTestFormModal';
 
 export interface SoilCardProps {
   soilRecord: SoilRecord;
+  onAddSoilTest: (updatedSoilRecord: SoilRecord) => void;
   onEditSoilRecord?: (soilRecord: SoilRecord) => void;
   onDeleteSoilRecord: (soilRecordId: string) => void;
 }
@@ -37,6 +40,7 @@ export const SOIL_AMENDMENT_OPTIONS: SoilAmendmentType[] = [
 
 export const SoilCard: React.FC<SoilCardProps> = ({
   soilRecord,
+  onAddSoilTest,
   onEditSoilRecord,
   onDeleteSoilRecord,
 }) => {
@@ -46,6 +50,7 @@ export const SoilCard: React.FC<SoilCardProps> = ({
     soilRecord.amendments,
   );
   const [isAmendmentMenuOpen, setIsAmendmentMenuOpen] = useState(false);
+  const [isSoilTestFormModalOpen, setIsSoilTestFormModalOpen] = useState(false);
 
   const confirmMessage = (
     <>
@@ -57,6 +62,31 @@ export const SoilCard: React.FC<SoilCardProps> = ({
     onDeleteSoilRecord(soilRecord.id);
     setIsConfirmOpen(false);
     toast.success('Soil record deleted successfully');
+  };
+
+  const handleOpenTestModal = () => setIsSoilTestFormModalOpen(true);
+
+  const handleAddTest = (newSoilTestData: {
+    dateTested: string;
+    pH: string;
+    nitrogen: string;
+    phosphorus: string;
+    potassium: string;
+  }) => {
+    const newSoilTest: SoilTest = {
+      id: crypto.randomUUID(),
+      dateTested: newSoilTestData.dateTested,
+      pH: parseFloat(newSoilTestData.pH),
+      nitrogen: parseFloat(newSoilTestData.nitrogen),
+      phosphorus: parseFloat(newSoilTestData.phosphorus),
+      potassium: parseFloat(newSoilTestData.potassium),
+    };
+    const updatedSoilRecord = {
+      ...soilRecord,
+      tests: [...soilRecord.tests, newSoilTest],
+    };
+
+    onAddSoilTest(updatedSoilRecord);
   };
 
   return (
@@ -198,11 +228,18 @@ export const SoilCard: React.FC<SoilCardProps> = ({
         </button>
         <button
           type='button'
+          onClick={handleOpenTestModal}
           className={`text-sm ${textAccent} hover:underline focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-1 focus-visible:ring-[#244225] rounded px-1`}
           aria-label={`Add soil test for ${soilRecord.name}`}
         >
           + Add test
         </button>
+        <SoilTestFormModal
+          isOpen={isSoilTestFormModalOpen}
+          onClose={() => setIsSoilTestFormModalOpen(false)}
+          onSaveSoilTest={handleAddTest}
+          // soilRecordToEdit={soilRecord}
+        />
       </div>
     </div>
   );

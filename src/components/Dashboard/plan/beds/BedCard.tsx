@@ -38,10 +38,13 @@ export const BedCard: React.FC<BedCardProps> = ({
     usePlantingHistoryContext();
 
   const hasPlantingHistory = plantingRecords.some(
-    (record) => record.bedId === bed.id
+    (record) => record.bedId === bed.id,
   );
 
   const hasCrops = bed.crops.length > 0;
+  const buttonClasses = hasCrops
+    ? 'bg-[#244225] text-white hover:bg-[#356a3c]'
+    : 'bg-gray-400 text-gray-500';
 
   const confirmMessage = (
     <>
@@ -87,7 +90,7 @@ export const BedCard: React.FC<BedCardProps> = ({
     onDeleteBed(bed.id);
     deletePlantingsForBed(
       bed.id,
-      bed.crops.map((c) => c.id)
+      bed.crops.map((c) => c.id),
     );
     setIsConfirmOpen(false);
   };
@@ -185,9 +188,10 @@ export const BedCard: React.FC<BedCardProps> = ({
         <div className='flex items-center justify-between mt-10'>
           <button
             type='button'
-            className='bg-[#244225] text-white text-sm px-4 py-1 rounded hover:bg-[#356a3c] transition'
+            className={`text-white text-sm px-4 py-1 rounded transition ${buttonClasses}`}
             onClick={() => onView(bed.id)}
             aria-label={`View details for ${bed.name}`}
+            disabled={!hasCrops}
           >
             View
           </button>

@@ -19,7 +19,7 @@ const getPlanningFeatureCards = (
   beds: Bed[],
   plantingRecordCount: number,
   compostBinCount: number,
-  tasks: Task[]
+  tasks: Task[],
 ): PlanningFeatureCard[] => {
   const taskCompleteCount = tasks.filter((task) => task.completed).length;
   const taskCount = tasks.length;
@@ -69,7 +69,7 @@ const PlanSection: React.FC<PlanSectionProps> = ({ onSelect }) => {
     beds,
     plantingRecords.length,
     compostBins.length,
-    tasks
+    tasks,
   );
 
   return (
@@ -103,9 +103,7 @@ const PlanSection: React.FC<PlanSectionProps> = ({ onSelect }) => {
                   onSelect(feature.viewKey);
                 }
               }}
-              className={`cursor-pointer bg-white rounded-lg shadow overflow-hidden transition hover:shadow-lg focus:outline-none focus-visible:ring-2 focus-visible:ring-[#79B040] ${
-                feature.comingSoon ? 'opacity-60 pointer-events-none' : ''
-              }`}
+              className='cursor-pointer bg-white rounded-lg shadow overflow-hidden transition hover:shadow-lg focus:outline-none focus-visible:ring-2 focus-visible:ring-[#244225] focus-visible:ring-offset-2'
             >
               <div className={`h-1 ${bgAccent}`} />
               <div className='pl-2 pr-2 py-4 flex items-center gap-2'>

@@ -59,7 +59,7 @@ export const BedList: React.FC<BedListProps> = ({
         <button
           type='button'
           onClick={handleOpenModal}
-          className='bg-[#244225] text-white text-sm px-4 py-2 rounded hover:bg-[#356a3c] transition'
+          className='bg-[#244225] text-white text-sm px-4 py-2 rounded hover:bg-[#356a3c] transition focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#244225]'
         >
           + Add Bed
         </button>
@@ -70,18 +70,29 @@ export const BedList: React.FC<BedListProps> = ({
         onSaveBed={onAddBed}
       />
 
-      <div className='grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-6'>
-        {beds.map((bed) => (
-          <BedCard
-            key={bed.id}
-            bed={bed}
-            onView={onView}
-            onAddCrop={onAddCrop}
-            onDeleteBed={onDeleteBed}
-            onEditBed={onEditBed}
-          />
-        ))}
-      </div>
+      <section aria-label='Soil records'>
+        {beds.length === 0 ? (
+          <div className='text-center py-12 text-gray-500'>
+            <p className='text-lg mb-2'>No Beds yet</p>
+            <p className='text-sm'>
+              Click "Add Bed" to create your first garden bed.
+            </p>
+          </div>
+        ) : (
+          <div className='grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-6'>
+            {beds.map((bed) => (
+              <BedCard
+                key={bed.id}
+                bed={bed}
+                onView={onView}
+                onAddCrop={onAddCrop}
+                onDeleteBed={onDeleteBed}
+                onEditBed={onEditBed}
+              />
+            ))}
+          </div>
+        )}
+      </section>
     </>
   );
 };

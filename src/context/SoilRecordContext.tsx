@@ -5,18 +5,18 @@ interface SoilRecordContextType {
   soilRecords: SoilRecord[];
   addSoilRecord: (name: string, season: Season) => void;
   updateSoilRecord: (updatedHarvest: SoilRecord) => void;
-  //   deleteHarvest: (harvestId: string) => void;
+  deleteSoilRecord: (soilRecordId: string) => void;
 }
 
 const SoilRecordContext = createContext<SoilRecordContextType | undefined>(
-  undefined
+  undefined,
 );
 
 export const useSoilRecordContext = (): SoilRecordContextType => {
   const context = useContext(SoilRecordContext);
   if (!context) {
     throw new Error(
-      'useSoilRecordContext must be used within a SoilRecordProvider'
+      'useSoilRecordContext must be used within a SoilRecordProvider',
     );
   }
   return context;
@@ -42,18 +42,20 @@ export const SoilRecordProvider = ({ children }: SoilProviderProps) => {
   const updateSoilRecord = (updatedSoilRecord: SoilRecord) => {
     setSoilRecords(
       soilRecords.map((soilRecord) =>
-        soilRecord.id === updatedSoilRecord.id ? updatedSoilRecord : soilRecord
-      )
+        soilRecord.id === updatedSoilRecord.id ? updatedSoilRecord : soilRecord,
+      ),
     );
   };
 
-  //   const deleteHarvest = (harvestId: string) => {
-  //     setHarvests(harvests.filter((harvest) => harvest.id !== harvestId));
-  //   };
+  const deleteSoilRecord = (soilRecordId: string) => {
+    setSoilRecords(
+      soilRecords.filter((soilRecord) => soilRecord.id !== soilRecordId),
+    );
+  };
 
   return (
     <SoilRecordContext.Provider
-      value={{ soilRecords, addSoilRecord, updateSoilRecord }}
+      value={{ soilRecords, addSoilRecord, updateSoilRecord, deleteSoilRecord }}
     >
       {children}
     </SoilRecordContext.Provider>

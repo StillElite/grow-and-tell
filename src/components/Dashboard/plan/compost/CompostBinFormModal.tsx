@@ -20,7 +20,7 @@ interface CompostBinFormModalProps {
     name: string,
     type: CompostType,
     status: CompostStatus,
-    notes: string
+    notes: string,
   ) => void;
   compostBinToEdit?: CompostBin | null;
 }
@@ -33,7 +33,7 @@ const CompostBinFormModal: React.FC<CompostBinFormModalProps> = ({
 }) => {
   const [name, setName] = useState(compostBinToEdit?.name ?? '');
   const [type, setType] = useState<CompostType | ''>(
-    compostBinToEdit?.type ?? ''
+    compostBinToEdit?.type ?? '',
   );
   const [status, setStatus] = useState<CompostStatus>(compostBinToEdit?.status);
   const [notes, setNotes] = useState(compostBinToEdit?.notes ?? '');
@@ -75,10 +75,10 @@ const CompostBinFormModal: React.FC<CompostBinFormModalProps> = ({
       name.trim(),
       type as CompostType,
       (status || 'Active') as CompostStatus,
-      notes.trim()
+      notes.trim(),
     );
     toast.success(
-      compostBinToEdit ? 'Bin updated successfully!' : 'New bin added!'
+      compostBinToEdit ? 'Bin updated successfully!' : 'New bin added!',
     );
 
     setName('');

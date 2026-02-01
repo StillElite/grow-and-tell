@@ -74,7 +74,7 @@ const HarvestSection: React.FC<HarvestSectionProps> = ({
         <button
           type='button'
           onClick={handleOpenModal}
-          className='bg-[#244225] text-white text-sm px-4 py-2 rounded hover:bg-[#356a3c] transition'
+          className='bg-[#244225] text-white text-sm px-4 py-2 rounded hover:bg-[#356a3c] transition focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#244225]'
         >
           + Add Harvest
         </button>
@@ -88,16 +88,27 @@ const HarvestSection: React.FC<HarvestSectionProps> = ({
         }}
         onSaveHarvest={handleSaveHarvest}
       />
-      <div className='grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-6'>
-        {harvests.map((harvest) => (
-          <HarvestCard
-            key={harvest.id}
-            harvest={harvest}
-            onDeleteHarvest={deleteHarvest}
-            onEditHarvest={(harvest) => setHarvestToEdit(harvest)}
-          />
-        ))}
-      </div>
+      <section aria-label='Soil records'>
+        {harvests.length === 0 ? (
+          <div className='text-center py-12 text-gray-500'>
+            <p className='text-lg mb-2'>No Harvests yet</p>
+            <p className='text-sm'>
+              Click "Add Harvest" to record your first harvest.
+            </p>
+          </div>
+        ) : (
+          <div className='grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-6'>
+            {harvests.map((harvest) => (
+              <HarvestCard
+                key={harvest.id}
+                harvest={harvest}
+                onDeleteHarvest={deleteHarvest}
+                onEditHarvest={(harvest) => setHarvestToEdit(harvest)}
+              />
+            ))}
+          </div>
+        )}
+      </section>
     </>
   );
 };

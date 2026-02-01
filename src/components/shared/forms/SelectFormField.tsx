@@ -19,8 +19,9 @@ interface BaseProps {
 }
 
 // Generic props: T is your union, e.g., CompostType
-export interface SelectFormFieldProps<T extends string = string>
-  extends BaseProps {
+export interface SelectFormFieldProps<
+  T extends string = string,
+> extends BaseProps {
   /** Controlled value; use "" for “no selection yet” */
   value: T | '';
   onChange: (value: T | '') => void;
@@ -46,11 +47,11 @@ export function SelectFormField<T extends string = string>({
 
   const labelClasses = clsx(
     'pointer-events-none absolute left-4 top-4 origin-left transition-all duration-150 ease-out text-gray-500 peer-focus:-translate-y-3 peer-focus:scale-90 peer-focus:top-4 peer-focus:text-orange-700',
-    hasValue && '-translate-y-3 scale-90 top-1.5 text-orange-700'
+    hasValue && '-translate-y-3 scale-90 top-1.5 text-orange-700',
   );
 
   return (
-    <div className='relative mb-4'>
+    <div className='relative'>
       <select
         id={id}
         value={value} // "" initially
@@ -61,7 +62,7 @@ export function SelectFormField<T extends string = string>({
         aria-describedby={error ? `${id}-error` : undefined}
         className={clsx(
           selectClasses,
-          error && 'border-red-500 focus:ring-red-500'
+          error && 'border-red-500 focus:ring-red-500',
         )}
       >
         {/* Needed for a truly empty controlled select.

@@ -118,7 +118,7 @@ const BedDetails: React.FC<BedDetailsProps> = ({
           <button
             type='button'
             onClick={handleOpenModal}
-            className='bg-[#244225] text-white text-sm px-4 py-2 rounded hover:bg-[#356a3c] transition'
+            className='bg-[#244225] text-white text-sm px-4 py-2 rounded hover:bg-[#356a3c] transition focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#244225]'
           >
             + Add Crops
           </button>

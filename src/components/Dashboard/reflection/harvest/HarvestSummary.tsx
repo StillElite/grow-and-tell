@@ -27,7 +27,7 @@ export const HarvestSummary: React.FC<HarvestSummaryProps> = ({ onSelect }) => {
       <div className='mt-6 pt-4 border-t border-neutral-200'>
         <button
           type='button'
-          className='w-full bg-[#244225] text-white text-sm px-4 py-2 rounded hover:bg-[#356a3c] transition'
+          className='w-full bg-[#244225] text-white text-sm px-4 py-2 rounded hover:bg-[#356a3c] transition focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#244225]'
           onClick={() => onSelect(ViewKey.Harvest)}
         >
           View harvest log

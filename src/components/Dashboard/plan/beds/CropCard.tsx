@@ -36,7 +36,7 @@ export const CropCard: React.FC<CropCardProps> = ({
   );
 
   const hasPlantingHistory = plantingRecords.some(
-    (record) => record.cropId === crop.id
+    (record) => record.cropId === crop.id,
   );
 
   const handleDeleteCropOnly = () => {
@@ -84,11 +84,11 @@ export const CropCard: React.FC<CropCardProps> = ({
           isOpen={isConfirmOpen}
           onClose={() => setIsConfirmOpen(false)}
           onConfirm={handleDeleteCropOnly}
-          confirmLabel='Remove bed'
+          confirmLabel='Remove crop'
           onSecondaryConfirm={handleDeleteCropAndHistory}
-          secondaryConfirmLabel='Remove bed from history'
+          secondaryConfirmLabel='Remove crop from history'
           secondaryConfirmDisabled={!hasPlantingHistory}
-          title='Remove Bed'
+          title='Remove Crop'
           message={confirmMessage}
         />
       </div>

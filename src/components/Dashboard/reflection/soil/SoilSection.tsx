@@ -15,7 +15,7 @@ const SoilSection: React.FC<SoilSectionProps> = ({
   onNavigate,
   onOpenMenu,
 }) => {
-  const { soilRecords, addSoilRecord, updateSoilRecord } =
+  const { soilRecords, addSoilRecord, updateSoilRecord, deleteSoilRecord } =
     useSoilRecordContext();
 
   const [isSoilRecordFormModalOpen, setIsSoilRecordFormModalOpen] =
@@ -48,6 +48,10 @@ const SoilSection: React.FC<SoilSectionProps> = ({
     } else {
       addSoilRecord(name, season);
     }
+  };
+
+  const handleDeleteSoilRecord = (soilRecordId: string) => {
+    deleteSoilRecord(soilRecordId);
   };
 
   return (
@@ -97,7 +101,8 @@ const SoilSection: React.FC<SoilSectionProps> = ({
               <SoilCard
                 key={soilRecord.id}
                 soilRecord={soilRecord}
-                onDeleteSoilRecord={() => {}}
+                onAddSoilTest={updateSoilRecord}
+                onDeleteSoilRecord={handleDeleteSoilRecord}
                 onEditSoilRecord={(soilRecord) =>
                   setSoilRecordToEdit(soilRecord)
                 }

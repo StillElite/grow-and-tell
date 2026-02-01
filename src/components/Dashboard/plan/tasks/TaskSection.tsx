@@ -10,7 +10,7 @@ import { TaskList } from './TaskList';
 import { TaskSummary } from './TaskSummary';
 import { useTaskContext } from '../../../../context/TaskContext';
 import TaskFormModal from './TaskFormModal';
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import toast from 'react-hot-toast';
 import { TaskSummaryFlyout } from './TaskSummaryFlyout';
 import ConfirmModal from '../../../shared/ConfirmModal';
@@ -41,6 +41,15 @@ const TaskSection: React.FC<PlantingSectionProps> = ({
   const { bgAccent } = getAccentColor(ViewKey.Tasks);
 
   const hasCompletedTasks = tasks.some((task) => task.completed);
+
+  const visibleTasks = useMemo(
+    () => tasks.filter((t) => !t.hidden), // ← hide hidden ones
+    [tasks],
+  );
+
+  const buttonClasses = hasCompletedTasks
+    ? 'bg-white hover:bg-gray-50 text-[#2a452c]'
+    : 'bg-gray-200 text-gray-400';
 
   const confirmMessage = (
     <>
@@ -133,11 +142,7 @@ const TaskSection: React.FC<PlantingSectionProps> = ({
             onClick={() => setIsConfirmOpen(true)}
             className={`text-sm px-3 py-2 rounded-md border border-gray-300
               focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#2a452c]
-              ${
-                hasCompletedTasks
-                  ? 'bg-white hover:bg-gray-50 text-[#2a452c]'
-                  : 'bg-gray-200 text-gray-400'
-              }`}
+              ${buttonClasses}`}
             aria-label='Clear all completed task checkmarks'
           >
             Clear All
@@ -183,12 +188,24 @@ const TaskSection: React.FC<PlantingSectionProps> = ({
       />
 
       <div className='mx-auto w-full grid grid-cols-1 gap-6 lg:grid-cols-[minmax(0,1fr)_380px] xl:grid-cols-[minmax(0,1fr)_440px] 2xl:grid-cols-[minmax(0,1fr)_500px]'>
-        <TaskList
-          tasks={tasks}
-          onEditTask={handleEditTask}
-          onDeleteTask={handleDeleteTask}
-          toggleComplete={toggleComplete}
-        />
+        {visibleTasks.length > 0 ? (
+          <TaskList
+            visibleTasks={visibleTasks}
+            onEditTask={handleEditTask}
+            onDeleteTask={handleDeleteTask}
+            toggleComplete={toggleComplete}
+          />
+        ) : (
+          <div className='flex flex-col items-center justify-center py-12 text-center text-gray-500'>
+            <h3 className='text-base font-semibold text-[#2a452c]'>
+              No tasks yet
+            </h3>
+            <p className='mt-1 text-sm text-gray-600'>
+              Add a task to start tracking what needs to get done.
+            </p>
+          </div>
+        )}
+
         <aside className='hidden lg:block'>
           <div className=' rounded-lg border bg-white p-4 shadow-sm'>
             <TaskSummary />

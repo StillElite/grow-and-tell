@@ -21,24 +21,6 @@ export const ReflectSection: React.FC<ReflectionSectionProps> = ({
       <div className='grid grid-cols-1 lg:grid-cols-2 gap-6'>
         <HarvestSummary onSelect={onSelect} />
         <SoilSummary onSelect={onSelect} />
-
-        <div className='bg-white rounded-lg shadow p-4 flex flex-col justify-between'>
-          <h3 className='text-lg font-semibold text-[#2a452c] mb-2'>
-            Photo Uploads
-          </h3>
-          <p className='text-sm text-gray-600'>
-            Upload garden photos to document your progress — not ready yet!
-          </p>
-        </div>
-
-        <div className='bg-white rounded-lg shadow p-4 flex flex-col justify-between'>
-          <h3 className='text-lg font-semibold text-[#2a452c] mb-2'>
-            Journal View
-          </h3>
-          <p className='text-sm text-gray-600'>
-            Write daily or seasonal reflections — stay tuned!
-          </p>
-        </div>
       </div>
     </section>
   );

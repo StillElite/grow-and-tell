@@ -27,7 +27,7 @@ const CompostList: React.FC<CompostListProps> = ({
         <button
           type='button'
           onClick={handleOpenModal}
-          className='bg-[#244225] text-white text-sm px-4 py-2 rounded hover:bg-[#356a3c] transition'
+          className='bg-[#244225] text-white text-sm px-4 py-2 rounded hover:bg-[#356a3c] transition focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#244225]'
         >
           + Add Bin
         </button>
@@ -38,16 +38,27 @@ const CompostList: React.FC<CompostListProps> = ({
         onSaveCompostBin={onAddCompostBin}
       />
 
-      <div className='grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-6'>
-        {compostBins.map((compostBin) => (
-          <CompostBinCard
-            key={compostBin.id}
-            compostBin={compostBin}
-            onDeleteBin={onDeleteBin}
-            onEditCompostBin={onEditCompostBin}
-          />
-        ))}
-      </div>
+      <section aria-label='Soil records'>
+        {compostBins.length === 0 ? (
+          <div className='text-center py-12 text-gray-500'>
+            <p className='text-lg mb-2'>No Compost Bins yet</p>
+            <p className='text-sm'>
+              Click "Add Bin" to create your first compost bin.
+            </p>
+          </div>
+        ) : (
+          <div className='grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-6'>
+            {compostBins.map((compostBin) => (
+              <CompostBinCard
+                key={compostBin.id}
+                compostBin={compostBin}
+                onDeleteBin={onDeleteBin}
+                onEditCompostBin={onEditCompostBin}
+              />
+            ))}
+          </div>
+        )}
+      </section>
     </>
   );
 };
