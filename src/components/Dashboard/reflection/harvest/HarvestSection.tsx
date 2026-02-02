@@ -1,4 +1,4 @@
-import { Harvest, HarvestCategory, ViewKey } from '../../../../mocks/mockdata';
+import { Harvest, HarvestCategory } from '../../../../mocks/mockdata';
 import PageHeader from '../../../shared/PageHeader';
 import SectionHeader from '../../../shared/SectionHeader';
 import { HarvestCard } from './HarvestCard';
@@ -6,6 +6,7 @@ import HarvestFormModal from './HarvestFormModal';
 import { useState } from 'react';
 import { useHarvestContext } from '../../../../context/HarvestContext';
 import { getHarvestUnit } from '../../../../utils/getHarvestUnit';
+import { ViewKey } from '../../../../types/types';
 
 export interface HarvestSectionProps {
   onNavigate: (view: ViewKey) => void;

@@ -1,4 +1,4 @@
-import { ViewKey } from '../../../mocks/mockdata';
+import { ViewKey } from '../../../types/types';
 import { HarvestSummary } from './harvest/HarvestSummary';
 import { SoilSummary } from './soil/SoilSummary';
 

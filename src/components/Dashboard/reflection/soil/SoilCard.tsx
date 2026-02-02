@@ -11,7 +11,6 @@ import {
   SoilAmendmentType,
   SoilRecord,
   SoilTest,
-  ViewKey,
 } from '../../../../mocks/mockdata';
 import { capitalize } from '../../../../utils/capitalize';
 import { useState } from 'react';
@@ -21,6 +20,7 @@ import { getPillClass } from '../../../../utils/getPillClass';
 import { SoilAmendmentDropdown } from './SoilAmendmentDropdown';
 import { getAccentColor } from '../../../../utils/getAccentColor';
 import SoilTestFormModal from './SoilTestFormModal';
+import { ViewKey } from '../../../../types/types';
 
 export interface SoilCardProps {
   soilRecord: SoilRecord;

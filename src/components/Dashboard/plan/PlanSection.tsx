@@ -1,10 +1,6 @@
 import Image from 'next/image';
-import {
-  Bed,
-  PlanningFeatureCard,
-  Task,
-  ViewKey,
-} from '../../../mocks/mockdata';
+import { Task } from '../../../mocks/mockdata';
+import { Bed, PlanningFeatureCard, ViewKey } from '../../../types/types';
 import { getAccentColor } from '../../../utils/getAccentColor';
 import { useBedContext } from '../../../context/BedContext';
 import { usePlantingHistoryContext } from '../../../context/PlantingHistoryContext';

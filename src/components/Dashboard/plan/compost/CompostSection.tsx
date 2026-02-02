@@ -3,7 +3,6 @@ import {
   CompostBin,
   CompostStatus,
   CompostType,
-  ViewKey,
 } from '../../../../mocks/mockdata';
 import PageHeader from '../../../shared/PageHeader';
 import CompostList from './CompostList';
@@ -11,6 +10,7 @@ import { useCompostContext } from '../../../../context/CompostContext';
 import toast from 'react-hot-toast';
 import { useState } from 'react';
 import { CompostBinFormModal } from './CompostBinFormModal';
+import { ViewKey } from '../../../../types/types';
 
 export interface CompostSectionProps {
   onNavigate: (view: ViewKey) => void;

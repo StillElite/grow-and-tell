@@ -1,4 +1,4 @@
-import { ViewKey } from '../../../../mocks/mockdata';
+import { ViewKey } from '../../../../types/types';
 
 export interface SoilSummaryProps {
   onSelect: (view: ViewKey) => void;

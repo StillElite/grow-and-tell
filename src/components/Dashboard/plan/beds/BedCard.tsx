@@ -6,10 +6,9 @@ import {
   faTrash,
   faPen,
 } from '@fortawesome/free-solid-svg-icons';
-
 import { useState } from 'react';
 import CropFormModal from './CropFormModal';
-import { Bed, Crop, ViewKey } from '../../../../mocks/mockdata';
+import { Bed, Crop, ViewKey } from '../../../../types/types';
 import { getAccentColor } from '../../../../utils/getAccentColor';
 import { usePlantingHistoryContext } from '../../../../context/PlantingHistoryContext';
 import { capitalize } from '../../../../utils/capitalize';

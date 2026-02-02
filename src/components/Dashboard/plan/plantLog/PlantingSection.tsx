@@ -1,6 +1,6 @@
 import SectionHeader from '../../../shared/SectionHeader';
 import { PlantingList } from './PlantingList';
-import { ViewKey } from '../../../../mocks/mockdata';
+import { ViewKey } from '../../../../types/types';
 import PageHeader from '../../../shared/PageHeader';
 import { usePlantingHistoryContext } from '../../../../context/PlantingHistoryContext';
 import PlantingHistoryFilterWrapper from './PlantingHistoryFilterWrapper ';

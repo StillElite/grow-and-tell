@@ -1,4 +1,4 @@
-import { ViewKey } from '../../mocks/mockdata';
+import { ViewKey } from '../../types/types';
 import BedSection from './plan/beds/BedSection';
 import CompostSection from './plan/compost/CompostSection';
 import PlantingSection from './plan/plantLog/PlantingSection';

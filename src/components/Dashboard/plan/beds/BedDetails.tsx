@@ -1,4 +1,4 @@
-import { Bed, Crop, ViewKey } from '../../../../mocks/mockdata';
+import { Bed, Crop, ViewKey } from '../../../../types/types';
 import { CropCard } from './CropCard';
 import { useState } from 'react';
 import CropFormModal from './CropFormModal';

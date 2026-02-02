@@ -1,7 +1,7 @@
 import { createContext, useContext, useState, ReactNode } from 'react';
-import { PlantingRecord } from '../mocks/mockdata';
 import { subtractDays } from '../utils/dateMatch';
 import { capitalize } from '../utils/capitalize';
+import { PlantingRecord } from '../types/types';
 
 interface PlantingHistoryContextType {
   plantingRecords: PlantingRecord[];
@@ -39,7 +39,7 @@ export const usePlantingHistoryContext = () => {
   const context = useContext(PlantingHistoryContext);
   if (!context) {
     throw new Error(
-      'usePlantingHistoryContext must be used within a PlantingHistoryProvider'
+      'usePlantingHistoryContext must be used within a PlantingHistoryProvider',
     );
   }
   return context;
@@ -58,11 +58,11 @@ export const PlantingHistoryProvider = ({
   const [dateFilter, setDateFilter] = useState<DateRangeKey | null>(null);
 
   const cropOptions = Array.from(
-    new Set(plantingRecords.map((p) => capitalize(p.cropName)))
+    new Set(plantingRecords.map((p) => capitalize(p.cropName))),
   ).sort();
 
   const bedOptions = Array.from(
-    new Set(plantingRecords.map((p) => capitalize(p.bedName)))
+    new Set(plantingRecords.map((p) => capitalize(p.bedName))),
   ).sort();
 
   const dateOptions: DateRangeKey[] = [
@@ -79,16 +79,16 @@ export const PlantingHistoryProvider = ({
   const updateBedNameInHistory = (bedId: string, newName: string) => {
     setPlantingRecords((prev) =>
       prev.map((record) =>
-        record.bedId === bedId ? { ...record, bedName: newName } : record
-      )
+        record.bedId === bedId ? { ...record, bedName: newName } : record,
+      ),
     );
   };
 
   const updateCropNameInHistory = (cropId: string, newName: string) => {
     setPlantingRecords((prev) =>
       prev.map((record) =>
-        record.cropId === cropId ? { ...record, cropName: newName } : record
-      )
+        record.cropId === cropId ? { ...record, cropName: newName } : record,
+      ),
     );
   };
 
@@ -100,8 +100,8 @@ export const PlantingHistoryProvider = ({
     setPlantingRecords((prev) =>
       prev.filter(
         (record) =>
-          record.bedId !== bedId || !cropIdsToDelete.includes(record.cropId)
-      )
+          record.bedId !== bedId || !cropIdsToDelete.includes(record.cropId),
+      ),
     );
   };
 

@@ -5,13 +5,13 @@ import {
   faNoteSticky,
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { Crop, ViewKey } from '../../../../mocks/mockdata';
 import { getAccentColor } from '../../../../utils/getAccentColor';
 import { useState } from 'react';
 import ConfirmModal from '../../../shared/ConfirmModal';
 import { formatDate } from '../../../../utils/formatDate';
 import { capitalize } from '../../../../utils/capitalize';
 import { usePlantingHistoryContext } from '../../../../context/PlantingHistoryContext';
+import { Crop, ViewKey } from '../../../../types/types';
 
 interface CropCardProps {
   crop: Crop;

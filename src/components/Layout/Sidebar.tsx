@@ -2,7 +2,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
-import { ViewKey } from '../../mocks/mockdata';
+import { ViewKey } from '../../types/types';
 
 interface SidebarProps {
   isOpen: boolean;

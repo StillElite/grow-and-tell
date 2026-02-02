@@ -1,32 +1,4 @@
-// --------------------
-// Interfaces
-// --------------------
-export interface FeatureCard {
-  title: string;
-  description: string;
-  image: string;
-  alt?: string;
-  comingSoon?: boolean;
-}
-
-export interface PlanningFeatureCard extends FeatureCard {
-  viewKey: ViewKey;
-}
-
-export interface Crop {
-  name: string;
-  datePlanted: string;
-  notes?: string;
-  id: string;
-}
-
-export interface Bed {
-  id: string;
-  name: string;
-  size: string;
-  crops: Crop[];
-  notes?: string;
-}
+import { Bed, FeatureCard } from '../types/types';
 
 //
 // --------------------
@@ -63,21 +35,6 @@ export const features: FeatureCard[] = [
     alt: 'Clock icon for seasonal tasks',
   },
 ];
-
-//
-// --------------------
-// Dashboard – Grow Your Garden Section
-// --------------------
-
-export enum ViewKey {
-  Dashboard = 'Dashboard',
-  Beds = 'Beds',
-  PlantLog = 'Plant Log',
-  Compost = 'Compost',
-  Tasks = 'Tasks',
-  Harvest = 'Harvest',
-  SoilRecord = 'Soil Record',
-}
 
 //
 // --------------------
@@ -235,20 +192,6 @@ export const beds: Bed[] = [
   //   crops: [],
   // },
 ];
-
-//
-// --------------------
-// Plant Log Mock Data
-// --------------------
-export interface PlantingRecord {
-  id: string;
-  cropId: string;
-  cropName: string;
-  bedId: string;
-  bedName: string;
-  datePlanted: string;
-  notes?: string;
-}
 
 // --------------------
 // (Compost)

@@ -1,11 +1,10 @@
 import SectionHeader from '../../../shared/SectionHeader';
 import BedFormModal from './BedFormModal';
-
 import { useState } from 'react';
-import { Bed, ViewKey } from '../../../../mocks/mockdata';
 import PageHeader from '../../../shared/PageHeader';
 import { BreadcrumbItem } from '../../../shared/Breadcrumb';
 import { BedCard } from './BedCard';
+import { Bed, ViewKey } from '../../../../types/types';
 
 interface BedListProps {
   beds: Bed[];

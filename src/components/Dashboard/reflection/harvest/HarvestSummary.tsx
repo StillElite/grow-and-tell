@@ -1,8 +1,8 @@
 import React from 'react';
 import { HarvestCategories } from './HarvestCategories';
 import { HarvestRecentEntries } from './HarvestRecentEntries';
-import { ViewKey } from '../../../../mocks/mockdata';
 import { useHarvestContext } from '../../../../context/HarvestContext';
+import { ViewKey } from '../../../../types/types';
 
 interface HarvestSummaryProps {
   onSelect: (view: ViewKey) => void;

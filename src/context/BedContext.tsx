@@ -1,5 +1,6 @@
 import { createContext, useContext, useState, ReactNode } from 'react';
-import { Bed, Crop, beds as initialBeds } from '../mocks/mockdata';
+import { beds as initialBeds } from '../mocks/mockdata';
+import { Bed, Crop } from '../types/types';
 
 interface BedContextType {
   beds: Bed[];
@@ -41,7 +42,7 @@ export const BedProvider = ({ children }: BedProviderProps) => {
 
   const updateBed = (updatedBed: Bed) => {
     setBeds((prevBeds) =>
-      prevBeds.map((bed) => (bed.id === updatedBed.id ? updatedBed : bed))
+      prevBeds.map((bed) => (bed.id === updatedBed.id ? updatedBed : bed)),
     );
   };
 
@@ -52,8 +53,8 @@ export const BedProvider = ({ children }: BedProviderProps) => {
   const addCrop = (bedId: string, crop: Crop) => {
     setBeds((prevBeds) =>
       prevBeds.map((bed) =>
-        bed.id === bedId ? { ...bed, crops: [...bed.crops, crop] } : bed
-      )
+        bed.id === bedId ? { ...bed, crops: [...bed.crops, crop] } : bed,
+      ),
     );
   };
 
@@ -63,14 +64,14 @@ export const BedProvider = ({ children }: BedProviderProps) => {
         if (bed.id !== bedId) return bed;
 
         const updatedCrops = bed.crops.map((crop) =>
-          crop.id === updatedCrop.id ? updatedCrop : crop
+          crop.id === updatedCrop.id ? updatedCrop : crop,
         );
 
         return {
           ...bed,
           crops: updatedCrops,
         };
-      })
+      }),
     );
   };
 
@@ -82,8 +83,8 @@ export const BedProvider = ({ children }: BedProviderProps) => {
               ...bed,
               crops: bed.crops.filter((crop) => crop.id !== cropId),
             }
-          : bed
-      )
+          : bed,
+      ),
     );
   };
 

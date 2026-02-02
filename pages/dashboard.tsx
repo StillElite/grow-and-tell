@@ -5,7 +5,7 @@ import {
   PlanSection,
   ReflectSection,
 } from '../src/components';
-import { ViewKey } from '../src/mocks/mockdata';
+import { ViewKey } from '../src/types/types';
 import SectionView from '../src/components/Dashboard/SectionView';
 import { BreadcrumbItem } from '../src/components/shared/Breadcrumb';
 import PageHeader from '../src/components/shared/PageHeader';
