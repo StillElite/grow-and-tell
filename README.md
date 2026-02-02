@@ -1,41 +1,51 @@
 # Grow & Tell 🌱
 
-A personal garden planner and journal app designed to track planting, composting, seasonal tasks, and reflections—all in one modern dashboard.
+Grow & Tell is a frontend-focused garden planning application for tracking beds, crops, tasks, harvests, compost activity, and soil health in one cohesive dashboard.
 
-## 🔍 What It Does
+The project was built as a long-running personal app with an emphasis on UX clarity, accessibility, and maintainable state management.
+
+## What It Does
 
 Grow & Tell helps home gardeners:
 
-- Track garden beds and planted crops
-- Log harvests, soil notes, and journal entries
-- Plan seasonal tasks
-- Manage compost activity
-- Upload photos to document progress
+- Manage garden beds and planted crops
+- Track harvests and planting history
+- Plan and complete recurring gardening tasks
+- Record soil amendments (including compost activity) and soil test results
+- View summaries and details through card- and modal-based flows
 
-## 🛠 Tech Stack
+The app is designed around real-world gardening workflows, with intentional empty states, disabled actions, and progressive disclosure of detail.
+
+## Tech Stack
 
 - **Next.js** with **TypeScript**
-- **Tailwind CSS** for styling
 - **React Context** for state management
-- Clean, modular folder structure with reusable components
+- **Tailwind CSS** for styling
+- Accessibility-first UI patterns (keyboard navigation, focus management, ARIA where appropriate)
 
-## ✅ Features So Far
+## Key Features
 
 - Responsive dashboard layout
-- Add/view/delete beds and crops
-- Modals for managing plantings
-- Real-time updates via context state
+- Add, edit, and delete beds, crops, and tasks
+- Modal-based CRUD flows with consistent interaction patterns
+- Derived state and real-time UI updates via context
+- Soil tracking using banded test inputs that reflect real garden test kits
+- Careful handling of empty and edge states
 
-## 🔜 Coming Soon
+## Scope & Decisions
 
-- Persistent data (localStorage or database)
-- More accessibility polish
-- Bed editing
-- Compost log
-- Journal view
+- Authentication is intentionally demo-only (email entry used for local context)
+- Data persistence is planned but not yet implemented
+- The app prioritizes core gardening workflows over auxiliary features to keep the experience focused and maintainable.
 
-## 📸 Screenshots
+These decisions prioritize clarity, UX quality, and long-term maintainability over feature breadth.
 
----
+## Possible Next Steps
 
-Let me know once you’ve added and committed that, and I’ll walk you through making it look clean on GitHub.
+- Local persistence (localStorage or IndexedDB)
+- Expanded soil test history views
+- Optional backend or API integration
+
+## Screenshots
+
+_(Coming soon)_

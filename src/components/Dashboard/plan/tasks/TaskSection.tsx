@@ -145,7 +145,7 @@ const TaskSection: React.FC<PlantingSectionProps> = ({
               ${buttonClasses}`}
             aria-label='Clear all completed task checkmarks'
           >
-            Clear All
+            Clear Completed
           </button>
           {!hasCompletedTasks && (
             <span

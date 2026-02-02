@@ -32,7 +32,7 @@ export const FormField: React.FC<FormFieldProps> = ({
   const maxLengthSpacing = type === 'textarea' ? '-mt-0.5' : 'mt-1';
 
   const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => onChange(e.target.value);
 
   const sharedProps = {
@@ -46,7 +46,7 @@ export const FormField: React.FC<FormFieldProps> = ({
     ...(type === 'number' && min !== undefined && { min }),
     className: clsx(
       inputBaseClasses,
-      error && 'border-red-500 focus:ring-red-500'
+      error && 'border-red-500 focus:ring-red-500',
     ),
     disabled,
   };
@@ -64,7 +64,7 @@ export const FormField: React.FC<FormFieldProps> = ({
       <div className={clsx('flex justify-between text-xs', maxLengthSpacing)}>
         <p
           id={`${id}-error`}
-          className={clsx('text-red-600 pl-2', !error && 'invisible')}
+          className={clsx('text-red-600 pl-2 h-4', !error && 'invisible')}
         >
           {error}
         </p>

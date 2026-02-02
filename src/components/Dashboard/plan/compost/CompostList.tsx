@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { CompostBin } from '../../../../mocks/mockdata';
 import { CompostBinCard } from './CompostBinCard';
-import CompostBinFormModal from './CompostBinFormModal';
+import { CompostBinFormModal } from './CompostBinFormModal';
 
 interface CompostListProps {
   compostBins: CompostBin[];

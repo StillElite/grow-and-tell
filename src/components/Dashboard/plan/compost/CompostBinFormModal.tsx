@@ -13,7 +13,7 @@ import {
 } from '../../../../mocks/mockdata';
 import { RadioGroup } from '../../../shared/forms/RadioGroup';
 
-interface CompostBinFormModalProps {
+export interface CompostBinFormModalProps {
   isOpen: boolean;
   onClose: () => void;
   onSaveCompostBin: (
@@ -25,7 +25,14 @@ interface CompostBinFormModalProps {
   compostBinToEdit?: CompostBin | null;
 }
 
-const CompostBinFormModal: React.FC<CompostBinFormModalProps> = ({
+export const COMPOST_TYPE_OPTIONS: { value: CompostType; label: string }[] = [
+  { value: 'Worm', label: 'Worm' },
+  { value: 'Leaf', label: 'Leaf' },
+  { value: 'Hot', label: 'Hot' },
+  { value: 'Cold', label: 'Cold' },
+];
+
+export const CompostBinFormModal: React.FC<CompostBinFormModalProps> = ({
   isOpen,
   onClose,
   onSaveCompostBin,
@@ -164,12 +171,7 @@ const CompostBinFormModal: React.FC<CompostBinFormModalProps> = ({
             setType(value as CompostType);
             setErrors((prev) => ({ ...prev, type: '' }));
           }}
-          options={[
-            { value: 'Worm', label: 'Worm' },
-            { value: 'Leaf', label: 'Leaf' },
-            { value: 'Hot', label: 'Hot' },
-            { value: 'Cold', label: 'Cold' },
-          ]}
+          options={COMPOST_TYPE_OPTIONS}
           error={errors.type}
         />
 
@@ -202,5 +204,3 @@ const CompostBinFormModal: React.FC<CompostBinFormModalProps> = ({
     </Modal>
   );
 };
-
-export default CompostBinFormModal;

@@ -83,7 +83,7 @@ export function SelectFormField<T extends string = string>({
       <div className='flex justify-between text-xs mt-1'>
         <p
           id={`${id}-error`}
-          className={clsx('text-red-600 pl-2', !error && 'invisible')}
+          className={clsx('text-red-600 pl-2 h-4', !error && 'invisible')}
         >
           {error}
         </p>

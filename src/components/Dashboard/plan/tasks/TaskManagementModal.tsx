@@ -19,7 +19,7 @@ const TaskManagementModal: React.FC<TaskManagementModalProps> = ({
 
   const defaultTasks = useMemo(
     () => tasks.filter((task) => task.type === 'default'),
-    [tasks]
+    [tasks],
   );
   const [visibilityState, setVisibilityState] = useState<
     Record<string, boolean>
@@ -44,14 +44,14 @@ const TaskManagementModal: React.FC<TaskManagementModalProps> = ({
 
   const handleSelectAll = () => {
     setVisibilityState((prev) =>
-      Object.fromEntries(Object.keys(prev).map((id) => [id, true]))
+      Object.fromEntries(Object.keys(prev).map((id) => [id, true])),
     );
     setRestoreApplied(false);
   };
 
   const handleClearAll = () => {
     setVisibilityState((prev) =>
-      Object.fromEntries(Object.keys(prev).map((id) => [id, false]))
+      Object.fromEntries(Object.keys(prev).map((id) => [id, false])),
     );
     setRestoreApplied(false);
   };
@@ -59,8 +59,8 @@ const TaskManagementModal: React.FC<TaskManagementModalProps> = ({
   const handleRestoreFactory = () => {
     setVisibilityState(
       Object.fromEntries(
-        defaultTasks.map((task) => [task.id, !task.factoryHidden])
-      )
+        defaultTasks.map((task) => [task.id, !task.factoryHidden]),
+      ),
     );
     setRestoreApplied(true);
   };

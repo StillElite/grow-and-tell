@@ -49,31 +49,26 @@ const SoilTestFormModal: React.FC<SoilTestFormModalProps> = ({
     setPhosphorus('');
     setPotassium('');
   };
+  const REQUIRED_ERROR = 'Please enter a value.';
+
+  const fieldsToValidate: Record<string, string> = {
+    dateTested,
+    pH,
+    nitrogen,
+    phosphorus,
+    potassium,
+  };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
     const newErrors: { [key: string]: string } = {};
 
-    if (!dateTested.trim()) {
-      newErrors.dateTested = 'Please enter a date tested.';
-    }
-
-    if (!pH.trim()) {
-      newErrors.pH = 'Please enter a pH value.';
-    }
-
-    if (!nitrogen.trim()) {
-      newErrors.nitrogen = 'Please enter a nitrogen value.';
-    }
-
-    if (!phosphorus.trim()) {
-      newErrors.phosphorus = 'Please enter a phosphorus value.';
-    }
-
-    if (!potassium.trim()) {
-      newErrors.potassium = 'Please enter a potassium value.';
-    }
+    Object.entries(fieldsToValidate).forEach(([key, value]) => {
+      if (!value.trim()) {
+        newErrors[key] = REQUIRED_ERROR;
+      }
+    });
 
     if (Object.keys(newErrors).length > 0) {
       setErrors(newErrors);

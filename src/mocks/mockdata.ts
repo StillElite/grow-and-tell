@@ -49,20 +49,18 @@ export const features: FeatureCard[] = [
     alt: 'Wheelbarrow icon for composting',
   },
   {
+    title: 'Plant Log ',
+    description:
+      "Log and track your plants as they grow. Keep a detailed history of each plant's development, from seedling to harvest.",
+    image: '/images/seed-icon2.png',
+    alt: 'Seed icon for seed inventory',
+  },
+  {
     title: 'Seasonal Tasks',
     description:
       'Plan ahead with simple seasonal checklists and timely reminders. Know the best moments to plant, harvest, and prepare your beds year-round.',
     image: '/images/clock-icon2.png',
     alt: 'Clock icon for seasonal tasks',
-    comingSoon: true,
-  },
-  {
-    title: 'Seed Inventory',
-    description:
-      "Record which seeds you have, track planting success, and decide what to replant next season. Build a living history of your garden's growth.",
-    image: '/images/seed-icon2.png',
-    alt: 'Seed icon for seed inventory',
-    comingSoon: true,
   },
 ];
 
@@ -252,7 +250,9 @@ export interface PlantingRecord {
   notes?: string;
 }
 
+// --------------------
 // (Compost)
+// --------------------
 
 export type CompostType = 'Worm' | 'Leaf' | 'Hot' | 'Cold';
 export type CompostStatus = 'Active' | 'Ready' | 'Emptied' | '';

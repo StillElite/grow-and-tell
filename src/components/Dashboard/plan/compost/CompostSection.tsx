@@ -10,7 +10,7 @@ import CompostList from './CompostList';
 import { useCompostContext } from '../../../../context/CompostContext';
 import toast from 'react-hot-toast';
 import { useState } from 'react';
-import CompostBinFormModal from './CompostBinFormModal';
+import { CompostBinFormModal } from './CompostBinFormModal';
 
 export interface CompostSectionProps {
   onNavigate: (view: ViewKey) => void;
@@ -24,7 +24,7 @@ const CompostSection: React.FC<CompostSectionProps> = ({
   const { compostBins, addCompostBin, updateCompostBin, deleteCompostBin } =
     useCompostContext();
   const [compostBinToEdit, setCompostBinToEdit] = useState<CompostBin | null>(
-    null
+    null,
   );
 
   const handleLogout = () => {
@@ -37,7 +37,7 @@ const CompostSection: React.FC<CompostSectionProps> = ({
     name: string,
     type: CompostType,
     status: CompostStatus,
-    notes: string
+    notes: string,
   ) => {
     if (compostBinToEdit) {
       const updated = { ...compostBinToEdit, name, type, status, notes };
