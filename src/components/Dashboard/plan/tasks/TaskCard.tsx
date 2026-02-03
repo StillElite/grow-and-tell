@@ -1,6 +1,6 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheck, faTrash, faPen } from '@fortawesome/free-solid-svg-icons';
-import { Task } from '../../../../mocks/mockdata';
+import { Task } from '../../../../types/types';
 import {
   getCategoryColor,
   getCategoryLabel,
@@ -86,7 +86,7 @@ export const TaskCard: React.FC<TaskCardProps> = ({
             <span className='flex items-center gap-1'>
               <span
                 className={`inline-block h-2.5 w-2.5 rounded-full ${getCategoryColor(
-                  task.category
+                  task.category,
                 )}`}
               />
               {getCategoryLabel(task.category)}

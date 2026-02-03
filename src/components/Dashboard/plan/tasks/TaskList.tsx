@@ -1,5 +1,6 @@
+import { Task } from '../../../../types/types';
 import TaskCard from './TaskCard';
-import { Task } from '../../../../mocks/mockdata';
+
 export interface TaskListProps {
   visibleTasks: Task[];
   onEditTask?: (task: Task) => void;

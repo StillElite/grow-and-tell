@@ -8,10 +8,10 @@ import {
   faFlask,
 } from '@fortawesome/free-solid-svg-icons';
 import {
-  SoilAmendmentType,
   SoilRecord,
   SoilTest,
-} from '../../../../mocks/mockdata';
+  SoilAmendmentType,
+} from '../../../../types/types';
 import { capitalize } from '../../../../utils/capitalize';
 import { useState } from 'react';
 import ConfirmModal from '../../../shared/ConfirmModal';

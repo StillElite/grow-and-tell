@@ -5,13 +5,16 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { toast } from 'react-hot-toast';
 import { FormField } from '../../../shared/forms/FormField';
 import { SelectFormField } from '../../../shared/forms/SelectFormField';
+import { RadioGroup } from '../../../shared/forms/RadioGroup';
 import {
   CompostBin,
   CompostStatus,
-  compostStatusOptions,
   CompostType,
-} from '../../../../mocks/mockdata';
-import { RadioGroup } from '../../../shared/forms/RadioGroup';
+} from '../../../../types/types';
+import {
+  COMPOST_STATUS_OPTIONS,
+  COMPOST_TYPE_OPTIONS,
+} from '../../../../constants/compost';
 
 export interface CompostBinFormModalProps {
   isOpen: boolean;
@@ -24,13 +27,6 @@ export interface CompostBinFormModalProps {
   ) => void;
   compostBinToEdit?: CompostBin | null;
 }
-
-export const COMPOST_TYPE_OPTIONS: { value: CompostType; label: string }[] = [
-  { value: 'Worm', label: 'Worm' },
-  { value: 'Leaf', label: 'Leaf' },
-  { value: 'Hot', label: 'Hot' },
-  { value: 'Cold', label: 'Cold' },
-];
 
 export const CompostBinFormModal: React.FC<CompostBinFormModalProps> = ({
   isOpen,
@@ -181,7 +177,7 @@ export const CompostBinFormModal: React.FC<CompostBinFormModalProps> = ({
             value={status}
             className='pb-5'
             onChange={(value) => setStatus(value as CompostStatus)}
-            options={compostStatusOptions}
+            options={COMPOST_STATUS_OPTIONS}
           />
         )}
 

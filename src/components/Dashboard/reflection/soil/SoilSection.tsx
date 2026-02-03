@@ -1,11 +1,10 @@
-import { Season, SoilRecord } from '../../../../mocks/mockdata';
 import PageHeader from '../../../shared/PageHeader';
 import SectionHeader from '../../../shared/SectionHeader';
 import { useState } from 'react';
 import { useSoilRecordContext } from '../../../../context/SoilRecordContext';
 import SoilRecordFormModal from './SoilRecordFormModal';
 import { SoilCard } from './SoilCard';
-import { ViewKey } from '../../../../types/types';
+import { Season, SoilRecord, ViewKey } from '../../../../types/types';
 
 export interface SoilSectionProps {
   onNavigate: (view: ViewKey) => void;
@@ -93,7 +92,8 @@ const SoilSection: React.FC<SoilSectionProps> = ({
           <div className='text-center py-12 text-gray-500'>
             <p className='text-lg mb-2'>No soil records yet</p>
             <p className='text-sm'>
-              Click "Add Soil Record" to start tracking your soil health.
+              Click &quot;Add Soil Record&quot; to start tracking your soil
+              health.
             </p>
           </div>
         ) : (

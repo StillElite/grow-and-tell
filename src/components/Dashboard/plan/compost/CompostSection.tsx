@@ -1,16 +1,16 @@
 import SectionHeader from '../../../shared/SectionHeader';
-import {
-  CompostBin,
-  CompostStatus,
-  CompostType,
-} from '../../../../mocks/mockdata';
 import PageHeader from '../../../shared/PageHeader';
 import CompostList from './CompostList';
 import { useCompostContext } from '../../../../context/CompostContext';
 import toast from 'react-hot-toast';
 import { useState } from 'react';
 import { CompostBinFormModal } from './CompostBinFormModal';
-import { ViewKey } from '../../../../types/types';
+import {
+  CompostBin,
+  CompostStatus,
+  CompostType,
+  ViewKey,
+} from '../../../../types/types';
 
 export interface CompostSectionProps {
   onNavigate: (view: ViewKey) => void;

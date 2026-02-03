@@ -1,10 +1,6 @@
 import { createContext, useContext, useState, ReactNode } from 'react';
-import {
-  tasks as initialTasks,
-  Task,
-  TaskCategory,
-  TaskFrequency,
-} from '../mocks/mockdata';
+import { tasks as initialTasks } from '../mocks/mockdata';
+import { Task, TaskCategory, TaskFrequency } from '../types/types';
 
 interface TaskContextType {
   tasks: Task[];
@@ -37,7 +33,7 @@ export const TaskProvider = ({ children }: TaskProviderProps) => {
   const addTask = (
     name: string,
     category: TaskCategory,
-    frequency: TaskFrequency
+    frequency: TaskFrequency,
   ) => {
     const newTask: Task = {
       id: crypto.randomUUID(),
@@ -53,13 +49,15 @@ export const TaskProvider = ({ children }: TaskProviderProps) => {
   };
   const toggleComplete = (id: string, next: boolean) => {
     setTasks((prev) =>
-      prev.map((task) => (task.id === id ? { ...task, completed: next } : task))
+      prev.map((task) =>
+        task.id === id ? { ...task, completed: next } : task,
+      ),
     );
   };
 
   const updateTask = (updatedTask: Task) => {
     setTasks((prev) =>
-      prev.map((task) => (task.id === updatedTask.id ? updatedTask : task))
+      prev.map((task) => (task.id === updatedTask.id ? updatedTask : task)),
     );
   };
 
@@ -69,21 +67,21 @@ export const TaskProvider = ({ children }: TaskProviderProps) => {
 
   const setTaskCompleted = (taskId: string, completed: boolean) => {
     setTasks((prev) =>
-      prev.map((task) => (task.id === taskId ? { ...task, completed } : task))
+      prev.map((task) => (task.id === taskId ? { ...task, completed } : task)),
     );
   };
 
   const toggleDefaultTaskVisibility = (taskId: string, hidden: boolean) => {
     setTasks((prev) =>
-      prev.map((task) => (task.id === taskId ? { ...task, hidden } : task))
+      prev.map((task) => (task.id === taskId ? { ...task, hidden } : task)),
     );
   };
 
   const clearCompletedTasks = () => {
     setTasks((prev) =>
       prev.map((task) =>
-        task.completed ? { ...task, completed: false } : task
-      )
+        task.completed ? { ...task, completed: false } : task,
+      ),
     );
   };
 

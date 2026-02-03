@@ -1,5 +1,4 @@
 import { createContext, useContext, useState, ReactNode } from 'react';
-import { beds as initialBeds } from '../mocks/mockdata';
 import { Bed, Crop } from '../types/types';
 
 interface BedContextType {
@@ -27,7 +26,7 @@ interface BedProviderProps {
 }
 
 export const BedProvider = ({ children }: BedProviderProps) => {
-  const [beds, setBeds] = useState<Bed[]>(initialBeds);
+  const [beds, setBeds] = useState<Bed[]>([]);
 
   const addBed = (name: string, size: string, notes: string) => {
     const newBed: Bed = {

@@ -117,8 +117,8 @@ const TaskManagementModal: React.FC<TaskManagementModalProps> = ({
         id='manage-defaults-desc'
         className='text-sm text-gray-600 dark:text-gray-300 mb-4'
       >
-        Uncheck any default tasks you don't want to appear in your list. You can
-        re-enable them anytime.
+        Uncheck any default tasks you do not want to appear in your list. You
+        can re-enable them anytime.
       </p>
 
       {/* Top controls (static for now) */}

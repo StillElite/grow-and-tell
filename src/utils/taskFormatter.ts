@@ -1,4 +1,4 @@
-import { TaskCategory, TaskFrequency } from '../mocks/mockdata';
+import { TaskCategory, TaskFrequency } from '../types/types';
 
 export const getCategoryColor = (category: TaskCategory): string => {
   const colors = {

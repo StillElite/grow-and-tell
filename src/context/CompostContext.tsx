@@ -1,9 +1,6 @@
 import { createContext, useContext, useState, ReactNode } from 'react';
-import {
-  CompostBin,
-  CompostType,
-  compostBins as initialCompostBins,
-} from '../mocks/mockdata';
+import { compostBins as initialCompostBins } from '../mocks/mockdata';
+import { CompostBin, CompostType } from '../types/types';
 
 interface CompostContextType {
   compostBins: CompostBin[];
@@ -44,8 +41,8 @@ export const CompostProvider = ({ children }: CompostProviderProps) => {
   const updateCompostBin = (updatedBin: CompostBin) => {
     setCompostBins((prevBins) =>
       prevBins.map((compostBin) =>
-        compostBin.id === updatedBin.id ? updatedBin : compostBin
-      )
+        compostBin.id === updatedBin.id ? updatedBin : compostBin,
+      ),
     );
   };
 

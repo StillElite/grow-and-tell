@@ -74,7 +74,7 @@ export const BedList: React.FC<BedListProps> = ({
           <div className='text-center py-12 text-gray-500'>
             <p className='text-lg mb-2'>No Beds yet</p>
             <p className='text-sm'>
-              Click "Add Bed" to create your first garden bed.
+              Click &quot;Add Bed&quot; to create your first garden bed.
             </p>
           </div>
         ) : (

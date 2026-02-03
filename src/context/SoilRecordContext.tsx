@@ -1,5 +1,5 @@
 import { createContext, useContext, useState, ReactNode } from 'react';
-import { Season, SoilRecord } from '../mocks/mockdata';
+import { Season, SoilRecord } from '../types/types';
 
 interface SoilRecordContextType {
   soilRecords: SoilRecord[];

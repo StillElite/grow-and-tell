@@ -1,5 +1,4 @@
 import SectionHeader from '../../../shared/SectionHeader';
-import { Task, TaskCategory, TaskFrequency } from '../../../../mocks/mockdata';
 import PageHeader from '../../../shared/PageHeader';
 import { TaskList } from './TaskList';
 import { TaskSummary } from './TaskSummary';
@@ -10,7 +9,12 @@ import toast from 'react-hot-toast';
 import { TaskSummaryFlyout } from './TaskSummaryFlyout';
 import ConfirmModal from '../../../shared/ConfirmModal';
 import { getAccentColor } from '../../../../utils/getAccentColor';
-import { ViewKey } from '../../../../types/types';
+import {
+  Task,
+  TaskCategory,
+  TaskFrequency,
+  ViewKey,
+} from '../../../../types/types';
 
 export interface PlantingSectionProps {
   onNavigate: (view: ViewKey) => void;

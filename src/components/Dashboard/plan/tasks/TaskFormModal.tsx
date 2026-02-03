@@ -2,10 +2,14 @@ import Modal from 'react-modal';
 import { useEffect, useState } from 'react';
 import { faTimes, faPlus, faSeedling } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { Task, TaskCategory, TaskFrequency } from '../../../../mocks/mockdata';
 import { FormField } from '../../../shared/forms/FormField';
 import { toast } from 'react-hot-toast';
 import { SelectFormField } from '../../../shared/forms/SelectFormField';
+import { Task, TaskCategory, TaskFrequency } from '../../../../types/types';
+import {
+  TASK_CATEGORY_OPTIONS,
+  TASK_FREQUENCY_OPTIONS,
+} from '../../../../constants/tasks';
 
 interface TaskFormModalProps {
   isOpen: boolean;
@@ -14,7 +18,7 @@ interface TaskFormModalProps {
     name: string,
     category: TaskCategory,
     frequency: TaskFrequency,
-    id?: string
+    id?: string,
   ) => void;
   taskToEdit?: Task | null;
 }
@@ -27,10 +31,10 @@ const TaskFormModal: React.FC<TaskFormModalProps> = ({
 }) => {
   const [name, setName] = useState(taskToEdit?.name ?? '');
   const [category, setCategory] = useState<TaskCategory | ''>(
-    taskToEdit?.category || ''
+    taskToEdit?.category || '',
   );
   const [frequency, setFrequency] = useState<TaskFrequency | ''>(
-    taskToEdit?.frequency || ''
+    taskToEdit?.frequency || '',
   );
   const [errors, setErrors] = useState<{ [key: string]: string }>({});
 
@@ -71,10 +75,10 @@ const TaskFormModal: React.FC<TaskFormModalProps> = ({
     onSaveTask(
       name.trim(),
       category as TaskCategory,
-      frequency as TaskFrequency
+      frequency as TaskFrequency,
     );
     toast.success(
-      taskToEdit ? 'Task updated successfully!' : 'New task added!'
+      taskToEdit ? 'Task updated successfully!' : 'New task added!',
     );
 
     setName('');
@@ -160,13 +164,7 @@ const TaskFormModal: React.FC<TaskFormModalProps> = ({
             setCategory(value);
             setErrors((prev) => ({ ...prev, category: '' }));
           }}
-          options={[
-            { value: 'plant-care', label: 'Plant Care' },
-            { value: 'growth-support', label: 'Growth Support' },
-            { value: 'soil-compost', label: 'Soil & Compost' },
-            { value: 'harvest', label: 'Harvest' },
-            { value: 'misc', label: 'Miscellaneous' },
-          ]}
+          options={TASK_CATEGORY_OPTIONS}
           error={errors.category}
         />
         <SelectFormField
@@ -177,11 +175,7 @@ const TaskFormModal: React.FC<TaskFormModalProps> = ({
             setFrequency(value);
             setErrors((prev) => ({ ...prev, frequency: '' }));
           }}
-          options={[
-            { value: 'daily', label: 'Daily' },
-            { value: 'weekly', label: 'Weekly' },
-            { value: 'monthly', label: 'Monthly' },
-          ]}
+          options={TASK_FREQUENCY_OPTIONS}
           error={errors.frequency}
         />
         <button

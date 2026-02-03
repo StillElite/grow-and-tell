@@ -1,9 +1,10 @@
 import React from 'react';
 import { capitalize } from '../../../../utils/capitalize';
 import { formatHarvestUnit } from '../../../../utils/formatHarvestUnit';
+import { Harvest } from '../../../../types/types';
 
 export interface HarvestRecentEntriesProps {
-  harvests: any[];
+  harvests: Harvest[];
 }
 
 export const HarvestRecentEntries: React.FC<HarvestRecentEntriesProps> = ({

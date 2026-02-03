@@ -89,7 +89,7 @@ const SoilTestFormModal: React.FC<SoilTestFormModalProps> = ({
     //     : 'Soil record added successfully!',
     // );
 
-    resetForm;
+    resetForm();
     onClose();
   };
 

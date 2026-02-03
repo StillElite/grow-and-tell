@@ -4,8 +4,9 @@ import { faTimes, faPlus, faSeedling } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { FormField } from '../../../shared/forms/FormField';
 import { toast } from 'react-hot-toast';
-import { Season, SoilRecord } from '../../../../mocks/mockdata';
+import { SoilRecord, Season } from '../../../../types/types';
 import { SelectFormField } from '../../../shared/forms/SelectFormField';
+import { SOIL_SEASON_OPTIONS } from '../../../../constants/soil';
 
 interface SoilRecordFormModalProps {
   isOpen: boolean;
@@ -146,12 +147,7 @@ const SoilRecordFormModal: React.FC<SoilRecordFormModalProps> = ({
             setSeason(value as Season);
             setErrors((prev) => ({ ...prev, season: '' }));
           }}
-          options={[
-            { label: 'Spring', value: 'Spring' },
-            { label: 'Summer', value: 'Summer' },
-            { label: 'Fall', value: 'Fall' },
-            { label: 'Winter', value: 'Winter' },
-          ]}
+          options={SOIL_SEASON_OPTIONS}
           error={errors.season}
         />
         <button

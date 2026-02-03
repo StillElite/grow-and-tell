@@ -8,9 +8,10 @@ import {
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { FormField } from '../../../shared/forms/FormField';
 import { toast } from 'react-hot-toast';
-import { Harvest, HarvestCategory } from '../../../../mocks/mockdata';
 import { SelectFormField } from '../../../shared/forms/SelectFormField';
 import { getHarvestUnit } from '../../../../utils/getHarvestUnit';
+import { Harvest, HarvestCategory } from '../../../../types/types';
+import { HARVEST_CATEGORY_OPTIONS } from '../../../../constants/harvest';
 
 interface HarvestFormModalProps {
   isOpen: boolean;
@@ -169,7 +170,29 @@ const HarvestFormModal: React.FC<HarvestFormModalProps> = ({
           error={errors.name}
           maxLength={24}
         />
+        <FormField
+          id='harvest-dateHarvested'
+          label='Date Harvested'
+          value={dateHarvested}
+          onChange={(value) => {
+            setDateHarvested(value);
+            setErrors((prev) => ({ ...prev, dateHarvested: '' }));
+          }}
+          type='date'
+          error={errors.dateHarvested}
+        />
         <div className='grid grid-cols-1 sm:grid-cols-2 gap-4'>
+          <SelectFormField
+            id='harvest-category'
+            label='Select category'
+            value={category}
+            onChange={(value) => {
+              setCategory(value as HarvestCategory);
+              setErrors((prev) => ({ ...prev, type: '' }));
+            }}
+            options={HARVEST_CATEGORY_OPTIONS}
+            error={errors.type}
+          />
           <div className={category ? '' : 'opacity-60'}>
             <FormField
               id='harvest-quantity'
@@ -186,34 +209,7 @@ const HarvestFormModal: React.FC<HarvestFormModalProps> = ({
               disabled={!category}
             />
           </div>
-          <SelectFormField
-            id='harvest-category'
-            label='Select category'
-            value={category}
-            onChange={(value) => {
-              setCategory(value as HarvestCategory);
-              setErrors((prev) => ({ ...prev, type: '' }));
-            }}
-            options={[
-              { value: 'Leafy greens', label: 'Leafy greens' },
-              { value: 'Fruiting veggies', label: 'Fruiting veggies' },
-              { value: 'Herbs', label: 'Herbs' },
-              { value: 'Roots', label: 'Roots' },
-            ]}
-            error={errors.type}
-          />
         </div>
-        <FormField
-          id='harvest-dateHarvested'
-          label='Date Harvested'
-          value={dateHarvested}
-          onChange={(value) => {
-            setDateHarvested(value);
-            setErrors((prev) => ({ ...prev, dateHarvested: '' }));
-          }}
-          type='date'
-          error={errors.dateHarvested}
-        />
 
         <button
           type='submit'

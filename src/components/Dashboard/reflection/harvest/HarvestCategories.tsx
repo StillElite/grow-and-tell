@@ -1,9 +1,5 @@
 import React from 'react';
-import {
-  Harvest,
-  HarvestCategory,
-  HarvestUnit,
-} from '../../../../mocks/mockdata';
+import { Harvest, HarvestCategory, HarvestUnit } from '../../../../types/types';
 import { formatHarvestUnit } from '../../../../utils/formatHarvestUnit';
 
 export interface HarvestCategoriesProps {
@@ -25,16 +21,19 @@ export type CategoryDisplay = {
 export const HarvestCategories: React.FC<HarvestCategoriesProps> = ({
   harvests,
 }) => {
-  const categoryTotals = harvests.reduce((acc, harvest) => {
-    const category = harvest.category;
+  const categoryTotals = harvests.reduce(
+    (acc, harvest) => {
+      const category = harvest.category;
 
-    if (!acc[category]) {
-      acc[category] = { quantity: 0, unit: harvest.unit };
-    }
+      if (!acc[category]) {
+        acc[category] = { quantity: 0, unit: harvest.unit };
+      }
 
-    acc[category].quantity += harvest.quantity;
-    return acc;
-  }, {} as Record<HarvestCategory, { quantity: number; unit: HarvestUnit }>);
+      acc[category].quantity += harvest.quantity;
+      return acc;
+    },
+    {} as Record<HarvestCategory, { quantity: number; unit: HarvestUnit }>,
+  );
 
   const categoryDisplay: Record<HarvestCategory, CategoryDisplay> = {
     'Leafy greens': { quantity: 0 },

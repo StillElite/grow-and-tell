@@ -1,4 +1,4 @@
-import { HarvestCategory, HarvestUnit } from '../mocks/mockdata';
+import { HarvestCategory, HarvestUnit } from '../types/types';
 
 export const getHarvestUnit = (category: HarvestCategory): HarvestUnit => {
   switch (category) {
