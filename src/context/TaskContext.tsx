@@ -1,5 +1,5 @@
 import { createContext, useContext, useState, ReactNode } from 'react';
-import { tasks as initialTasks } from '../mocks/mockdata';
+import { tasks as initialTasks } from '../constants/tasks';
 import { Task, TaskCategory, TaskFrequency } from '../types/types';
 
 interface TaskContextType {

@@ -1,58 +1,16 @@
 import Image from 'next/image';
-import { Bed, PlanningFeatureCard, Task, ViewKey } from '../../../types/types';
+import { ViewKey } from '../../../types/types';
 import { getAccentColor } from '../../../utils/getAccentColor';
 import { useBedContext } from '../../../context/BedContext';
 import { usePlantingHistoryContext } from '../../../context/PlantingHistoryContext';
 import { useCompostContext } from '../../../context/CompostContext';
 import { useTaskContext } from '../../../context/TaskContext';
+import { getPlanningFeatureCards } from '../../../utils/getPlanningFeatureCards';
+import { useMemo } from 'react';
 
 interface PlanSectionProps {
   onSelect: (view: ViewKey) => void;
 }
-
-const getPlanningFeatureCards = (
-  beds: Bed[],
-  plantingRecordCount: number,
-  compostBinCount: number,
-  tasks: Task[],
-): PlanningFeatureCard[] => {
-  const taskCompleteCount = tasks.filter((task) => task.completed).length;
-  const taskCount = tasks.length;
-
-  return [
-    {
-      title: 'Beds',
-      description: `${beds.length} Active`,
-      image: '/images/garden-bed-icon.png',
-      viewKey: ViewKey.Beds,
-    },
-    {
-      title: 'Plant Log',
-      description: `${plantingRecordCount} ${
-        plantingRecordCount === 1 ? 'Entry' : 'Entries'
-      }`,
-      image: '/images/planting-icon.png',
-      viewKey: ViewKey.PlantLog,
-    },
-    {
-      title: 'Compost',
-      description: `${compostBinCount} ${
-        compostBinCount === 1 ? 'Bin' : 'Bins'
-      }`,
-      image: '/images/compost-icon3.png',
-      viewKey: ViewKey.Compost,
-    },
-    {
-      title: 'Tasks',
-      description:
-        taskCount === 0
-          ? 'All caught up'
-          : `${taskCompleteCount} of ${taskCount} Done`,
-      image: '/images/task-icon.png',
-      viewKey: ViewKey.Tasks,
-    },
-  ];
-};
 
 const PlanSection: React.FC<PlanSectionProps> = ({ onSelect }) => {
   const { beds } = useBedContext();
@@ -60,11 +18,16 @@ const PlanSection: React.FC<PlanSectionProps> = ({ onSelect }) => {
   const { compostBins } = useCompostContext();
   const { tasks } = useTaskContext();
 
+  const visibleTasks = useMemo(
+    () => tasks.filter((t) => !t.hidden), // ← hide hidden ones
+    [tasks],
+  );
+
   const planningFeatureCards = getPlanningFeatureCards(
     beds,
     plantingRecords.length,
     compostBins.length,
-    tasks,
+    visibleTasks,
   );
 
   return (

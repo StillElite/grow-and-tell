@@ -57,11 +57,17 @@ export const Dropdown: React.FC<DropdownProps> = ({
 
   const handleOptionKeyDown = (
     e: React.KeyboardEvent<HTMLDivElement>,
-    option: string | null
+    option: string | null,
   ) => {
     if (e.key === 'Enter' || e.key === ' ') {
       e.preventDefault();
-      option === null ? onChange(null) : onChange(option);
+
+      if (option === null) {
+        onChange(null);
+      } else {
+        onChange(option);
+      }
+
       onClose();
     } else if (e.key === 'Escape') {
       e.preventDefault();

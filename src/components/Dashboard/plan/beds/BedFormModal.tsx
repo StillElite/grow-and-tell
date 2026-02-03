@@ -2,9 +2,9 @@ import Modal from 'react-modal';
 import { useEffect, useState } from 'react';
 import { faTimes, faPlus, faSeedling } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { Bed } from '../../../../mocks/mockdata';
 import { FormField } from '../../../shared/forms/FormField';
 import { toast } from 'react-hot-toast';
+import { Bed } from '../../../../types/types';
 
 interface BedFormModalProps {
   isOpen: boolean;

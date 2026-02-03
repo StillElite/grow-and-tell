@@ -53,9 +53,6 @@ export const FilterBar: React.FC<FilterBarProps> = ({
           );
         }
 
-        // single
-        const value = (controller.values[group.key] as string) ?? null;
-
         return (
           <Dropdown
             key={group.key}

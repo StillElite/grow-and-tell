@@ -24,7 +24,11 @@ export const RadioGroup = <T extends string>({
   label,
   error,
 }: RadioGroupProps<T>) => (
-  <fieldset className={className}>
+  <fieldset
+    className={className}
+    aria-invalid={error ? 'true' : undefined}
+    aria-describedby={error ? `${name}-error` : undefined}
+  >
     {label && (
       <legend className='block text-sm font-medium text-gray-700 mb-2'>
         {label}
@@ -51,8 +55,6 @@ export const RadioGroup = <T extends string>({
               onChange={() => onChange(opt.value)}
               className='peer appearance-none w-5 h-5 rounded-full border border-gray-400 outline-none cursor-pointer
                          focus:ring-2 focus:ring-orange-500 focus:ring-offset-1'
-              aria-invalid={error ? 'true' : undefined}
-              aria-describedby={error ? `${name}-error` : undefined}
             />
 
             <span className='pointer-events-none absolute inset-0 m-auto w-2.5 h-2.5 rounded-full bg-orange-600 opacity-0 scale-75 transition-all duration-200 ease-out peer-checked:opacity-100 peer-checked:scale-100' />

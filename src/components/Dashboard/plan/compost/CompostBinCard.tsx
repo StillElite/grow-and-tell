@@ -7,11 +7,10 @@ import {
   faCircleCheck,
 } from '@fortawesome/free-solid-svg-icons';
 import { getAccentColor } from '../../../../utils/getAccentColor';
-import { CompostBin } from '../../../../mocks/mockdata';
 import { useState } from 'react';
 import ConfirmModal from '../../../shared/ConfirmModal';
 import { capitalize } from '../../../../utils/capitalize';
-import { ViewKey } from '../../../../types/types';
+import { CompostBin, ViewKey } from '../../../../types/types';
 
 interface CompostBinCardProps {
   compostBin: CompostBin;

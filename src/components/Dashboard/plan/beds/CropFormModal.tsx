@@ -27,7 +27,7 @@ const CropFormModal: React.FC<CropFormModalProps> = ({
   const [name, setName] = useState('');
   const [datePlanted, setDatePlanted] = useState('');
   const [notes, setNotes] = useState('');
-  const [id, setId] = useState('');
+  const [, setId] = useState('');
   const [errors, setErrors] = useState<{ [key: string]: string }>({});
 
   useEffect(() => {
@@ -80,7 +80,7 @@ const CropFormModal: React.FC<CropFormModalProps> = ({
 
   const handleClose = () => {
     setName('');
-    setDatePlanted;
+    setDatePlanted('');
     setNotes('');
     setErrors({});
     onClose();

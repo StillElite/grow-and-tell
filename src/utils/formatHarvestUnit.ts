@@ -1,4 +1,4 @@
-import { HarvestUnit } from '../mocks/mockdata';
+import { HarvestUnit } from '../types/types';
 
 const SINGULAR_UNITS: Record<HarvestUnit, string> = {
   bunches: 'bunch',
@@ -8,7 +8,7 @@ const SINGULAR_UNITS: Record<HarvestUnit, string> = {
 
 export const formatHarvestUnit = (
   quantity: number,
-  unit: HarvestUnit
+  unit: HarvestUnit,
 ): string => {
   return quantity === 1 ? SINGULAR_UNITS[unit] : unit;
 };

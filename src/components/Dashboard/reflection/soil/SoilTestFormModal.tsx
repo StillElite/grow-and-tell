@@ -4,6 +4,10 @@ import { faTimes, faPlus, faSeedling } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { FormField } from '../../../shared/forms/FormField';
 import { SelectFormField } from '../../../shared/forms/SelectFormField';
+import {
+  SOIL_NUTRIENT_LEVELS,
+  SOIL_PH_OPTIONS,
+} from '../../../../constants/soil';
 
 interface SoilTestFormModalProps {
   isOpen: boolean;
@@ -179,13 +183,7 @@ const SoilTestFormModal: React.FC<SoilTestFormModalProps> = ({
               setPH(value as string);
               setErrors((prev) => ({ ...prev, pH: '' }));
             }}
-            options={[
-              { value: '7.5', label: 'Alkaline (7.5)' },
-              { value: '7.0', label: 'Neutral (7.0)' },
-              { value: '6.5', label: 'Slight Acidic (6.5)' },
-              { value: '6.0', label: 'Acidic (5.5-6.0)' },
-              { value: '5.0', label: 'Very Acidic (4.5-5.0)' },
-            ]}
+            options={SOIL_PH_OPTIONS}
             error={errors.pH}
           />
           <SelectFormField
@@ -196,13 +194,7 @@ const SoilTestFormModal: React.FC<SoilTestFormModalProps> = ({
               setNitrogen(value as string);
               setErrors((prev) => ({ ...prev, nitrogen: '' }));
             }}
-            options={[
-              { value: '4', label: 'Surplus (4)' },
-              { value: '3', label: 'Sufficient (3)' },
-              { value: '2', label: 'Adequate (2)' },
-              { value: '1', label: 'Deficient (1)' },
-              { value: '0', label: 'Depleted (0)' },
-            ]}
+            options={SOIL_NUTRIENT_LEVELS}
             error={errors.nitrogen}
           />
         </div>
@@ -215,13 +207,7 @@ const SoilTestFormModal: React.FC<SoilTestFormModalProps> = ({
               setPhosphorus(value as string);
               setErrors((prev) => ({ ...prev, phosphorus: '' }));
             }}
-            options={[
-              { value: '4', label: 'Surplus (4)' },
-              { value: '3', label: 'Sufficient (3)' },
-              { value: '2', label: 'Adequate (2)' },
-              { value: '1', label: 'Deficient (1)' },
-              { value: '0', label: 'Depleted (0)' },
-            ]}
+            options={SOIL_NUTRIENT_LEVELS}
             error={errors.phosphorus}
           />
           <SelectFormField
@@ -232,13 +218,7 @@ const SoilTestFormModal: React.FC<SoilTestFormModalProps> = ({
               setPotassium(value as string);
               setErrors((prev) => ({ ...prev, potassium: '' }));
             }}
-            options={[
-              { value: '4', label: 'Surplus (4)' },
-              { value: '3', label: 'Sufficient (3)' },
-              { value: '2', label: 'Adequate (2)' },
-              { value: '1', label: 'Deficient (1)' },
-              { value: '0', label: 'Depleted (0)' },
-            ]}
+            options={SOIL_NUTRIENT_LEVELS}
             error={errors.potassium}
           />
         </div>

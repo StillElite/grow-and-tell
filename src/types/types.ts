@@ -1,8 +1,8 @@
 // --------------------
-// Grouped Features
+// Home / Features
 // --------------------
 
-export interface FeatureCard {
+export interface Feature {
   title: string;
   description: string;
   image: string;
@@ -10,7 +10,7 @@ export interface FeatureCard {
   comingSoon?: boolean;
 }
 
-export interface PlanningFeatureCard extends FeatureCard {
+export interface PlanningFeatureCard extends Feature {
   viewKey: ViewKey;
 }
 

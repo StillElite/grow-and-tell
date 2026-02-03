@@ -1,5 +1,4 @@
 import { createContext, useContext, useState, ReactNode } from 'react';
-import { compostBins as initialCompostBins } from '../mocks/mockdata';
 import { CompostBin, CompostType } from '../types/types';
 
 interface CompostContextType {
@@ -24,8 +23,7 @@ interface CompostProviderProps {
 }
 
 export const CompostProvider = ({ children }: CompostProviderProps) => {
-  const [compostBins, setCompostBins] =
-    useState<CompostBin[]>(initialCompostBins);
+  const [compostBins, setCompostBins] = useState<CompostBin[]>([]);
 
   const addCompostBin = (name: string, type: CompostType, notes: string) => {
     const newBin: CompostBin = {

@@ -7,7 +7,6 @@ import {
   faShoppingBasket,
   faTags,
 } from '@fortawesome/free-solid-svg-icons';
-import { Harvest } from '../../../../mocks/mockdata';
 import { capitalize } from '../../../../utils/capitalize';
 import { formatDate } from '../../../../utils/formatDate';
 import { useState } from 'react';
@@ -15,7 +14,7 @@ import ConfirmModal from '../../../shared/ConfirmModal';
 import { formatHarvestUnit } from '../../../../utils/formatHarvestUnit';
 import toast from 'react-hot-toast';
 import { getAccentColor } from '../../../../utils/getAccentColor';
-import { ViewKey } from '../../../../types/types';
+import { Harvest, ViewKey } from '../../../../types/types';
 
 export interface HarvestCardProps {
   harvest: Harvest;

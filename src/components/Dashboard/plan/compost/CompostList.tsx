@@ -43,7 +43,7 @@ const CompostList: React.FC<CompostListProps> = ({
           <div className='text-center py-12 text-gray-500'>
             <p className='text-lg mb-2'>No Compost Bins yet</p>
             <p className='text-sm'>
-              Click "Add Bin" to create your first compost bin.
+              Click &quot;Add Bin&quot; to create your first compost bin.
             </p>
           </div>
         ) : (

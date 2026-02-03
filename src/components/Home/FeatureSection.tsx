@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import { features } from '../../mocks/mockdata';
+import { features } from '../../constants/home';
 
 const FeatureSection: React.FC = () => {
   return (

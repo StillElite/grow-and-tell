@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheck } from '@fortawesome/free-solid-svg-icons';
 import { useClickOutsideClose } from '../../../../utils/useClickOutsideClose';
 import { capitalize } from '../../../../utils/capitalize';
-import { SoilAmendmentType } from '../../../../mocks/mockdata';
+import { SoilAmendmentType } from '../../../../types/types';
 
 export interface SoilAmendmentDropdownProps {
   options: SoilAmendmentType[];

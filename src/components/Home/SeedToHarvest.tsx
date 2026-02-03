@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Image from 'next/image';
 
 const SeedToHarvest: React.FC = () => {
   return (
@@ -8,10 +9,12 @@ const SeedToHarvest: React.FC = () => {
     >
       {/* Left: Image with overlay */}
       <div className='relative'>
-        <img
+        <Image
           src='/images/carrots.jpg'
           alt='Freshly harvested carrots and leeks'
           className='w-full h-full object-cover'
+          width={640}
+          height={960}
         />
         <div className='absolute inset-0 bg-black/20' aria-hidden='true' />
       </div>
@@ -24,8 +27,8 @@ const SeedToHarvest: React.FC = () => {
           </h2>
           <p className='mb-6 leading-relaxed'>
             Grow & Tell helps you track everything from when your tomatoes were
-            planted to when they ripen on the vine. Stay on top of your garden's
-            progress, season after season.
+            planted to when they ripen on the vine. Stay on top of your
+            garden&apos;s progress, season after season.
           </p>
           <Link
             href='/dashboard'
