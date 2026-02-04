@@ -26,30 +26,34 @@ const FeatureSection: React.FC = () => {
         </div>
 
         <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10'>
-          {features.map((feature) => (
-            <article
-              key={feature.title}
-              className={`flex flex-col items-center px-4 pb-6 ${
-                feature.comingSoon ? 'opacity-60' : ''
-              }`}
-              aria-label={`${feature.title} feature`}
-            >
-              <Image
-                src={feature.image}
-                alt={feature.alt}
-                width={100}
-                height={100}
-                className='mb-4 md:mb-10 w-[100px] h-[100px] object-contain'
-                priority
-              />
-              <h3 className='text-xl font-bold uppercase text-[#79B040] mb-2'>
-                {feature.title}
-              </h3>
-              <p className='text-base text-gray-600 text-center leading-relaxed'>
-                {feature.description}
-              </p>
-            </article>
-          ))}
+          {features.map((feature) => {
+            const featureCardClasses = `flex flex-col items-center px-4 pb-6 ${
+              feature.comingSoon ? 'opacity-60' : ''
+            }`;
+
+            return (
+              <article
+                key={feature.title}
+                className={featureCardClasses}
+                aria-label={`${feature.title} feature`}
+              >
+                <Image
+                  src={feature.image}
+                  alt={feature.alt}
+                  width={100}
+                  height={100}
+                  className='mb-4 md:mb-10 w-[100px] h-[100px] object-contain'
+                  priority
+                />
+                <h3 className='text-xl font-bold uppercase text-[#79B040] mb-2'>
+                  {feature.title}
+                </h3>
+                <p className='text-base text-gray-600 text-center leading-relaxed'>
+                  {feature.description}
+                </p>
+              </article>
+            );
+          })}
         </div>
       </div>
     </section>

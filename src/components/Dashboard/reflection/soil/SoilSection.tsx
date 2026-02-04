@@ -2,7 +2,7 @@ import PageHeader from '../../../shared/PageHeader';
 import SectionHeader from '../../../shared/SectionHeader';
 import { useState } from 'react';
 import { useSoilRecordContext } from '../../../../context/SoilRecordContext';
-import SoilRecordFormModal from './SoilRecordFormModal';
+import { SoilRecordFormModal } from './SoilRecordFormModal';
 import { SoilCard } from './SoilCard';
 import { Season, SoilRecord, ViewKey } from '../../../../types/types';
 

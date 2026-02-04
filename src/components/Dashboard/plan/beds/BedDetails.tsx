@@ -1,7 +1,7 @@
 import { Bed, Crop, ViewKey } from '../../../../types/types';
 import { CropCard } from './CropCard';
 import { useState } from 'react';
-import CropFormModal from './CropFormModal';
+import { CropFormModal } from './CropFormModal';
 import { useBedContext } from '../../../../context/BedContext';
 import SectionHeader from '../../../shared/SectionHeader';
 import { BreadcrumbItem } from '../../../shared/Breadcrumb';
@@ -9,7 +9,7 @@ import PageHeader from '../../../shared/PageHeader';
 import toast from 'react-hot-toast';
 import { usePlantingHistoryContext } from '../../../../context/PlantingHistoryContext';
 
-interface BedDetailsProps {
+export interface BedDetailsProps {
   bed: Bed;
   onDeselectBed: () => void;
   onNavigate: (view: ViewKey) => void;

@@ -1,7 +1,8 @@
 import { createContext, useContext, useState, ReactNode } from 'react';
 import { subtractDays } from '../utils/dateMatch';
 import { capitalize } from '../utils/capitalize';
-import { PlantingRecord } from '../types/types';
+import { DateRangeKey, PlantingRecord } from '../types/types';
+import { dateOptions } from '../constants/plantLog';
 
 interface PlantingHistoryContextType {
   plantingRecords: PlantingRecord[];
@@ -24,12 +25,6 @@ interface PlantingHistoryContextType {
   deletePlantingsForBed: (bedId: string, cropIdsToDelete: string[]) => void;
   deletePlantingsByCropId: (cropId: string) => void;
 }
-
-export type DateRangeKey =
-  | 'Past 7 Days'
-  | 'Past 30 Days'
-  | 'Past 3 Months'
-  | 'Past 6 Months';
 
 const PlantingHistoryContext = createContext<
   PlantingHistoryContextType | undefined
@@ -64,13 +59,6 @@ export const PlantingHistoryProvider = ({
   const bedOptions = Array.from(
     new Set(plantingRecords.map((p) => capitalize(p.bedName))),
   ).sort();
-
-  const dateOptions: DateRangeKey[] = [
-    'Past 7 Days',
-    'Past 30 Days',
-    'Past 3 Months',
-    'Past 6 Months',
-  ];
 
   const addPlantingToHistory = (record: PlantingRecord) => {
     setPlantingRecords((prev) => [...prev, record]);

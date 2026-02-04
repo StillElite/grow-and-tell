@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import BedDetails from './BedDetails';
-import BedFormModal from './BedFormModal';
+import { BedFormModal } from './BedFormModal';
 import toast from 'react-hot-toast';
 import { useBedContext } from '../../../../context/BedContext';
 import { usePlantingHistoryContext } from '../../../../context/PlantingHistoryContext';

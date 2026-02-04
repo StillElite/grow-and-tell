@@ -9,7 +9,7 @@ export interface TaskManagementModalProps {
   onClose: () => void;
 }
 
-const TaskManagementModal: React.FC<TaskManagementModalProps> = ({
+export const TaskManagementModal: React.FC<TaskManagementModalProps> = ({
   isOpen,
   onClose,
 }) => {
@@ -203,5 +203,3 @@ const TaskManagementModal: React.FC<TaskManagementModalProps> = ({
     </Modal>
   );
 };
-
-export default TaskManagementModal;

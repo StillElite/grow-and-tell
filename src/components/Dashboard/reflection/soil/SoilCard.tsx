@@ -19,7 +19,7 @@ import toast from 'react-hot-toast';
 import { getPillClass } from '../../../../utils/getPillClass';
 import { SoilAmendmentDropdown } from './SoilAmendmentDropdown';
 import { getAccentColor } from '../../../../utils/getAccentColor';
-import SoilTestFormModal from './SoilTestFormModal';
+import { SoilTestFormModal } from './SoilTestFormModal';
 import { ViewKey } from '../../../../types/types';
 
 export interface SoilCardProps {
@@ -107,7 +107,7 @@ export const SoilCard: React.FC<SoilCardProps> = ({
             type='button'
             onClick={() => onEditSoilRecord(soilRecord)}
             aria-label={`Edit ${soilRecord.name} entry`}
-            className='text-[#244225] focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-1 focus-visible:ring-[#244225] rounded'
+            className='text-[#475569] focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-1 focus-visible:ring-[#244225] rounded-sm'
           >
             <FontAwesomeIcon icon={faPen} aria-hidden='true' />
           </button>
@@ -115,7 +115,7 @@ export const SoilCard: React.FC<SoilCardProps> = ({
             type='button'
             onClick={() => setIsConfirmOpen(true)}
             aria-label={`Delete ${soilRecord.name} soil record`}
-            className='text-red-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-1 focus-visible:ring-[#244225]  rounded'
+            className='text-[#991b1b] focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-1 focus-visible:ring-[#244225] rounded-sm'
           >
             <FontAwesomeIcon icon={faTrash} aria-hidden='true' />
           </button>

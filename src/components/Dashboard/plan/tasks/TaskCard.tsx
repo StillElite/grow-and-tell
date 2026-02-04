@@ -37,15 +37,17 @@ export const TaskCard: React.FC<TaskCardProps> = ({
   focus-visible:outline-[#d1a052]
 `;
 
+  const taskNameClasses = `text-sm font-medium ${
+    isDone ? 'line-through opacity-70' : ''
+  }`;
+
   const handleDeleteTask = () => {
     onDeleteTask(task.id);
     setIsConfirmOpen(false);
   };
 
   return (
-    <li
-      className={`flex items-center justify-between border bg-white px-4 py-3 shadow-sm`}
-    >
+    <li className='flex items-center justify-between border bg-white px-4 py-3 shadow-sm'>
       {/* Left: checkbox + text */}
       <div className='flex items-center gap-3 ali'>
         <div className='flex items-center '>
@@ -70,12 +72,7 @@ export const TaskCard: React.FC<TaskCardProps> = ({
         </div>
 
         <div className=' border-l border-gray-100 pl-3'>
-          <div
-            id={`task-${task.id}-label`}
-            className={`text-sm font-medium mb-1 ${
-              isDone ? 'line-through opacity-70' : ''
-            }`}
-          >
+          <div id={`task-${task.id}-label`} className={taskNameClasses}>
             {capitalize(task.name)}
           </div>
 
@@ -115,13 +112,13 @@ export const TaskCard: React.FC<TaskCardProps> = ({
             onClick={() => {
               onEditTask(task);
             }}
-            className='hover:bg-gray-100 dark:hover:bg-gray-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#d1a052]'
+            className='text-[#475569] focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-1 focus-visible:ring-[#244225]'
             title='Edit'
           >
             <FontAwesomeIcon
               aria-hidden='true'
               icon={faPen}
-              className='h-3 w-3'
+              className='h-3 w-3 text-[#475569]'
             />
           </button>
 
@@ -129,13 +126,13 @@ export const TaskCard: React.FC<TaskCardProps> = ({
             type='button'
             aria-label='Delete task'
             onClick={() => setIsConfirmOpen(true)}
-            className='hover:bg-gray-100 dark:hover:bg-gray-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#d1a052]'
+            className='text-[#991b1b] focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-1 focus-visible:ring-[#244225]'
             title='Delete'
           >
             <FontAwesomeIcon
               aria-hidden='true'
               icon={faTrash}
-              className='h-3 w-3'
+              className='h-3 w-3 text-[#991b1b]'
             />
           </button>
           <ConfirmModal

@@ -59,7 +59,7 @@ export const HarvestCard: React.FC<HarvestCardProps> = ({
             type='button'
             onClick={() => onEditHarvest(harvest)}
             aria-label='Edit harvest entry'
-            className='text-[#244225]'
+            className='text-[#475569] focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-1 focus-visible:ring-[#244225] rounded-sm'
           >
             <FontAwesomeIcon icon={faPen} aria-hidden='true' />
           </button>
@@ -68,7 +68,7 @@ export const HarvestCard: React.FC<HarvestCardProps> = ({
             type='button'
             onClick={() => setIsConfirmOpen(true)}
             aria-label={`Delete ${harvest.name} harvest`}
-            className='text-red-700'
+            className='text-[#991b1b] focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-1 focus-visible:ring-[#244225] rounded-sm'
           >
             <FontAwesomeIcon icon={faTrash} aria-hidden='true' />
           </button>

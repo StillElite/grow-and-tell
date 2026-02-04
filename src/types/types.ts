@@ -57,7 +57,17 @@ export interface PlantingRecord {
 }
 
 // --------------------
-// (Compost)
+// Planting Log
+// --------------------
+
+export type DateRangeKey =
+  | 'Past 7 Days'
+  | 'Past 30 Days'
+  | 'Past 3 Months'
+  | 'Past 6 Months';
+
+// --------------------
+// Compost
 // --------------------
 
 export type CompostType = 'Worm' | 'Leaf' | 'Hot' | 'Cold';

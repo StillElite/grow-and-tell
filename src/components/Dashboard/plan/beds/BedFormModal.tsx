@@ -6,14 +6,14 @@ import { FormField } from '../../../shared/forms/FormField';
 import { toast } from 'react-hot-toast';
 import { Bed } from '../../../../types/types';
 
-interface BedFormModalProps {
+export interface BedFormModalProps {
   isOpen: boolean;
   onClose: () => void;
   onSaveBed: (name: string, size: string, notes: string) => void;
   bedToEdit?: Bed | null;
 }
 
-const BedFormModal: React.FC<BedFormModalProps> = ({
+export const BedFormModal: React.FC<BedFormModalProps> = ({
   isOpen,
   onClose,
   onSaveBed,
@@ -164,5 +164,3 @@ const BedFormModal: React.FC<BedFormModalProps> = ({
     </Modal>
   );
 };
-
-export default BedFormModal;

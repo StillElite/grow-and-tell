@@ -9,7 +9,7 @@ import {
   SOIL_PH_OPTIONS,
 } from '../../../../constants/soil';
 
-interface SoilTestFormModalProps {
+export interface SoilTestFormModalProps {
   isOpen: boolean;
   onClose: () => void;
   onSaveSoilTest: (soilTest: {
@@ -22,7 +22,7 @@ interface SoilTestFormModalProps {
   //   soilRecordToEdit?: SoilRecord | null;
 }
 
-const SoilTestFormModal: React.FC<SoilTestFormModalProps> = ({
+export const SoilTestFormModal: React.FC<SoilTestFormModalProps> = ({
   isOpen,
   onClose,
   onSaveSoilTest,
@@ -233,5 +233,3 @@ const SoilTestFormModal: React.FC<SoilTestFormModalProps> = ({
     </Modal>
   );
 };
-
-export default SoilTestFormModal;

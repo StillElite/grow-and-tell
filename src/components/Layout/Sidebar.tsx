@@ -27,13 +27,11 @@ const Sidebar: React.FC<SidebarProps> = ({
     { label: 'Soil Records', viewKey: ViewKey.SoilRecord },
   ];
 
+  const asideClasses = `fixed top-0 left-0 h-full z-50 md:relative md:block w-64 bg-[#2a452c] text-white p-6 transform transition-transform duration-300 ease-in-out
+    ${isOpen ? 'translate-x-0' : '-translate-x-full md:translate-x-0'}`;
+
   return (
-    <aside
-      className={`
-        fixed top-0 left-0 h-full z-50 md:relative md:block w-64 bg-[#2a452c] text-white p-6 transform transition-transform duration-300 ease-in-out
-        ${isOpen ? 'translate-x-0' : '-translate-x-full md:translate-x-0'}
-      `}
-    >
+    <aside className={asideClasses} aria-label='Sidebar navigation'>
       <button
         type='button'
         onClick={onClose}

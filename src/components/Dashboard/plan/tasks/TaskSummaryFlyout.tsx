@@ -12,22 +12,19 @@ export const TaskSummaryFlyout: React.FC<TaskSummaryFlyoutProps> = ({
   isOpen,
   onClose,
 }) => {
+  const overlayClasses = `fixed inset-0 bg-black/40 transition-opacity duration-300 z-40 ${
+    isOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'
+  }`;
+
+  const asideClasses = `fixed top-0 right-0 h-full w-80 bg-white border-l border-gray-200 shadow-lg transform transition-transform duration-300 z-50
+    ${isOpen ? 'translate-x-0' : 'translate-x-full'}`;
+
   return (
     <>
       {/* Overlay */}
-      <div
-        className={`fixed inset-0 bg-black/40 transition-opacity duration-300 z-40 ${
-          isOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'
-        }`}
-        onClick={onClose}
-        aria-hidden='true'
-      />
+      <div className={overlayClasses} onClick={onClose} aria-hidden='true' />
 
-      <aside
-        className={`fixed top-0 right-0 h-full w-80 bg-white border-l border-gray-200 shadow-lg transform transition-transform duration-300 z-50
-        ${isOpen ? 'translate-x-0' : 'translate-x-full'}`}
-        aria-labelledby='task-summary-title'
-      >
+      <aside className={asideClasses} aria-labelledby='task-summary-title'>
         <TaskSummary />
         <button
           type='button'

@@ -7,7 +7,7 @@ import {
   faPen,
 } from '@fortawesome/free-solid-svg-icons';
 import { useState } from 'react';
-import CropFormModal from './CropFormModal';
+import { CropFormModal } from './CropFormModal';
 import { Bed, Crop, ViewKey } from '../../../../types/types';
 import { getAccentColor } from '../../../../utils/getAccentColor';
 import { usePlantingHistoryContext } from '../../../../context/PlantingHistoryContext';
@@ -15,7 +15,7 @@ import { capitalize } from '../../../../utils/capitalize';
 import ConfirmModal from '../../../shared/ConfirmModal';
 import { getPillClass } from '../../../../utils/getPillClass';
 
-interface BedCardProps {
+export interface BedCardProps {
   bed: Bed;
   onView: (bedId: string) => void;
   onAddCrop: (updatedBed: Bed) => void;
@@ -108,7 +108,7 @@ export const BedCard: React.FC<BedCardProps> = ({
           <div className='flex gap-3 text-sm'>
             <button
               type='button'
-              className='text-[#244225]'
+              className='text-[#475569] focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-1 focus-visible:ring-[#244225] rounded-sm'
               onClick={() => {
                 onEditBed(bed);
               }}
@@ -119,7 +119,7 @@ export const BedCard: React.FC<BedCardProps> = ({
             <button
               type='button'
               onClick={() => setIsConfirmOpen(true)}
-              className='text-red-700'
+              className='text-[#991b1b] focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-1 focus-visible:ring-[#244225] rounded-sm'
               aria-label={`Delete ${bed.name}`}
             >
               <FontAwesomeIcon aria-hidden='true' icon={faTrash} />

@@ -67,7 +67,7 @@ export const CropCard: React.FC<CropCardProps> = ({
             type='button'
             onClick={() => onEditCrop(crop)}
             aria-label={`Edit ${crop.name}`}
-            className='text-[#244225]'
+            className='text-[#475569] focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-1 focus-visible:ring-[#244225] rounded-sm'
           >
             <FontAwesomeIcon icon={faPen} aria-hidden='true' />
           </button>
@@ -75,7 +75,7 @@ export const CropCard: React.FC<CropCardProps> = ({
             type='button'
             onClick={() => setIsConfirmOpen(true)}
             aria-label={`Delete ${crop.name}`}
-            className='text-red-700'
+            className='text-[#991b1b] focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-1 focus-visible:ring-[#244225] rounded-sm'
           >
             <FontAwesomeIcon icon={faTrash} aria-hidden='true' />
           </button>

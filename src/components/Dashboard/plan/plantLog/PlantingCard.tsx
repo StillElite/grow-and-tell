@@ -41,6 +41,8 @@ export const PlantingCard: React.FC<PlantingCardProps> = ({
     bed.crops.some((crop) => crop.id === cropId),
   );
 
+  const activeClasses = isCropStillActive ? 'text-gray-400' : 'text-[#1e61cd]';
+
   const deletePlantingMessage = (
     <>
       Are you sure you want to delete the planting of{' '}
@@ -53,6 +55,7 @@ export const PlantingCard: React.FC<PlantingCardProps> = ({
     toast.success(`${cropName} was deleted from history`);
     setIsConfirmOpen(false);
   };
+
   return (
     <div
       key={id}
@@ -64,12 +67,12 @@ export const PlantingCard: React.FC<PlantingCardProps> = ({
           {capitalize(cropName)}
         </h3>
 
-        <div className='relative inline-block group'>
+        <div className='relative inline-block group text-sm'>
           <button
             type='button'
             onClick={() => setIsConfirmOpen(true)}
             disabled={isCropStillActive}
-            className={isCropStillActive ? 'text-gray-400' : 'text-[#2a452c]'}
+            className={`${activeClasses}  focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-1 focus-visible:ring-[#244225] rounded-sm`}
             aria-label={`Delete planting of ${cropName}`}
           >
             <FontAwesomeIcon icon={faTrash} aria-hidden='true' />

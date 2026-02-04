@@ -11,7 +11,7 @@ import {
   TASK_FREQUENCY_OPTIONS,
 } from '../../../../constants/tasks';
 
-interface TaskFormModalProps {
+export interface TaskFormModalProps {
   isOpen: boolean;
   onClose: () => void;
   onSaveTask: (
@@ -23,7 +23,7 @@ interface TaskFormModalProps {
   taskToEdit?: Task | null;
 }
 
-const TaskFormModal: React.FC<TaskFormModalProps> = ({
+export const TaskFormModal: React.FC<TaskFormModalProps> = ({
   isOpen,
   onClose,
   onSaveTask,
@@ -189,5 +189,3 @@ const TaskFormModal: React.FC<TaskFormModalProps> = ({
     </Modal>
   );
 };
-
-export default TaskFormModal;

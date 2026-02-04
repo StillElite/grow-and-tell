@@ -34,11 +34,11 @@ export const FilterFlyout: React.FC<GenericFilterFlyoutProps> = ({
 
   // Local staged values (copied from controller on open)
   const [localValues, setLocalValues] = useState<Record<string, GroupValue>>(
-    controller.values
+    controller.values,
   );
 
   const getPanelClasses = (entering: boolean) => `
-    bg-gray-50 w-80 max-w-full h-full shadow-lg p-6 relative
+    bg-gray-50 w-84 max-w-full h-full shadow-lg p-6 relative
     transform transition-transform duration-300 ease-in-out
     ${entering ? 'translate-x-0' : 'translate-x-full'}
     flex flex-col
@@ -82,7 +82,7 @@ export const FilterFlyout: React.FC<GenericFilterFlyoutProps> = ({
     for (const group of groups) {
       controller.setValue(
         group.key,
-        localValues[group.key] ?? (group.type === 'multi' ? [] : null)
+        localValues[group.key] ?? (group.type === 'multi' ? [] : null),
       );
     }
     onClose();
@@ -120,10 +120,10 @@ export const FilterFlyout: React.FC<GenericFilterFlyoutProps> = ({
             // normalize staged selection into the shape FilterFlyoutGroup expects
             const selectedForGroup =
               group.type === 'multi'
-                ? (currentValue as string[]) ?? []
+                ? ((currentValue as string[]) ?? [])
                 : currentValue
-                ? [currentValue as string]
-                : [];
+                  ? [currentValue as string]
+                  : [];
 
             return (
               <FilterFlyoutGroup
@@ -139,7 +139,7 @@ export const FilterFlyout: React.FC<GenericFilterFlyoutProps> = ({
                     if (group.type === 'multi') {
                       const nextIds = toggleArrayValue(
                         (prevValue as string[]) ?? [],
-                        optionId
+                        optionId,
                       );
                       return { ...prev, [group.key]: nextIds };
                     } else {

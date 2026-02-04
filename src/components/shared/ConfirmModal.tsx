@@ -30,6 +30,12 @@ const ConfirmModal: React.FC<ConfirmModalProps> = ({
   secondaryConfirmLabel,
   secondaryConfirmDisabled = false,
 }) => {
+  const buttonClasses = `px-4 py-2 rounded ${
+    secondaryConfirmDisabled
+      ? 'bg-gray-300 text-gray-600 cursor-not-allowed'
+      : 'bg-yellow-600 text-white hover:bg-yellow-700'
+  }`;
+
   return (
     <Modal
       isOpen={isOpen}
@@ -87,11 +93,7 @@ const ConfirmModal: React.FC<ConfirmModalProps> = ({
               type='button'
               onClick={onSecondaryConfirm}
               disabled={secondaryConfirmDisabled}
-              className={`px-4 py-2 rounded ${
-                secondaryConfirmDisabled
-                  ? 'bg-gray-300 text-gray-600 cursor-not-allowed'
-                  : 'bg-yellow-600 text-white hover:bg-yellow-700'
-              }`}
+              className={buttonClasses}
             >
               {secondaryConfirmLabel}
             </button>

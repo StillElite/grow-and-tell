@@ -1,5 +1,5 @@
 import SectionHeader from '../../../shared/SectionHeader';
-import BedFormModal from './BedFormModal';
+import { BedFormModal } from './BedFormModal';
 import { useState } from 'react';
 import PageHeader from '../../../shared/PageHeader';
 import { BreadcrumbItem } from '../../../shared/Breadcrumb';

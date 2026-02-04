@@ -6,7 +6,7 @@ import { FormField } from '../../../shared/forms/FormField';
 import { toast } from 'react-hot-toast';
 import { Crop } from '../../../../types/types';
 
-interface CropFormModalProps {
+export interface CropFormModalProps {
   isOpen: boolean;
   onClose: () => void;
   onSaveCrop: (crop: {
@@ -18,7 +18,7 @@ interface CropFormModalProps {
   cropToEdit?: Crop;
 }
 
-const CropFormModal: React.FC<CropFormModalProps> = ({
+export const CropFormModal: React.FC<CropFormModalProps> = ({
   isOpen,
   onClose,
   onSaveCrop,
@@ -185,5 +185,3 @@ const CropFormModal: React.FC<CropFormModalProps> = ({
     </Modal>
   );
 };
-
-export default CropFormModal;

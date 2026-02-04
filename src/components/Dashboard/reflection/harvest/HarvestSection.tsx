@@ -1,7 +1,7 @@
 import PageHeader from '../../../shared/PageHeader';
 import SectionHeader from '../../../shared/SectionHeader';
 import { HarvestCard } from './HarvestCard';
-import HarvestFormModal from './HarvestFormModal';
+import { HarvestFormModal } from './HarvestFormModal';
 import { useState } from 'react';
 import { useHarvestContext } from '../../../../context/HarvestContext';
 import { getHarvestUnit } from '../../../../utils/getHarvestUnit';

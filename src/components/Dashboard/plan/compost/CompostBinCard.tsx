@@ -54,7 +54,7 @@ export const CompostBinCard: React.FC<CompostBinCardProps> = ({
           <div className='flex gap-3 text-sm'>
             <button
               type='button'
-              className='text-[#244225]'
+              className='text-[#475569] focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-1 focus-visible:ring-[#244225] rounded-sm'
               onClick={() => {
                 onEditCompostBin(compostBin);
               }}
@@ -65,7 +65,7 @@ export const CompostBinCard: React.FC<CompostBinCardProps> = ({
             <button
               type='button'
               onClick={() => setIsConfirmOpen(true)}
-              className='text-red-700'
+              className='text-[#991b1b] focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-1 focus-visible:ring-[#244225] rounded-sm'
               aria-label={`Delete ${compostBin.name}`}
             >
               <FontAwesomeIcon icon={faTrash} aria-hidden='true' />

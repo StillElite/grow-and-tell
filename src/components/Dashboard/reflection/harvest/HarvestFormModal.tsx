@@ -13,7 +13,7 @@ import { getHarvestUnit } from '../../../../utils/getHarvestUnit';
 import { Harvest, HarvestCategory } from '../../../../types/types';
 import { HARVEST_CATEGORY_OPTIONS } from '../../../../constants/harvest';
 
-interface HarvestFormModalProps {
+export interface HarvestFormModalProps {
   isOpen: boolean;
   onClose: () => void;
   onSaveHarvest: (
@@ -25,7 +25,7 @@ interface HarvestFormModalProps {
   harvestToEdit?: Harvest | null;
 }
 
-const HarvestFormModal: React.FC<HarvestFormModalProps> = ({
+export const HarvestFormModal: React.FC<HarvestFormModalProps> = ({
   isOpen,
   onClose,
   onSaveHarvest,
@@ -222,5 +222,3 @@ const HarvestFormModal: React.FC<HarvestFormModalProps> = ({
     </Modal>
   );
 };
-
-export default HarvestFormModal;

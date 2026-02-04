@@ -8,7 +8,7 @@ import { SoilRecord, Season } from '../../../../types/types';
 import { SelectFormField } from '../../../shared/forms/SelectFormField';
 import { SOIL_SEASON_OPTIONS } from '../../../../constants/soil';
 
-interface SoilRecordFormModalProps {
+export interface SoilRecordFormModalProps {
   isOpen: boolean;
   onClose: () => void;
   onSaveSoilRecord: (name: string, season: Season) => void;
@@ -16,7 +16,7 @@ interface SoilRecordFormModalProps {
   soilRecordToEdit?: SoilRecord | null;
 }
 
-const SoilRecordFormModal: React.FC<SoilRecordFormModalProps> = ({
+export const SoilRecordFormModal: React.FC<SoilRecordFormModalProps> = ({
   isOpen,
   onClose,
   onSaveSoilRecord,
@@ -161,5 +161,3 @@ const SoilRecordFormModal: React.FC<SoilRecordFormModalProps> = ({
     </Modal>
   );
 };
-
-export default SoilRecordFormModal;
