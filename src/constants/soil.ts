@@ -23,3 +23,5 @@ export const SOIL_NUTRIENT_LEVELS: Option<string>[] = [
   { value: '1', label: 'Deficient (1)' },
   { value: '0', label: 'Depleted (0)' },
 ];
+
+export const SOIL_NUTRIENTS = ['nitrogen', 'phosphorus', 'potassium'] as const;

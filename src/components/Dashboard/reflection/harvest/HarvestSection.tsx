@@ -67,7 +67,7 @@ const HarvestSection: React.FC<HarvestSectionProps> = ({
       <SectionHeader
         title='Harvest'
         description='Review your harvests and track your garden productivity.'
-        imageSrc='/images/harvest-icon.png'
+        imageSrc='/images/basket-icon.png'
       />
 
       <div className='flex justify-end mb-4'>

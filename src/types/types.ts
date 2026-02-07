@@ -1,3 +1,6 @@
+import { HARVEST_CATEGORIES } from '../constants/harvest';
+import { SOIL_NUTRIENTS } from '../constants/soil';
+
 // --------------------
 // Home / Features
 // --------------------
@@ -110,11 +113,7 @@ export interface Task {
 // (Harvest)
 // --------------------
 
-export type HarvestCategory =
-  | 'Leafy greens'
-  | 'Fruiting veggies'
-  | 'Herbs'
-  | 'Roots';
+export type HarvestCategory = (typeof HARVEST_CATEGORIES)[number];
 
 export type HarvestUnit = 'lbs' | 'bunches' | 'count';
 
@@ -156,3 +155,10 @@ export interface SoilRecord {
   amendments: SoilAmendmentType[];
   tests: SoilTest[];
 }
+
+export type SoilNutrient = (typeof SOIL_NUTRIENTS)[number];
+
+export type SoilTestStatusCounts = {
+  testedCount: number;
+  needsNutrientsCount: number;
+};

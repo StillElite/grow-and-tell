@@ -1,27 +1,38 @@
 import React from 'react';
-import { Harvest, HarvestCategory, HarvestUnit } from '../../../../types/types';
+import type {
+  Harvest,
+  HarvestCategory,
+  HarvestUnit,
+} from '../../../../types/types';
 import { formatHarvestUnit } from '../../../../utils/formatHarvestUnit';
+import { HARVEST_CATEGORIES } from '../../../../constants/harvest';
 
 export interface HarvestCategoriesProps {
   harvests: Harvest[];
 }
 
-const HARVEST_CATEGORIES: HarvestCategory[] = [
-  'Leafy greens',
-  'Fruiting veggies',
-  'Herbs',
-  'Roots',
-];
-
-export type CategoryDisplay = {
+type CategoryDisplay = {
   quantity: number;
   unit?: HarvestUnit;
 };
 
-export const HarvestCategories: React.FC<HarvestCategoriesProps> = ({
-  harvests,
-}) => {
-  const categoryTotals = harvests.reduce(
+const buildEmptyCategoryDisplay = (): Record<
+  HarvestCategory,
+  CategoryDisplay
+> => {
+  return HARVEST_CATEGORIES.reduce(
+    (acc, category) => {
+      acc[category] = { quantity: 0 };
+      return acc;
+    },
+    {} as Record<HarvestCategory, CategoryDisplay>,
+  );
+};
+
+const buildCategoryTotals = (
+  harvests: Harvest[],
+): Record<HarvestCategory, { quantity: number; unit: HarvestUnit }> => {
+  return harvests.reduce(
     (acc, harvest) => {
       const category = harvest.category;
 
@@ -34,13 +45,13 @@ export const HarvestCategories: React.FC<HarvestCategoriesProps> = ({
     },
     {} as Record<HarvestCategory, { quantity: number; unit: HarvestUnit }>,
   );
+};
 
-  const categoryDisplay: Record<HarvestCategory, CategoryDisplay> = {
-    'Leafy greens': { quantity: 0 },
-    'Fruiting veggies': { quantity: 0 },
-    Herbs: { quantity: 0 },
-    Roots: { quantity: 0 },
-  };
+const buildCategoryDisplay = (
+  harvests: Harvest[],
+): Record<HarvestCategory, CategoryDisplay> => {
+  const categoryTotals = buildCategoryTotals(harvests);
+  const categoryDisplay = buildEmptyCategoryDisplay();
 
   HARVEST_CATEGORIES.forEach((category) => {
     const total = categoryTotals[category];
@@ -53,6 +64,14 @@ export const HarvestCategories: React.FC<HarvestCategoriesProps> = ({
     };
   });
 
+  return categoryDisplay;
+};
+
+export const HarvestCategories: React.FC<HarvestCategoriesProps> = ({
+  harvests,
+}) => {
+  const categoryDisplay = buildCategoryDisplay(harvests);
+
   return (
     <div className='rounded-lg border border-neutral-200 p-4'>
       <h3 className='text-sm font-bold text-[#c28b3c]'>Categories</h3>
@@ -60,6 +79,7 @@ export const HarvestCategories: React.FC<HarvestCategoriesProps> = ({
       <ul className='mt-3 space-y-2'>
         {HARVEST_CATEGORIES.map((category) => {
           const display = categoryDisplay[category];
+
           return (
             <li key={category} className='flex justify-between text-sm'>
               <span>{category}</span>

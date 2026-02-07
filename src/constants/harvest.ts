@@ -7,3 +7,10 @@ export const HARVEST_CATEGORY_OPTIONS: Option<HarvestCategory>[] = [
   { value: 'Herbs', label: 'Herbs' },
   { value: 'Roots', label: 'Roots' },
 ];
+
+export const HARVEST_CATEGORIES = [
+  'Leafy greens',
+  'Fruiting veggies',
+  'Herbs',
+  'Roots',
+] as const;

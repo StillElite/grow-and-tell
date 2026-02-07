@@ -8,6 +8,7 @@ import {
   SOIL_NUTRIENT_LEVELS,
   SOIL_PH_OPTIONS,
 } from '../../../../constants/soil';
+import toast from 'react-hot-toast';
 
 export interface SoilTestFormModalProps {
   isOpen: boolean;
@@ -19,14 +20,12 @@ export interface SoilTestFormModalProps {
     phosphorus: string;
     potassium: string;
   }) => void;
-  //   soilRecordToEdit?: SoilRecord | null;
 }
 
 export const SoilTestFormModal: React.FC<SoilTestFormModalProps> = ({
   isOpen,
   onClose,
   onSaveSoilTest,
-  //   soilRecordToEdit,
 }) => {
   const [pH, setPH] = useState('');
   const [nitrogen, setNitrogen] = useState('');
@@ -35,16 +34,6 @@ export const SoilTestFormModal: React.FC<SoilTestFormModalProps> = ({
   const [dateTested, setDateTested] = useState('');
 
   const [errors, setErrors] = useState<{ [key: string]: string }>({});
-
-  //   useEffect(() => {
-  //     if (soilRecordToEdit) {
-  //       setName(soilRecordToEdit.name);
-  //       setSeason(soilRecordToEdit.season);
-  //     } else {
-  //       setName('');
-  //       setSeason('');
-  //     }
-  //   }, [soilRecordToEdit, isOpen]);
 
   const resetForm = () => {
     setDateTested('');
@@ -87,11 +76,7 @@ export const SoilTestFormModal: React.FC<SoilTestFormModalProps> = ({
       potassium: potassium.trim(),
     });
 
-    // toast.success(
-    //   soilRecordToEdit
-    //     ? 'Soil record updated successfully!'
-    //     : 'Soil record added successfully!',
-    // );
+    toast.success('Soil test added successfully!');
 
     resetForm();
     onClose();

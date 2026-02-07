@@ -21,6 +21,7 @@ import { SoilAmendmentDropdown } from './SoilAmendmentDropdown';
 import { getAccentColor } from '../../../../utils/getAccentColor';
 import { SoilTestFormModal } from './SoilTestFormModal';
 import { ViewKey } from '../../../../types/types';
+import { formatDate } from '../../../../utils/formatDate';
 
 export interface SoilCardProps {
   soilRecord: SoilRecord;
@@ -89,6 +90,18 @@ export const SoilCard: React.FC<SoilCardProps> = ({
     onAddSoilTest(updatedSoilRecord);
   };
 
+  const handleAmendmentChange = (updatedAmendments: SoilAmendmentType[]) => {
+    soilRecord.amendments = Array.from(new Set(updatedAmendments));
+    setAmendments(soilRecord.amendments);
+  };
+  const latestTest =
+    soilRecord.tests.length > 0
+      ? [...soilRecord.tests].sort(
+          (a, b) =>
+            new Date(b.dateTested).getTime() - new Date(a.dateTested).getTime(),
+        )[0]
+      : null;
+
   return (
     <div
       key={soilRecord.id}
@@ -155,7 +168,7 @@ export const SoilCard: React.FC<SoilCardProps> = ({
               <SoilAmendmentDropdown
                 options={SOIL_AMENDMENT_OPTIONS}
                 selectedAmendments={amendments}
-                onChange={(next) => setAmendments(Array.from(new Set(next)))}
+                onChange={handleAmendmentChange}
                 open={isAmendmentMenuOpen}
                 onToggle={() => setIsAmendmentMenuOpen((prev) => !prev)}
               />
@@ -169,63 +182,77 @@ export const SoilCard: React.FC<SoilCardProps> = ({
               amendments.map((amendment) => (
                 <span key={amendment} className={getPillClass()}>
                   {capitalize(amendment)}
+                  <button
+                    type='button'
+                    aria-label={`Remove ${amendment} amendment`}
+                    className='ml-2 text-xs text-gray-500 hover:text-white hover:bg-[#1E6635] focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-1 focus-visible:ring-[#244225] bg-white rounded-full w-4 h-4'
+                    onClick={() => {
+                      setAmendments(amendments.filter((a) => a !== amendment));
+                    }}
+                  >
+                    x
+                  </button>
                 </span>
               ))
             )}
           </div>
         </div>
 
-        <div className='min-h-[24px] mt-2'>
-          <div className='flex items-start gap-2 text-sm'>
-            <FontAwesomeIcon
-              icon={faFlask}
-              aria-hidden='true'
-              className={`${textAccent} mt-0.5`}
-            />
+        {/* Soil Test*/}
+        {soilRecord.tests.length > 0 && (
+          <div className='min-h-[24px] mt-2'>
+            <div className='flex items-start gap-2 text-sm'>
+              <FontAwesomeIcon
+                icon={faFlask}
+                aria-hidden='true'
+                className={`${textAccent} mt-0.5`}
+              />
 
-            <div className='flex flex-col'>
-              {/* Line 1: label + date */}
-              <div className='flex items-center gap-2'>
-                <strong className='text-gray-800'>Last test:</strong>
-                <span className='text-gray-700'>Oct 12</span>
-              </div>
-
-              {/* Line 2: values */}
-              <div className='mt-1 grid grid-cols-4 gap-x-3 gap-y-1 text-xs text-gray-700'>
-                <div className='text-center'>
-                  <div className='text-gray-500'>pH</div>
-                  <div className='font-medium'>6.4</div>
+              <div className='flex flex-col'>
+                {/* Line 1: label + date */}
+                <div className='flex items-center gap-2'>
+                  <strong className='text-gray-800'>Last test:</strong>
+                  <span className='text-gray-700'>
+                    {formatDate(latestTest?.dateTested) ?? 'None'}
+                  </span>
                 </div>
 
-                <div className='text-center'>
-                  <div className='text-gray-500'>N</div>
-                  <div className='font-medium'>2</div>
-                </div>
+                {/* Line 2: values */}
+                <div className='mt-1 grid grid-cols-4 gap-x-3 gap-y-1 text-xs text-gray-700'>
+                  <div className='text-center'>
+                    <div className='text-gray-500'>pH</div>
+                    <div className='font-medium'>{latestTest?.pH ?? ''}</div>
+                  </div>
 
-                <div className='text-center'>
-                  <div className='text-gray-500'>P</div>
-                  <div className='font-medium'>1</div>
-                </div>
+                  <div className='text-center'>
+                    <div className='text-gray-500'>N</div>
+                    <div className='font-medium'>
+                      {latestTest?.nitrogen ?? ''}
+                    </div>
+                  </div>
 
-                <div className='text-center'>
-                  <div className='text-gray-500'>K</div>
-                  <div className='font-medium'>0</div>
+                  <div className='text-center'>
+                    <div className='text-gray-500'>P</div>
+                    <div className='font-medium'>
+                      {latestTest?.phosphorus ?? ''}
+                    </div>
+                  </div>
+
+                  <div className='text-center'>
+                    <div className='text-gray-500'>K</div>
+                    <div className='font-medium'>
+                      {latestTest?.potassium ?? ''}
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
+        )}
       </div>
 
       {/* Footer actions */}
-      <div className='flex items-center justify-between mt-10'>
-        <button
-          type='button'
-          className='bg-[#244225] text-white text-sm px-4 py-1 rounded hover:bg-[#356a3c] transition focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#244225]'
-          aria-label={`View details for ${soilRecord.name}`}
-        >
-          View
-        </button>
+      <div className='flex justify-end mt-10'>
         <button
           type='button'
           onClick={handleOpenTestModal}
@@ -238,7 +265,6 @@ export const SoilCard: React.FC<SoilCardProps> = ({
           isOpen={isSoilTestFormModalOpen}
           onClose={() => setIsSoilTestFormModalOpen(false)}
           onSaveSoilTest={handleAddTest}
-          // soilRecordToEdit={soilRecord}
         />
       </div>
     </div>

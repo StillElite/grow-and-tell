@@ -1,64 +1,23 @@
 import { ViewKey } from '../../../../types/types';
+import { SoilNutrientStatus } from './SoilNutrientStatus';
 
+import { SoilTestStatus } from './SoilTestStatus';
 export interface SoilSummaryProps {
   onSelect: (view: ViewKey) => void;
 }
 
 export const SoilSummary: React.FC<SoilSummaryProps> = ({ onSelect }) => {
   return (
-    <section className='rounded-lg bg-white shadow p-6'>
-      <h3 className='text-lg font-semibold text-neutral-900'>Soil Summary</h3>
+    <section className='rounded-lg bg-white shadow p-6 flex flex-col justify-between'>
+      <div>
+        <h2 className='text-lg font-semibold text-neutral-900'>Soil Summary</h2>
 
-      {/* Split summary */}
-      <div className='mt-4 grid grid-cols-2 gap-4'>
-        <div className='rounded-md bg-neutral-50 p-3'>
-          <h3 className='text-sm font-bold text-neutral-500 uppercase tracking-wide'>
-            Tests
-          </h3>
-
-          {/* Metrics list */}
-          <ul className='mt-3 space-y-2 text-sm text-neutral-800'>
-            <li className='flex justify-between'>
-              <span>Beds tested</span>
-              <span>6 / 7</span>
-            </li>
-
-            <li className='flex justify-between'>
-              <span>Beds needing nutrients</span>
-              <span>3 / 7</span>
-            </li>
-          </ul>
-        </div>
-
-        {/* Nutrients */}
-        <div className='rounded-md bg-neutral-50 p-3'>
-          <h3 className='text-sm font-medium text-neutral-500 uppercase tracking-wide'>
-            Nutrients Needed
-          </h3>
-
-          {/* Status block */}
-
-          <ul className='mt-3 space-y-2 text-sm text-neutral-800'>
-            <li className='flex justify-between'>
-              <span>Nitrogen (N)</span>
-              <span>2</span>
-            </li>
-            <li className='flex justify-between'>
-              <span>Phosphorus (P)</span>
-              <span>1</span>
-            </li>
-            <li className='flex justify-between'>
-              <span>Potassium (K)</span>
-              <span>0</span>
-            </li>
-            <li className='flex justify-between'>
-              <span>pH</span>
-              <span>3</span>
-            </li>
-          </ul>
+        {/* Grid */}
+        <div className='mt-5 grid gap-4 md:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2'>
+          <SoilNutrientStatus />
+          <SoilTestStatus />
         </div>
       </div>
-
       {/* Bottom action */}
       <div className='mt-6 pt-4 border-t border-neutral-200'>
         <button

@@ -21,11 +21,20 @@ export const SoilAmendmentDropdown: React.FC<SoilAmendmentDropdownProps> = ({
   onToggle,
 }) => {
   const menuRef = useRef<HTMLDivElement>(null);
+  const triggerRef = useRef<HTMLButtonElement>(null);
   const optionRefs = useRef<Map<string, HTMLDivElement>>(new Map());
 
-  useClickOutsideClose(menuRef, open, () => {
-    if (open) onToggle();
-  });
+  const closeAndReturnFocus = () => {
+    if (!open) return;
+
+    onToggle();
+
+    setTimeout(() => {
+      triggerRef.current?.focus();
+    }, 0);
+  };
+
+  useClickOutsideClose(menuRef, open, closeAndReturnFocus);
 
   const toggleAmendment = (amendment: SoilAmendmentType) => {
     onChange(
@@ -64,13 +73,14 @@ export const SoilAmendmentDropdown: React.FC<SoilAmendmentDropdownProps> = ({
       toggleAmendment(amendment);
     } else if (e.key === 'Escape') {
       e.preventDefault();
-      onToggle();
+      closeAndReturnFocus();
     }
   };
 
   return (
     <div ref={menuRef} className='relative'>
       <button
+        ref={triggerRef}
         type='button'
         aria-label='Add amendment'
         className='flex h-5 w-5 items-center justify-center rounded-full border border-gray-300 text-gray-500 hover:border-[#244225] hover:text-[#244225]'
@@ -116,7 +126,7 @@ export const SoilAmendmentDropdown: React.FC<SoilAmendmentDropdownProps> = ({
                         readOnly
                         tabIndex={-1}
                         aria-hidden='true'
-                        className='peer appearance-none w-5 h-5 border border-gray-300 rounded checked:bg-[#154D29] checked:border-transparent'
+                        className='peer appearance-none w-5 h-5 border border-gray-300 rounded checked:bg-[#154D29] checked:border-transparent pointer-events-none'
                       />
                       <FontAwesomeIcon
                         icon={faCheck}
