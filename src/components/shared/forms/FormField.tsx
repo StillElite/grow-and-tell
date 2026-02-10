@@ -8,9 +8,11 @@ interface FormFieldProps {
   onChange: (value: string) => void;
   error?: string;
   maxLength?: number;
+  minLength?: number;
   type?: 'text' | 'textarea' | 'date' | 'number';
   placeholder?: string;
-  min?;
+  min?: number | string;
+  max?: number | string;
   disabled?: boolean;
 }
 
@@ -21,8 +23,10 @@ export const FormField: React.FC<FormFieldProps> = ({
   onChange,
   error,
   maxLength,
+  minLength,
   type = 'text',
   placeholder = ' ',
+  max,
   min,
   disabled = false,
 }) => {
@@ -43,12 +47,21 @@ export const FormField: React.FC<FormFieldProps> = ({
     'aria-describedby': error ? `${id}-error` : undefined,
     placeholder,
     maxLength,
-    ...(type === 'number' && min !== undefined && { min }),
+    disabled,
     className: clsx(
       inputBaseClasses,
       error && 'border-red-500 focus:ring-red-500',
     ),
-    disabled,
+
+    ...(type === 'date' && {
+      max: max || new Date().toISOString().split('T')[0],
+      min: min,
+    }),
+    ...(type === 'number' && {
+      min,
+      max,
+    }),
+    ...(type !== 'number' && { minLength }),
   };
 
   return (

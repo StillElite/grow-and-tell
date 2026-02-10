@@ -1,8 +1,16 @@
-import { createContext, useContext, useState, ReactNode } from 'react';
+import {
+  createContext,
+  useContext,
+  useState,
+  ReactNode,
+  useEffect,
+} from 'react';
 import { subtractDays } from '../utils/dateMatch';
 import { capitalize } from '../utils/capitalize';
 import { DateRangeKey, PlantingRecord } from '../types/types';
 import { dateOptions } from '../constants/plantLog';
+
+const STORAGE_KEY = 'grow-tell:plantingHistory';
 
 interface PlantingHistoryContextType {
   plantingRecords: PlantingRecord[];
@@ -44,6 +52,24 @@ interface PlantingHistoryProviderProps {
   children: ReactNode;
 }
 
+const loadFromStorage = (): PlantingRecord[] => {
+  try {
+    const stored = localStorage.getItem(STORAGE_KEY);
+    return stored ? JSON.parse(stored) : [];
+  } catch (error) {
+    console.error('Failed to load planting history from localStorage:', error);
+    return [];
+  }
+};
+
+const saveToStorage = (plantingRecords: PlantingRecord[]) => {
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(plantingRecords));
+  } catch (error) {
+    console.error('Failed to save planting history to localStorage:', error);
+  }
+};
+
 export const PlantingHistoryProvider = ({
   children,
 }: PlantingHistoryProviderProps) => {
@@ -51,6 +77,21 @@ export const PlantingHistoryProvider = ({
   const [cropFilter, setCropFilter] = useState<string[]>([]);
   const [bedFilter, setBedFilter] = useState<string[]>([]);
   const [dateFilter, setDateFilter] = useState<DateRangeKey | null>(null);
+  const [isLoaded, setIsLoaded] = useState(false);
+
+  // Load from localStorage after mount
+  useEffect(() => {
+    const loaded = loadFromStorage();
+    setPlantingRecords(loaded);
+    setIsLoaded(true);
+  }, []);
+
+  // Save to localStorage whenever plantingRecords change
+  useEffect(() => {
+    if (isLoaded) {
+      saveToStorage(plantingRecords);
+    }
+  }, [plantingRecords, isLoaded]);
 
   const cropOptions = Array.from(
     new Set(plantingRecords.map((p) => capitalize(p.cropName))),

@@ -23,10 +23,6 @@ const HarvestSection: React.FC<HarvestSectionProps> = ({
 
   const isEditHarvestModalOpen = harvestToEdit !== null;
 
-  const handleLogout = () => {
-    window.location.href = '/';
-  };
-
   const breadcrumbItems = [
     { label: 'Dashboard', onClick: () => onNavigate?.(ViewKey.Dashboard) },
     { label: 'Harvest' },
@@ -59,15 +55,12 @@ const HarvestSection: React.FC<HarvestSectionProps> = ({
 
   return (
     <>
-      <PageHeader
-        breadcrumbItems={breadcrumbItems}
-        onLogout={handleLogout}
-        onOpenMenu={onOpenMenu}
-      />
+      <PageHeader breadcrumbItems={breadcrumbItems} onOpenMenu={onOpenMenu} />
       <SectionHeader
         title='Harvest'
         description='Review your harvests and track your garden productivity.'
         imageSrc='/images/basket-icon.png'
+        imageAlt='basket icon'
       />
 
       <div className='flex justify-end mb-4'>

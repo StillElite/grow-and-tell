@@ -27,10 +27,6 @@ const CompostSection: React.FC<CompostSectionProps> = ({
     null,
   );
 
-  const handleLogout = () => {
-    window.location.href = '/';
-  };
-
   const isEditCompostBinModalOpen = compostBinToEdit !== null;
 
   const handleSaveCompostBin = (
@@ -60,15 +56,12 @@ const CompostSection: React.FC<CompostSectionProps> = ({
 
   return (
     <>
-      <PageHeader
-        breadcrumbItems={breadcrumbItems}
-        onLogout={handleLogout}
-        onOpenMenu={onOpenMenu}
-      />
+      <PageHeader breadcrumbItems={breadcrumbItems} onOpenMenu={onOpenMenu} />
       <SectionHeader
         title='Compost'
         description='Manage your composting activities and track compost usage.'
         imageSrc='/images/compost.png'
+        imageAlt='compost bin icon'
       />
       <CompostList
         compostBins={compostBins}

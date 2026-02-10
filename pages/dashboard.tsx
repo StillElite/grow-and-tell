@@ -26,10 +26,6 @@ const Dashboard: React.FC = () => {
           { label: activeView },
         ];
 
-  const handleLogout = () => {
-    window.location.href = '/';
-  };
-
   const handleNavigation = (view: ViewKey) => {
     setActiveView(view);
     setIsSidebarOpen(false);
@@ -60,7 +56,6 @@ const Dashboard: React.FC = () => {
           <>
             <PageHeader
               breadcrumbItems={breadcrumbItems}
-              onLogout={handleLogout}
               onOpenMenu={() => setIsSidebarOpen(true)}
             />
             <Welcome />

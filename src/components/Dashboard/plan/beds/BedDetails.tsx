@@ -40,10 +40,6 @@ const BedDetails: React.FC<BedDetailsProps> = ({
     { label: bed.name },
   ];
 
-  const handleLogout = () => {
-    window.location.href = '/';
-  };
-
   const handleOpenModal = () => {
     setIsCropFormModalOpen(true);
   };
@@ -101,15 +97,12 @@ const BedDetails: React.FC<BedDetailsProps> = ({
 
   return (
     <>
-      <PageHeader
-        breadcrumbItems={breadcrumbItems}
-        onLogout={handleLogout}
-        onOpenMenu={onOpenMenu}
-      />
+      <PageHeader breadcrumbItems={breadcrumbItems} onOpenMenu={onOpenMenu} />
       <SectionHeader
         title={`${bed.name} - ${bed.size}`}
         description='Manage the crops planted in this garden bed.'
         imageSrc='/images/sign-icon.png'
+        imageAlt='garden sign'
       />
 
       {/* Crops */}

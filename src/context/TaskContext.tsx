@@ -1,6 +1,14 @@
-import { createContext, useContext, useState, ReactNode } from 'react';
+import {
+  createContext,
+  useContext,
+  useState,
+  ReactNode,
+  useEffect,
+} from 'react';
 import { tasks as initialTasks } from '../constants/tasks';
 import { Task, TaskCategory, TaskFrequency } from '../types/types';
+
+const STORAGE_KEY = 'grow-tell:tasks';
 
 interface TaskContextType {
   tasks: Task[];
@@ -27,8 +35,41 @@ interface TaskProviderProps {
   children: ReactNode;
 }
 
+const loadFromStorage = (): Task[] => {
+  try {
+    const stored = localStorage.getItem(STORAGE_KEY);
+    return stored ? JSON.parse(stored) : initialTasks;
+  } catch (error) {
+    console.error('Failed to load tasks from localStorage:', error);
+    return initialTasks;
+  }
+};
+
+const saveToStorage = (tasks: Task[]) => {
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(tasks));
+  } catch (error) {
+    console.error('Failed to save tasks to localStorage:', error);
+  }
+};
+
 export const TaskProvider = ({ children }: TaskProviderProps) => {
   const [tasks, setTasks] = useState<Task[]>(initialTasks);
+  const [isLoaded, setLoaded] = useState(false);
+
+  // Load from localStorage after mount
+  useEffect(() => {
+    const loaded = loadFromStorage();
+    setTasks(loaded);
+    setLoaded(true);
+  }, []);
+
+  // Save to localStorage whenever tasks change
+  useEffect(() => {
+    if (isLoaded) {
+      saveToStorage(tasks);
+    }
+  }, [tasks, isLoaded]);
 
   const addTask = (
     name: string,
@@ -47,6 +88,7 @@ export const TaskProvider = ({ children }: TaskProviderProps) => {
     };
     setTasks((prev) => [...prev, newTask]);
   };
+
   const toggleComplete = (id: string, next: boolean) => {
     setTasks((prev) =>
       prev.map((task) =>

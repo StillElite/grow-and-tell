@@ -69,10 +69,6 @@ const TaskSection: React.FC<PlantingSectionProps> = ({
     setIsTaskFormModalOpen(true);
   };
 
-  const handleLogout = () => {
-    window.location.href = '/';
-  };
-
   // SAVE: decide add vs edit
   const handleSaveTask = (
     name: string,
@@ -124,15 +120,12 @@ const TaskSection: React.FC<PlantingSectionProps> = ({
 
   return (
     <>
-      <PageHeader
-        breadcrumbItems={breadcrumbItems}
-        onLogout={handleLogout}
-        onOpenMenu={onOpenMenu}
-      />
+      <PageHeader breadcrumbItems={breadcrumbItems} onOpenMenu={onOpenMenu} />
       <SectionHeader
         title='Tasks'
         description='Manage your gardening tasks and to-dos.'
         imageSrc='/images/clock-icon2.png'
+        imageAlt='clock icon'
       />
       <div className='flex justify-end items-center gap-2 mb-4'>
         <div className='relative group'>

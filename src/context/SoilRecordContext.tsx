@@ -1,5 +1,13 @@
-import { createContext, useContext, useState, ReactNode } from 'react';
+import {
+  createContext,
+  useContext,
+  useState,
+  ReactNode,
+  useEffect,
+} from 'react';
 import { Season, SoilRecord } from '../types/types';
+
+const STORAGE_KEY = 'grow-tell:soilRecords';
 
 interface SoilRecordContextType {
   soilRecords: SoilRecord[];
@@ -25,8 +33,41 @@ export const useSoilRecordContext = (): SoilRecordContextType => {
 interface SoilProviderProps {
   children: ReactNode;
 }
+
+const loadFromStorage = (): SoilRecord[] => {
+  try {
+    const stored = localStorage.getItem(STORAGE_KEY);
+    return stored ? JSON.parse(stored) : [];
+  } catch (error) {
+    console.error('Failed to load soil records from localStorage:', error);
+    return [];
+  }
+};
+
+const saveToStorage = (soilRecords: SoilRecord[]) => {
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(soilRecords));
+  } catch (error) {
+    console.error('Failed to save soil records to localStorage:', error);
+  }
+};
+
 export const SoilRecordProvider = ({ children }: SoilProviderProps) => {
   const [soilRecords, setSoilRecords] = useState<SoilRecord[]>([]);
+  const [isLoaded, setIsLoaded] = useState(false);
+
+  // Load from localStorage after mount
+  useEffect(() => {
+    const loaded = loadFromStorage();
+    setSoilRecords(loaded);
+    setIsLoaded(true);
+  }, []);
+  // Save to localStorage whenever soilRecords change
+  useEffect(() => {
+    if (isLoaded) {
+      saveToStorage(soilRecords);
+    }
+  }, [soilRecords, isLoaded]);
 
   const addSoilRecord = (name: string, season: Season) => {
     const newSoilRecord: SoilRecord = {

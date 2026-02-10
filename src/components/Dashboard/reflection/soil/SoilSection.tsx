@@ -26,10 +26,6 @@ const SoilSection: React.FC<SoilSectionProps> = ({
 
   const isEditSoilRecordFormModalOpen = soilRecordToEdit !== null;
 
-  const handleLogout = () => {
-    window.location.href = '/';
-  };
-
   const breadcrumbItems = [
     { label: 'Dashboard', onClick: () => onNavigate?.(ViewKey.Dashboard) },
     { label: 'Soil Record' },
@@ -56,15 +52,12 @@ const SoilSection: React.FC<SoilSectionProps> = ({
 
   return (
     <>
-      <PageHeader
-        breadcrumbItems={breadcrumbItems}
-        onLogout={handleLogout}
-        onOpenMenu={onOpenMenu}
-      />
+      <PageHeader breadcrumbItems={breadcrumbItems} onOpenMenu={onOpenMenu} />
       <SectionHeader
         title='Soil Record'
         description='Track and manage your soil health and composting activities to ensure optimal growing conditions for your plants.'
         imageSrc='/images/trowel-sprout.png'
+        imageAlt='spade and sprout icon'
       />
 
       <div className='flex justify-end mb-4'>

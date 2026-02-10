@@ -29,10 +29,6 @@ export const BedList: React.FC<BedListProps> = ({
 }) => {
   const [isBedFormModalOpen, setIsBedFormModalOpen] = useState(false);
 
-  const handleLogout = () => {
-    window.location.href = '/';
-  };
-
   const breadcrumbItems: BreadcrumbItem[] = [
     { label: 'Dashboard', onClick: () => onNavigate(ViewKey.Dashboard) },
     { label: 'Beds' },
@@ -42,15 +38,12 @@ export const BedList: React.FC<BedListProps> = ({
 
   return (
     <>
-      <PageHeader
-        breadcrumbItems={breadcrumbItems}
-        onLogout={handleLogout}
-        onOpenMenu={onOpenMenu}
-      />
+      <PageHeader breadcrumbItems={breadcrumbItems} onOpenMenu={onOpenMenu} />
       <SectionHeader
         title='Beds'
         description='View and manage your garden beds in one place. Each bed displays its size and the crops currently planted. Stay organized as you grow!'
         imageSrc='/images/bed-icon2.png'
+        imageAlt='garden bed icon'
         headingId='beds-heading'
       />
 

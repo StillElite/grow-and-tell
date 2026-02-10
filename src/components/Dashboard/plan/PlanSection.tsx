@@ -19,7 +19,7 @@ const PlanSection: React.FC<PlanSectionProps> = ({ onSelect }) => {
   const { tasks } = useTaskContext();
 
   const visibleTasks = useMemo(
-    () => tasks.filter((t) => !t.hidden), // ← hide hidden ones
+    () => tasks.filter((t) => !t.hidden), // hide hidden ones
     [tasks],
   );
 

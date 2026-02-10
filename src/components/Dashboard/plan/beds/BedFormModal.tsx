@@ -47,6 +47,8 @@ export const BedFormModal: React.FC<BedFormModalProps> = ({
 
     if (!size.trim()) {
       newErrors.size = 'Please enter a bed size.';
+    } else if (size.trim().length < 3) {
+      newErrors.size = 'Size must be at least 3 characters.';
     }
 
     if (Object.keys(newErrors).length > 0) {
@@ -143,6 +145,7 @@ export const BedFormModal: React.FC<BedFormModalProps> = ({
           }}
           error={errors.size}
           maxLength={24}
+          minLength={2}
         />
 
         <FormField

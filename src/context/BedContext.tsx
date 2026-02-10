@@ -1,5 +1,13 @@
-import { createContext, useContext, useState, ReactNode } from 'react';
+import {
+  createContext,
+  useContext,
+  useState,
+  ReactNode,
+  useEffect,
+} from 'react';
 import { Bed, Crop } from '../types/types';
+
+const STORAGE_KEY = 'grow-tell:beds';
 
 interface BedContextType {
   beds: Bed[];
@@ -25,8 +33,41 @@ interface BedProviderProps {
   children: ReactNode;
 }
 
+const loadFromStorage = (): Bed[] => {
+  try {
+    const stored = localStorage.getItem(STORAGE_KEY);
+    return stored ? JSON.parse(stored) : [];
+  } catch (error) {
+    console.error('Failed to load beds from localStorage:', error);
+    return [];
+  }
+};
+
+const saveToStorage = (beds: Bed[]) => {
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(beds));
+  } catch (error) {
+    console.error('Failed to save beds to localStorage:', error);
+  }
+};
+
 export const BedProvider = ({ children }: BedProviderProps) => {
   const [beds, setBeds] = useState<Bed[]>([]);
+  const [isLoaded, setIsLoaded] = useState(false);
+
+  // Load from localStorage after mount
+  useEffect(() => {
+    const loaded = loadFromStorage();
+    setBeds(loaded);
+    setIsLoaded(true);
+  }, []);
+
+  // Save to localStorage whenever beds change
+  useEffect(() => {
+    if (isLoaded) {
+      saveToStorage(beds);
+    }
+  }, [beds, isLoaded]);
 
   const addBed = (name: string, size: string, notes: string) => {
     const newBed: Bed = {

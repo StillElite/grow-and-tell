@@ -1,5 +1,13 @@
-import { createContext, useContext, useState, ReactNode } from 'react';
+import {
+  createContext,
+  useContext,
+  useState,
+  ReactNode,
+  useEffect,
+} from 'react';
 import { Harvest, HarvestCategory, HarvestUnit } from '../types/types';
+
+const STORAGE_KEY = 'grow-tell:harvests';
 
 interface HarvestContextType {
   harvests: Harvest[];
@@ -27,8 +35,42 @@ export const useHarvestContext = (): HarvestContextType => {
 interface HarvestProviderProps {
   children: ReactNode;
 }
+
+const loadFromStorage = (): Harvest[] => {
+  try {
+    const stored = localStorage.getItem(STORAGE_KEY);
+    return stored ? JSON.parse(stored) : [];
+  } catch (error) {
+    console.error('Failed to load harvests from localStorage:', error);
+    return [];
+  }
+};
+
+const saveToStorage = (harvests: Harvest[]) => {
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(harvests));
+  } catch (error) {
+    console.error('Failed to save harvests to localStorage:', error);
+  }
+};
+
 export const HarvestProvider = ({ children }: HarvestProviderProps) => {
   const [harvests, setHarvests] = useState<Harvest[]>([]);
+  const [isLoaded, setIsLoaded] = useState(false);
+
+  // Load from localStorage after mount
+  useEffect(() => {
+    const loaded = loadFromStorage();
+    setHarvests(loaded);
+    setIsLoaded(true);
+  }, []);
+
+  // Save to localStorage whenever harvests change
+  useEffect(() => {
+    if (isLoaded) {
+      saveToStorage(harvests);
+    }
+  }, [harvests, isLoaded]);
 
   const addHarvest = (
     name: string,

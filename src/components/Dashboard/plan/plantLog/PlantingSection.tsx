@@ -16,10 +16,6 @@ const PlantingSection: React.FC<PlantingSectionProps> = ({
 }) => {
   const { filteredPlantings } = usePlantingHistoryContext();
 
-  const handleLogout = () => {
-    window.location.href = '/';
-  };
-
   const breadcrumbItems = [
     { label: 'Dashboard', onClick: () => onNavigate?.(ViewKey.Dashboard) },
     { label: 'Plant Log' },
@@ -27,15 +23,12 @@ const PlantingSection: React.FC<PlantingSectionProps> = ({
 
   return (
     <>
-      <PageHeader
-        breadcrumbItems={breadcrumbItems}
-        onLogout={handleLogout}
-        onOpenMenu={onOpenMenu}
-      />
+      <PageHeader breadcrumbItems={breadcrumbItems} onOpenMenu={onOpenMenu} />
       <SectionHeader
         title='Plant Log'
         description='Review past plantings to learn what worked where.'
         imageSrc='/images/planting.png'
+        imageAlt='sprout icon'
       />
       <PlantingHistoryFilterWrapper />
       <PlantingList plantingHistory={filteredPlantings} />
