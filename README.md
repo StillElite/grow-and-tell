@@ -29,23 +29,40 @@ The app is designed around real-world gardening workflows, with intentional empt
 - Add, edit, and delete beds, crops, and tasks
 - Modal-based CRUD flows with consistent interaction patterns
 - Derived state and real-time UI updates via context
+- Harvest summaries grouped by category
 - Soil tracking using banded test inputs that reflect real garden test kits
 - Careful handling of empty and edge states
 
 ## Scope & Decisions
 
-- Authentication is intentionally demo-only (email entry used for local context)
-- Data persistence is planned but not yet implemented
+- No authentication or backend integration
+- Data is stored locally in the browser
 - The app prioritizes core gardening workflows over auxiliary features to keep the experience focused and maintainable.
 
 These decisions prioritize clarity, UX quality, and long-term maintainability over feature breadth.
 
-## Possible Next Steps
+## User Guide
 
-- Local persistence (localStorage or IndexedDB)
-- Expanded soil test history views
-- Optional backend or API integration
+See [USER_GUIDE.md](./USER_GUIDE.md) for a walkthrough of app features and workflows.
 
 ## Screenshots
 
-_(Coming soon)_
+### Dashboard
+
+![Dashboard overview](./screenshots/dashboard-feat.png)
+
+### Beds
+
+![Beds and crop management](./screenshots/beds-feat.png)
+
+### Plant Log
+
+![Planting history view](./screenshots/plant-log-feat.png)
+
+### Tasks
+
+![Task management](./screenshots/tasks-feat.png)
+
+### Soil
+
+![Soil tracking and summary](./screenshots/soil-feat.png)
