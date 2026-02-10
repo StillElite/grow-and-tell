@@ -103,11 +103,11 @@ export const CropFormModal: React.FC<CropFormModalProps> = ({
   return (
     <Modal
       isOpen={isOpen}
-      onRequestClose={onClose}
-      role='dialog'
+      onRequestClose={handleClose}
       contentLabel={modalText.title}
-      className='relative w-full max-w-md mx-auto mt-24 bg-white p-8 rounded-lg shadow border border-gray-200 focus:outline-none'
-      overlayClassName='fixed inset-0 bg-black bg-opacity-40 flex items-start justify-center z-50'
+      role='dialog'
+      className='relative w-full max-w-md mx-auto bg-white p-8 xs:rounded-lg shadow border border-gray-200 focus:outline-none'
+      overlayClassName='fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center z-50'
       shouldCloseOnEsc={true}
       shouldCloseOnOverlayClick={false}
       aria={{

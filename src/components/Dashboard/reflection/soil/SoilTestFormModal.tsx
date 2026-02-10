@@ -111,8 +111,8 @@ export const SoilTestFormModal: React.FC<SoilTestFormModalProps> = ({
       onRequestClose={handleClose}
       contentLabel={modalText.title}
       role='dialog'
-      className='relative w-full max-w-md mx-auto mt-24 bg-white p-8 rounded-lg shadow border border-gray-200 focus:outline-none'
-      overlayClassName='fixed inset-0 bg-black bg-opacity-40 flex items-start justify-center z-50'
+      className='relative w-full max-w-md mx-auto bg-white p-8 xs:rounded-lg shadow border border-gray-200 focus:outline-none'
+      overlayClassName='fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center z-50'
       shouldCloseOnOverlayClick={false}
       shouldCloseOnEsc={true}
       aria={{
@@ -159,7 +159,7 @@ export const SoilTestFormModal: React.FC<SoilTestFormModalProps> = ({
           type='date'
           error={errors.dateTested}
         />
-        <div className='grid grid-cols-1 md:grid-cols-2 gap-4'>
+        <div className='grid grid-cols-2 gap-4'>
           <SelectFormField
             id='soil-pH'
             label='pH'
@@ -183,7 +183,7 @@ export const SoilTestFormModal: React.FC<SoilTestFormModalProps> = ({
             error={errors.nitrogen}
           />
         </div>
-        <div className='grid grid-cols-1 md:grid-cols-2 gap-4'>
+        <div className='grid grid-cols-2 gap-4'>
           <SelectFormField
             id='soil-phosphorus'
             label='Phosphorus'
