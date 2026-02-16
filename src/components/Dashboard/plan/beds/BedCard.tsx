@@ -11,7 +11,6 @@ import { CropFormModal } from './CropFormModal';
 import { Bed, Crop, ViewKey } from '../../../../types/types';
 import { getAccentColor } from '../../../../utils/getAccentColor';
 import { usePlantingHistoryContext } from '../../../../context/PlantingHistoryContext';
-import { capitalize } from '../../../../utils/capitalize';
 import ConfirmModal from '../../../shared/ConfirmModal';
 import { getPillClass } from '../../../../utils/getPillClass';
 
@@ -103,7 +102,7 @@ export const BedCard: React.FC<BedCardProps> = ({
         {/* Top section */}
         <div className='mb-4 flex items-start justify-between border-b border-gray-300'>
           <h3 className='text-lg font-semibold text-gray-900 truncate'>
-            {capitalize(bed.name)}
+            {bed.name}
           </h3>
           <div className='flex gap-3 text-sm'>
             <button
@@ -160,7 +159,7 @@ export const BedCard: React.FC<BedCardProps> = ({
                 <strong className='text-gray-800'>Crops:</strong>
                 {bed.crops.map((crop) => (
                   <span key={crop.id} className={getPillClass()}>
-                    {capitalize(crop.name)}
+                    {crop.name}
                   </span>
                 ))}
               </div>

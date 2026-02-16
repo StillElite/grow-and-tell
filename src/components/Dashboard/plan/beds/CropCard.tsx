@@ -9,7 +9,6 @@ import { getAccentColor } from '../../../../utils/getAccentColor';
 import { useState } from 'react';
 import ConfirmModal from '../../../shared/ConfirmModal';
 import { formatDate } from '../../../../utils/formatDate';
-import { capitalize } from '../../../../utils/capitalize';
 import { usePlantingHistoryContext } from '../../../../context/PlantingHistoryContext';
 import { Crop, ViewKey } from '../../../../types/types';
 
@@ -60,7 +59,7 @@ export const CropCard: React.FC<CropCardProps> = ({
       {/* Title with icons */}
       <div className='mb-4 flex items-start justify-between border-b border-gray-300'>
         <h3 className='text-lg font-semibold text-gray-900 truncate'>
-          {capitalize(crop.name)}
+          {crop.name}
         </h3>
         <div className='flex gap-3 text-sm'>
           <button

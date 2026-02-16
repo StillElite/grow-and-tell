@@ -6,7 +6,6 @@ import {
   useEffect,
 } from 'react';
 import { subtractDays } from '../utils/dateMatch';
-import { capitalize } from '../utils/capitalize';
 import { DateRangeKey, PlantingRecord } from '../types/types';
 import { dateOptions } from '../constants/plantLog';
 
@@ -94,11 +93,11 @@ export const PlantingHistoryProvider = ({
   }, [plantingRecords, isLoaded]);
 
   const cropOptions = Array.from(
-    new Set(plantingRecords.map((p) => capitalize(p.cropName))),
+    new Set(plantingRecords.map((p) => p.cropName)),
   ).sort();
 
   const bedOptions = Array.from(
-    new Set(plantingRecords.map((p) => capitalize(p.bedName))),
+    new Set(plantingRecords.map((p) => p.bedName)),
   ).sort();
 
   const addPlantingToHistory = (record: PlantingRecord) => {
@@ -149,12 +148,10 @@ export const PlantingHistoryProvider = ({
 
   const filteredPlantings = plantingRecords.filter((p) => {
     const matchesCrop = cropFilter.length
-      ? cropFilter.includes(capitalize(p.cropName))
+      ? cropFilter.includes(p.cropName)
       : true;
 
-    const matchesBed = bedFilter.length
-      ? bedFilter.includes(capitalize(p.bedName))
-      : true;
+    const matchesBed = bedFilter.length ? bedFilter.includes(p.bedName) : true;
 
     const matchesDate = (() => {
       if (!dateFilter) return true;

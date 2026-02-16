@@ -7,7 +7,6 @@ import {
   faShoppingBasket,
   faTags,
 } from '@fortawesome/free-solid-svg-icons';
-import { capitalize } from '../../../../utils/capitalize';
 import { formatDate } from '../../../../utils/formatDate';
 import { useState } from 'react';
 import ConfirmModal from '../../../shared/ConfirmModal';
@@ -51,7 +50,7 @@ export const HarvestCard: React.FC<HarvestCardProps> = ({
       {/* Title + actions */}
       <div className='mb-4 flex items-start justify-between border-b border-gray-300 pb-2'>
         <h3 className='text-lg font-semibold text-gray-900 truncate'>
-          {capitalize(harvest.name)}
+          {harvest.name}
         </h3>
 
         <div className='flex gap-3 text-sm'>

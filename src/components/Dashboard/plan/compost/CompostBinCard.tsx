@@ -9,7 +9,6 @@ import {
 import { getAccentColor } from '../../../../utils/getAccentColor';
 import { useState } from 'react';
 import ConfirmModal from '../../../shared/ConfirmModal';
-import { capitalize } from '../../../../utils/capitalize';
 import { CompostBin, ViewKey } from '../../../../types/types';
 
 interface CompostBinCardProps {
@@ -49,7 +48,7 @@ export const CompostBinCard: React.FC<CompostBinCardProps> = ({
         {/* Top section */}
         <div className='mb-4 flex items-start justify-between border-b border-gray-300'>
           <h3 className='text-lg font-semibold text-gray-900 truncate'>
-            {capitalize(compostBin.name)}
+            {compostBin.name}
           </h3>
           <div className='flex gap-3 text-sm'>
             <button

@@ -8,7 +8,6 @@ import {
 } from '../../../../utils/taskFormatter';
 import { useState } from 'react';
 import ConfirmModal from '../../../shared/ConfirmModal';
-import { capitalize } from '../../../../utils/capitalize';
 
 interface TaskCardProps {
   task: Task;
@@ -73,7 +72,7 @@ export const TaskCard: React.FC<TaskCardProps> = ({
 
         <div className=' border-l border-gray-100 pl-3'>
           <div id={`task-${task.id}-label`} className={taskNameClasses}>
-            {capitalize(task.name)}
+            {task.name}
           </div>
 
           <div

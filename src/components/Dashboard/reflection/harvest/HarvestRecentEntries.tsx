@@ -1,5 +1,4 @@
 import React from 'react';
-import { capitalize } from '../../../../utils/capitalize';
 import { formatHarvestUnit } from '../../../../utils/formatHarvestUnit';
 import { Harvest } from '../../../../types/types';
 
@@ -32,7 +31,7 @@ export const HarvestRecentEntries: React.FC<HarvestRecentEntriesProps> = ({
               key={harvest.id}
               className='flex justify-between  text-sm text-neutral-600'
             >
-              <span className='font-bold'>{capitalize(harvest.name)}</span>
+              <span className='font-bold'>{harvest.name}</span>
               <span className='text-neutral-600'>
                 <strong>{harvest.quantity} </strong>(
                 {formatHarvestUnit(harvest.quantity, harvest.unit)})

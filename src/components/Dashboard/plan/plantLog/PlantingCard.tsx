@@ -7,7 +7,6 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { getAccentColor } from '../../../../utils/getAccentColor';
 import { formatDate } from '../../../../utils/formatDate';
-import { capitalize } from '../../../../utils/capitalize';
 import { useBedContext } from '../../../../context/BedContext';
 import ConfirmModal from '../../../shared/ConfirmModal';
 import { useState } from 'react';
@@ -63,9 +62,7 @@ export const PlantingCard: React.FC<PlantingCardProps> = ({
     >
       {/* Title with icon */}
       <div className='mb-4 flex items-start justify-between border-b border-gray-300'>
-        <h3 className='text-lg font-semibold text-gray-900'>
-          {capitalize(cropName)}
-        </h3>
+        <h3 className='text-lg font-semibold text-gray-900'>{cropName}</h3>
 
         <div className='relative inline-block group text-sm'>
           <button

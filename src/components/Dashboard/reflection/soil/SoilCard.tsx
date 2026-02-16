@@ -120,7 +120,7 @@ export const SoilCard: React.FC<SoilCardProps> = ({
       {/* Top section */}
       <div className='mb-4 flex items-start justify-between border-b border-gray-300'>
         <h3 className='text-lg font-semibold text-gray-900 truncate'>
-          {capitalize(soilRecord.name)}
+          {soilRecord.name}
         </h3>
 
         <div className='flex gap-3 text-sm'>
