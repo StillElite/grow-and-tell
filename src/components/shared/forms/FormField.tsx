@@ -30,11 +30,12 @@ export const FormField: React.FC<FormFieldProps> = ({
   min,
   disabled = false,
 }) => {
+  const hasValue = String(value ?? '').length > 0;
+
   const inputBaseClasses =
-    'peer w-full border border-gray-300 rounded-md px-4 pt-6 pb-2 text-base text-gray-900 placeholder-transparent shadow-sm focus:outline-none focus:ring-2 focus:ring-[#2a452c] focus:border-[#2a452c]';
+    'relative z-0 peer w-full bg-white border border-gray-300 rounded-md p-4 text-base text-gray-900 placeholder-transparent shadow-sm focus:outline-none focus:border-[#2a452c] focus-visible:ring-2 focus-visible:ring-[#2a452c] focus-visible:ring-offset-2 focus-visible:ring-offset-white ';
 
-  const maxLengthSpacing = type === 'textarea' ? '-mt-0.5' : 'mt-1';
-
+  const isEmptyDate = type === 'date' && !String(value ?? '');
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => onChange(e.target.value);
@@ -51,11 +52,11 @@ export const FormField: React.FC<FormFieldProps> = ({
     className: clsx(
       inputBaseClasses,
       error && 'border-red-500 focus:ring-red-500',
+      isEmptyDate && 'date-empty',
     ),
-
     ...(type === 'date' && {
       max: max || new Date().toISOString().split('T')[0],
-      min: min,
+      min,
     }),
     ...(type === 'number' && {
       min,
@@ -65,16 +66,16 @@ export const FormField: React.FC<FormFieldProps> = ({
   };
 
   return (
-    <div className='relative'>
+    <div className='relative group'>
       {type === 'textarea' ? (
         <textarea {...sharedProps} rows={3} />
       ) : (
         <input {...sharedProps} type={type} />
       )}
-      <label htmlFor={id} className={getFormLabelClasses(String(value ?? ''))}>
+      <label htmlFor={id} className={getFormLabelClasses(hasValue)}>
         {label}
       </label>
-      <div className={clsx('flex justify-between text-xs', maxLengthSpacing)}>
+      <div className='flex justify-between text-xs mt-1'>
         <p
           id={`${id}-error`}
           className={clsx('text-red-600 pl-2 h-4', !error && 'invisible')}
@@ -86,6 +87,7 @@ export const FormField: React.FC<FormFieldProps> = ({
             {value.length}/{maxLength}
           </p>
         )}
+
         {type === 'number' && <p className='text-gray-500 invisible'>0/0</p>}
       </div>
     </div>

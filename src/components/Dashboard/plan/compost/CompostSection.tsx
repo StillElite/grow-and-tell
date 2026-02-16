@@ -40,7 +40,7 @@ const CompostSection: React.FC<CompostSectionProps> = ({
       updateCompostBin(updated);
       setCompostBinToEdit(null);
     } else {
-      addCompostBin(name, type, notes);
+      addCompostBin(name, type, status, notes);
     }
   };
 

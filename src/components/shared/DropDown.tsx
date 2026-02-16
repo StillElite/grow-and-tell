@@ -99,7 +99,7 @@ export const Dropdown: React.FC<DropdownProps> = ({
           id={listboxId}
           role='listbox'
           aria-labelledby={buttonId}
-          className='absolute z-[99] mt-1 max-h-48 w-full overflow-y-auto rounded-md border border-gray-200 bg-white shadow-md py-1'
+          className='absolute z-[99] mt-1 max-h-60 w-full overflow-y-auto rounded-md border border-gray-200 bg-white shadow-md py-1'
         >
           {/* All / clear */}
           <div

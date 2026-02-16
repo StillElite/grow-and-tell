@@ -56,3 +56,22 @@ summary,
 .clickable {
   cursor: pointer;
 }
+input:-webkit-autofill,
+input:-webkit-autofill:focus,
+textarea:-webkit-autofill,
+select:-webkit-autofill {
+  -webkit-box-shadow: 0 0 0px 1000px white inset !important;
+  box-shadow: 0 0 0px 1000px white inset !important;
+  -webkit-text-fill-color: #111827 !important;
+}
+
+/* Hide ghost text when empty */
+input[type='date'].date-empty::-webkit-datetime-edit {
+  color: transparent;
+}
+
+/* Show ghost text when the field is focused OR wrapper is focus-within */
+input[type='date'].date-empty:focus::-webkit-datetime-edit,
+.group:focus-within input[type='date'].date-empty::-webkit-datetime-edit {
+  color: inherit;
+}

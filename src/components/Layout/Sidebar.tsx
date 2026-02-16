@@ -1,8 +1,9 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faXmark } from '@fortawesome/free-solid-svg-icons';
+import { faTimes } from '@fortawesome/free-solid-svg-icons';
 import { ViewKey } from '../../types/types';
+import { useState } from 'react';
 
 interface SidebarProps {
   isOpen: boolean;
@@ -17,6 +18,8 @@ const Sidebar: React.FC<SidebarProps> = ({
   onNavigate,
   onDeselectBed,
 }) => {
+  const [activeView, setActiveView] = useState<ViewKey>(ViewKey.Dashboard);
+
   const sidebarItems = [
     { label: 'Dashboard', viewKey: ViewKey.Dashboard },
     { label: 'Beds', viewKey: ViewKey.Beds },
@@ -38,7 +41,7 @@ const Sidebar: React.FC<SidebarProps> = ({
         className='absolute top-4 right-4 text-white md:hidden'
         aria-label='Close menu'
       >
-        <FontAwesomeIcon icon={faXmark} className='w-4 h-4' />
+        <FontAwesomeIcon icon={faTimes} className='w-4 h-4' />
       </button>
 
       <Link href='/' className='flex items-center gap-2 mb-6'>
@@ -53,20 +56,25 @@ const Sidebar: React.FC<SidebarProps> = ({
       </Link>
 
       <nav className='space-y-2 text-sm'>
-        {sidebarItems.map((item) => (
-          <button
-            type='button'
-            key={item.viewKey}
-            onClick={() => {
-              onNavigate(item.viewKey);
-              onDeselectBed();
-              onClose();
-            }}
-            className='block hover:underline'
-          >
-            {item.label}
-          </button>
-        ))}
+        {sidebarItems.map((item) => {
+          const buttonClasses = `block hover:underline ${activeView === item.viewKey ? 'font-bold text-[#FCD583]' : ''}`;
+
+          return (
+            <button
+              type='button'
+              key={item.viewKey}
+              onClick={() => {
+                onNavigate(item.viewKey);
+                onDeselectBed();
+                onClose();
+                setActiveView(item.viewKey);
+              }}
+              className={buttonClasses}
+            >
+              {item.label}
+            </button>
+          );
+        })}
       </nav>
     </aside>
   );

@@ -105,7 +105,7 @@ export const CropCard: React.FC<CropCardProps> = ({
           {formatDate(crop.datePlanted)}
         </p>
 
-        <div className='min-h-[24px]'>
+        <div className='min-h-[24px] [overflow-wrap:anywhere]'>
           {crop.notes?.trim() ? (
             <p className='flex items-start gap-2'>
               <FontAwesomeIcon

@@ -67,7 +67,8 @@ export type DateRangeKey =
   | 'Past 7 Days'
   | 'Past 30 Days'
   | 'Past 3 Months'
-  | 'Past 6 Months';
+  | 'Past 6 Months'
+  | 'Past Year';
 
 // --------------------
 // Compost

@@ -5,11 +5,16 @@ import {
   ReactNode,
   useEffect,
 } from 'react';
-import { CompostBin, CompostType } from '../types/types';
+import { CompostBin, CompostStatus, CompostType } from '../types/types';
 
 interface CompostContextType {
   compostBins: CompostBin[];
-  addCompostBin: (name: string, type: CompostType, notes: string) => void;
+  addCompostBin: (
+    name: string,
+    type: CompostType,
+    status: CompostStatus,
+    notes: string,
+  ) => void;
   updateCompostBin: (updatedBin: CompostBin) => void;
   deleteCompostBin: (id: string) => void;
 }
@@ -66,15 +71,20 @@ export const CompostProvider = ({ children }: CompostProviderProps) => {
     }
   }, [compostBins, isLoaded]);
 
-  const addCompostBin = (name: string, type: CompostType, notes: string) => {
+  const addCompostBin = (
+    name: string,
+    type: CompostType,
+    status: CompostStatus,
+    notes: string,
+  ) => {
     const newBin: CompostBin = {
       id: crypto.randomUUID(),
       name,
       type,
-      status: 'Active',
+      status,
       notes,
     };
-    setCompostBins((prev) => [...prev, newBin]);
+    setCompostBins((prevBins) => [...prevBins, newBin]);
   };
 
   const updateCompostBin = (updatedBin: CompostBin) => {

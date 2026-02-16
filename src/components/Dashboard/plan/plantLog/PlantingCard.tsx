@@ -113,7 +113,7 @@ export const PlantingCard: React.FC<PlantingCardProps> = ({
           <strong>Planted:</strong> {formatDate(datePlanted)}{' '}
         </p>
 
-        <div className='min-h-[24px]'>
+        <div className='min-h-[24px] [overflow-wrap:anywhere]'>
           {notes?.trim() ? (
             <p className='flex items-start gap-2'>
               <FontAwesomeIcon

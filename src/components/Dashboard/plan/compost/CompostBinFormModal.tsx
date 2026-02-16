@@ -34,28 +34,28 @@ export const CompostBinFormModal: React.FC<CompostBinFormModalProps> = ({
   onSaveCompostBin,
   compostBinToEdit,
 }) => {
-  const [name, setName] = useState(compostBinToEdit?.name ?? '');
-  const [type, setType] = useState<CompostType | ''>(
-    compostBinToEdit?.type ?? '',
-  );
-  const [status, setStatus] = useState<CompostStatus>(compostBinToEdit?.status);
-  const [notes, setNotes] = useState(compostBinToEdit?.notes ?? '');
+  const [name, setName] = useState<string>('');
+  const [type, setType] = useState<CompostType | ''>('');
+  const [status, setStatus] = useState<CompostStatus>('Active');
+  const [notes, setNotes] = useState<string>('');
   const [errors, setErrors] = useState<{ [key: string]: string }>({});
 
   useEffect(() => {
+    if (!isOpen) return;
+
     if (compostBinToEdit) {
-      setName(compostBinToEdit.name);
-      setType(compostBinToEdit.type);
-      setStatus(compostBinToEdit.status);
-      setNotes(compostBinToEdit.notes);
+      setName(compostBinToEdit.name ?? '');
+      setType(compostBinToEdit.type ?? '');
+      setStatus(compostBinToEdit.status ?? 'Active');
+      setNotes(compostBinToEdit.notes ?? '');
     } else {
       setName('');
       setType('');
-      setStatus('');
+      setStatus('Active');
       setNotes('');
     }
     setErrors({});
-  }, [compostBinToEdit]);
+  }, [isOpen, compostBinToEdit]);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -77,7 +77,7 @@ export const CompostBinFormModal: React.FC<CompostBinFormModalProps> = ({
     onSaveCompostBin(
       name.trim(),
       type as CompostType,
-      (status || 'Active') as CompostStatus,
+      status as CompostStatus,
       notes.trim(),
     );
     toast.success(

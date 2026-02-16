@@ -1,11 +1,16 @@
 import { useState } from 'react';
 import { CompostBinCard } from './CompostBinCard';
 import { CompostBinFormModal } from './CompostBinFormModal';
-import { CompostBin } from '../../../../types/types';
+import { CompostBin, CompostStatus } from '../../../../types/types';
 
 interface CompostListProps {
   compostBins: CompostBin[];
-  onAddCompostBin: (name: string, type: string, notes: string) => void;
+  onAddCompostBin: (
+    name: string,
+    type: string,
+    status: CompostStatus,
+    notes: string,
+  ) => void;
   onDeleteBin: (compostBinId: string) => void;
   onEditCompostBin: (compostBin: CompostBin) => void;
 }

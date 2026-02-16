@@ -170,6 +170,8 @@ export const PlantingHistoryProvider = ({
           return plantedDate >= subtractDays(90);
         case 'Past 6 Months':
           return plantedDate >= subtractDays(180);
+        case 'Past Year':
+          return plantedDate >= subtractDays(365);
         default:
           return true;
       }

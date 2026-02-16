@@ -4,9 +4,7 @@ import React from 'react';
 export default function Document() {
   return (
     <Html lang='en'>
-      <Head>
-        <link rel='icon' href='/images/favicon-32x32.png' type='image/png' />
-      </Head>
+      <Head />
       <body className='antialiased'>
         <Main />
         <NextScript />

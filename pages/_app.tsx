@@ -10,29 +10,42 @@ import { CompostProvider } from '../src/context/CompostContext';
 import { TaskProvider } from '../src/context/TaskContext';
 import { HarvestProvider } from '../src/context/HarvestContext';
 import { SoilRecordProvider } from '../src/context/SoilRecordContext';
+import Head from 'next/head';
+
 Modal.setAppElement('#__next');
 
 const App = ({ Component, pageProps }: AppProps) => {
   return (
-    <div className={nunito.className}>
-      <BedProvider>
-        <CompostProvider>
-          <PlantingHistoryProvider>
-            <TaskProvider>
-              <HarvestProvider>
-                <SoilRecordProvider>
-                  <Component {...pageProps} />
-                  <Toaster
-                    position='bottom-right'
-                    toastOptions={toastOptions}
-                  />
-                </SoilRecordProvider>
-              </HarvestProvider>
-            </TaskProvider>
-          </PlantingHistoryProvider>
-        </CompostProvider>
-      </BedProvider>
-    </div>
+    <>
+      <Head>
+        <title>Grow & Tell</title>
+        <link rel='icon' href='/images/favicon-32x32.png' type='image/png' />
+        <meta
+          name='description'
+          content='Plan, track, and reflect on your garden with Grow & Tell.'
+        />
+      </Head>
+
+      <div className={nunito.className}>
+        <BedProvider>
+          <CompostProvider>
+            <PlantingHistoryProvider>
+              <TaskProvider>
+                <HarvestProvider>
+                  <SoilRecordProvider>
+                    <Component {...pageProps} />
+                    <Toaster
+                      position='bottom-right'
+                      toastOptions={toastOptions}
+                    />
+                  </SoilRecordProvider>
+                </HarvestProvider>
+              </TaskProvider>
+            </PlantingHistoryProvider>
+          </CompostProvider>
+        </BedProvider>
+      </div>
+    </>
   );
 };
 

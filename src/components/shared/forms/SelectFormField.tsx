@@ -2,6 +2,7 @@ import React from 'react';
 import { clsx } from 'clsx';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronDown } from '@fortawesome/free-solid-svg-icons';
+import { getFormLabelClasses } from '../../../utils/getFormLabelClasses';
 
 // Make Option generic over a string union T
 export type Option<T extends string = string> = {
@@ -43,15 +44,10 @@ export function SelectFormField<T extends string = string>({
 
   // Base select styles
   const selectClasses =
-    'peer w-full border border-gray-300 rounded-md px-4 pt-6 pb-2 shadow-sm focus:outline-none focus:ring-2 focus:ring-[#2a452c] focus:border-[#2a452c] appearance-none pr-10';
-
-  const labelClasses = clsx(
-    'pointer-events-none absolute left-4 top-4 origin-left transition-all duration-150 ease-out text-gray-500 peer-focus:-translate-y-3 peer-focus:scale-90 peer-focus:top-4 peer-focus:text-orange-700',
-    hasValue && '-translate-y-3 scale-90 top-1.5 text-orange-700',
-  );
+    'relative z-0 peer w-full bg-white border border-gray-300 rounded-md p-4 text-base text-gray-900 placeholder-transparent shadow-sm focus:outline-none focus:border-[#2a452c] focus-visible:ring-2 focus-visible:ring-[#2a452c] appearance-none pr-10';
 
   return (
-    <div className='relative'>
+    <div className='relative group'>
       <select
         id={id}
         value={value} // "" initially
@@ -75,7 +71,7 @@ export function SelectFormField<T extends string = string>({
           </option>
         ))}
       </select>
-      <label htmlFor={id} className={labelClasses}>
+      <label htmlFor={id} className={getFormLabelClasses(hasValue)}>
         {label}
       </label>
 

@@ -3,7 +3,7 @@ import { PlantingList } from './PlantingList';
 import { ViewKey } from '../../../../types/types';
 import PageHeader from '../../../shared/PageHeader';
 import { usePlantingHistoryContext } from '../../../../context/PlantingHistoryContext';
-import PlantingHistoryFilterWrapper from './PlantingHistoryFilterWrapper ';
+import PlantingHistoryFilterWrapper from './PlantingHistoryFilterWrapper';
 
 export interface PlantingSectionProps {
   onNavigate: (view: ViewKey) => void;

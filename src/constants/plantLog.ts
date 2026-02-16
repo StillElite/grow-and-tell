@@ -5,4 +5,5 @@ export const dateOptions: DateRangeKey[] = [
   'Past 30 Days',
   'Past 3 Months',
   'Past 6 Months',
+  'Past Year',
 ];

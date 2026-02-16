@@ -22,6 +22,7 @@ import { getAccentColor } from '../../../../utils/getAccentColor';
 import { SoilTestFormModal } from './SoilTestFormModal';
 import { ViewKey } from '../../../../types/types';
 import { formatDate } from '../../../../utils/formatDate';
+import { VieWSoilTestModal } from './ViewSoilTestModal';
 
 export interface SoilCardProps {
   soilRecord: SoilRecord;
@@ -52,6 +53,12 @@ export const SoilCard: React.FC<SoilCardProps> = ({
   );
   const [isAmendmentMenuOpen, setIsAmendmentMenuOpen] = useState(false);
   const [isSoilTestFormModalOpen, setIsSoilTestFormModalOpen] = useState(false);
+  const [isVieWSoilTestModalOpen, setIsVieWSoilTestModalOpen] = useState(false);
+
+  const hasTests = soilRecord.tests.length > 0;
+  const buttonClasses = hasTests
+    ? 'bg-[#244225] text-white hover:bg-[#356a3c]'
+    : 'bg-gray-400 text-gray-500';
 
   const confirmMessage = (
     <>
@@ -65,7 +72,8 @@ export const SoilCard: React.FC<SoilCardProps> = ({
     toast.success('Soil record deleted successfully');
   };
 
-  const handleOpenTestModal = () => setIsSoilTestFormModalOpen(true);
+  const handleOpenTestFormModal = () => setIsSoilTestFormModalOpen(true);
+  const handleOpenViewTestModal = () => setIsVieWSoilTestModalOpen(true);
 
   const handleAddTest = (newSoilTestData: {
     dateTested: string;
@@ -144,7 +152,7 @@ export const SoilCard: React.FC<SoilCardProps> = ({
       </div>
 
       {/* Details */}
-      <div className='text-sm text-gray-700 space-y-2'>
+      <div className='text-sm text-gray-700 space-y-2 flex-1'>
         <p className='flex items-center gap-2'>
           <FontAwesomeIcon
             icon={faCalendarDays}
@@ -252,10 +260,19 @@ export const SoilCard: React.FC<SoilCardProps> = ({
       </div>
 
       {/* Footer actions */}
-      <div className='flex justify-end mt-10'>
+      <div className='flex items-center justify-between mt-10'>
         <button
           type='button'
-          onClick={handleOpenTestModal}
+          className={`text-white text-sm px-4 py-1 rounded transition ${buttonClasses}`}
+          onClick={handleOpenViewTestModal}
+          aria-label={`View details for ${soilRecord.name}`}
+          disabled={!hasTests}
+        >
+          View
+        </button>
+        <button
+          type='button'
+          onClick={handleOpenTestFormModal}
           className={`text-sm ${textAccent} hover:underline focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-1 focus-visible:ring-[#244225] rounded px-1`}
           aria-label={`Add soil test for ${soilRecord.name}`}
         >
@@ -265,6 +282,11 @@ export const SoilCard: React.FC<SoilCardProps> = ({
           isOpen={isSoilTestFormModalOpen}
           onClose={() => setIsSoilTestFormModalOpen(false)}
           onSaveSoilTest={handleAddTest}
+        />
+        <VieWSoilTestModal
+          isOpen={isVieWSoilTestModalOpen}
+          onClose={() => setIsVieWSoilTestModalOpen(false)}
+          soilTests={soilRecord.tests}
         />
       </div>
     </div>

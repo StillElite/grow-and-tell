@@ -168,7 +168,7 @@ export const BedCard: React.FC<BedCardProps> = ({
           )}
 
           {bed.notes && (
-            <div className='min-h-[24px] mt-2'>
+            <div className='min-h-[24px] mt-2 [overflow-wrap:anywhere]'>
               <p className='flex items-start gap-2 text-sm text-gray-700'>
                 <FontAwesomeIcon
                   icon={faNoteSticky}

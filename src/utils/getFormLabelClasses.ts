@@ -1,13 +1,11 @@
-export const getFormLabelClasses = (value: string | number): string => {
+export const getFormLabelClasses = (hasValue: boolean): string => {
   const base =
-    'absolute left-4 transition-all duration-200 ease-in-out text-[14px]';
-  const float = 'top-1.5 text-orange-700';
-  const placeholder =
-    'peer-placeholder-shown:top-[1rem] peer-placeholder-shown:text-[17px] peer-placeholder-shown:text-gray-400';
-  const focus =
-    'peer-focus:top-1.5 peer-focus:text-[14px] peer-focus:text-orange-700';
+    'absolute left-4 transition-all duration-200 ease-in-out pointer-events-none z-20 px-1 leading-5 bg-white';
 
-  return `${base} ${focus} ${
-    value ? float : `${placeholder} text-gray-500 top-1.5`
-  }`;
+  const floated = '-top-2 left-4 text-[14px] text-orange-700';
+
+  const inline =
+    'top-5 left-4 text-[17px] text-gray-400 peer-focus:-top-2 peer-focus:left-4 peer-focus:text-[14px] peer-focus:text-orange-700 group-focus-within:-top-2 group-focus-within:left-2 group-focus-within:text-[14px] group-focus-within:text-orange-700';
+
+  return `${base} ${hasValue ? floated : inline}`;
 };
