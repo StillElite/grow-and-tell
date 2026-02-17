@@ -8,7 +8,7 @@ const nextConfig: NextConfig = {
   output: 'export',
   // Only needed for GitHub Pages (production build)
   basePath: isProd ? '/grow-and-tell' : undefined,
-  assetPrefix: isProd ? '/grow-and-tell/' : undefined,
+
   trailingSlash: true,
   images: {
     unoptimized: true, // Required because GH Pages can't run the Next.js image server
