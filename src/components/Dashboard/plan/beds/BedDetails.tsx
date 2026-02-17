@@ -8,6 +8,7 @@ import { BreadcrumbItem } from '../../../shared/Breadcrumb';
 import PageHeader from '../../../shared/PageHeader';
 import toast from 'react-hot-toast';
 import { usePlantingHistoryContext } from '../../../../context/PlantingHistoryContext';
+import { BASE_PATH } from '../../../../constants/basePath';
 
 export interface BedDetailsProps {
   bed: Bed;
@@ -101,7 +102,7 @@ const BedDetails: React.FC<BedDetailsProps> = ({
       <SectionHeader
         title={`${bed.name} - ${bed.size}`}
         description='Manage the crops planted in this garden bed.'
-        imageSrc='/images/sign-icon.png'
+        imageSrc={`${BASE_PATH}/images/sign-icon.png`}
         imageAlt='garden sign'
       />
 

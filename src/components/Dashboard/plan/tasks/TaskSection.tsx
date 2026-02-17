@@ -15,6 +15,7 @@ import {
   TaskFrequency,
   ViewKey,
 } from '../../../../types/types';
+import { BASE_PATH } from '../../../../constants/basePath';
 
 export interface PlantingSectionProps {
   onNavigate: (view: ViewKey) => void;
@@ -124,7 +125,7 @@ const TaskSection: React.FC<PlantingSectionProps> = ({
       <SectionHeader
         title='Tasks'
         description='Manage your gardening tasks and to-dos.'
-        imageSrc='/images/clock-icon2.png'
+        imageSrc={`${BASE_PATH}/images/clock-icon2.png`}
         imageAlt='clock icon'
       />
       <div className='flex justify-end items-center gap-2 mb-4'>

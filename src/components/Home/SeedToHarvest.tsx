@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import Image from 'next/image';
+import { BASE_PATH } from '../../constants/basePath';
 
 const SeedToHarvest: React.FC = () => {
   return (
@@ -10,7 +11,7 @@ const SeedToHarvest: React.FC = () => {
       {/* Left: Image with overlay */}
       <div className='relative'>
         <Image
-          src='/images/carrots.jpg'
+          src={`${BASE_PATH}/images/carrots.jpg`}
           alt='Freshly harvested carrots and leeks'
           className='w-full h-full object-cover'
           width={640}

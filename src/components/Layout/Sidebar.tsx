@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
 import { ViewKey } from '../../types/types';
 import { useState } from 'react';
+import { BASE_PATH } from '../../constants/basePath';
 
 interface SidebarProps {
   isOpen: boolean;
@@ -46,7 +47,7 @@ const Sidebar: React.FC<SidebarProps> = ({
 
       <Link href='/' className='flex items-center gap-2 mb-6'>
         <Image
-          src='/images/logo-white.png'
+          src={`${BASE_PATH}/images/logo-white.png`}
           alt='Grow & Tell logo'
           width={140}
           height={40}

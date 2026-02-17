@@ -5,6 +5,7 @@ import PageHeader from '../../../shared/PageHeader';
 import { BreadcrumbItem } from '../../../shared/Breadcrumb';
 import { BedCard } from './BedCard';
 import { Bed, ViewKey } from '../../../../types/types';
+import { BASE_PATH } from '../../../../constants/basePath';
 
 interface BedListProps {
   beds: Bed[];
@@ -42,7 +43,7 @@ export const BedList: React.FC<BedListProps> = ({
       <SectionHeader
         title='Beds'
         description='View and manage your garden beds in one place. Each bed displays its size and the crops currently planted. Stay organized as you grow!'
-        imageSrc='/images/bed-icon2.png'
+        imageSrc={`${BASE_PATH}/images/bed-icon2.png`}
         imageAlt='garden bed icon'
         headingId='beds-heading'
       />

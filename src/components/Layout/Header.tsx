@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import Nav from './Nav';
+import { BASE_PATH } from '../../constants/basePath';
 
 const Header: React.FC = () => {
   return (
@@ -17,7 +18,7 @@ const Header: React.FC = () => {
         <Link href='/'>
           <div className='flex items-center gap-2'>
             <Image
-              src='/images/logo.png'
+              src={`${BASE_PATH}/images/logo.png`}
               alt='Grow & Tell logo'
               width={140}
               height={40}

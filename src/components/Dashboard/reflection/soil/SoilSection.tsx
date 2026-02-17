@@ -5,6 +5,7 @@ import { useSoilRecordContext } from '../../../../context/SoilRecordContext';
 import { SoilRecordFormModal } from './SoilRecordFormModal';
 import { SoilCard } from './SoilCard';
 import { Season, SoilRecord, ViewKey } from '../../../../types/types';
+import { BASE_PATH } from '../../../../constants/basePath';
 
 export interface SoilSectionProps {
   onNavigate: (view: ViewKey) => void;
@@ -56,7 +57,7 @@ const SoilSection: React.FC<SoilSectionProps> = ({
       <SectionHeader
         title='Soil Record'
         description='Track and manage your soil health and composting activities to ensure optimal growing conditions for your plants.'
-        imageSrc='/images/trowel-sprout.png'
+        imageSrc={`${BASE_PATH}/images/trowel-sprout.png`}
         imageAlt='spade and sprout icon'
       />
 

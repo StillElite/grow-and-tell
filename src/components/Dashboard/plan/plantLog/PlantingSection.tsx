@@ -4,6 +4,7 @@ import { ViewKey } from '../../../../types/types';
 import PageHeader from '../../../shared/PageHeader';
 import { usePlantingHistoryContext } from '../../../../context/PlantingHistoryContext';
 import PlantingHistoryFilterWrapper from './PlantingHistoryFilterWrapper';
+import { BASE_PATH } from '../../../../constants/basePath';
 
 export interface PlantingSectionProps {
   onNavigate: (view: ViewKey) => void;
@@ -27,7 +28,7 @@ const PlantingSection: React.FC<PlantingSectionProps> = ({
       <SectionHeader
         title='Plant Log'
         description='Review past plantings to learn what worked where.'
-        imageSrc='/images/planting.png'
+        imageSrc={`${BASE_PATH}/images/planting.png`}
         imageAlt='sprout icon'
       />
       <PlantingHistoryFilterWrapper />

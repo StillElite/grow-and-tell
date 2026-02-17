@@ -11,6 +11,7 @@ import {
   CompostType,
   ViewKey,
 } from '../../../../types/types';
+import { BASE_PATH } from '../../../../constants/basePath';
 
 export interface CompostSectionProps {
   onNavigate: (view: ViewKey) => void;
@@ -60,7 +61,7 @@ const CompostSection: React.FC<CompostSectionProps> = ({
       <SectionHeader
         title='Compost'
         description='Manage your composting activities and track compost usage.'
-        imageSrc='/images/compost.png'
+        imageSrc={`${BASE_PATH}/images/compost.png`}
         imageAlt='compost bin icon'
       />
       <CompostList

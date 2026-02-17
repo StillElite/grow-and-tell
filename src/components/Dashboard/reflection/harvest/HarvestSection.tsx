@@ -6,6 +6,7 @@ import { useState } from 'react';
 import { useHarvestContext } from '../../../../context/HarvestContext';
 import { getHarvestUnit } from '../../../../utils/getHarvestUnit';
 import { Harvest, HarvestCategory, ViewKey } from '../../../../types/types';
+import { BASE_PATH } from '../../../../constants/basePath';
 
 export interface HarvestSectionProps {
   onNavigate: (view: ViewKey) => void;
@@ -59,7 +60,7 @@ const HarvestSection: React.FC<HarvestSectionProps> = ({
       <SectionHeader
         title='Harvest'
         description='Review your harvests and track your garden productivity.'
-        imageSrc='/images/basket-icon.png'
+        imageSrc={`${BASE_PATH}/images/basket-icon.png`}
         imageAlt='basket icon'
       />
 

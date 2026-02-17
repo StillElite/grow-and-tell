@@ -11,6 +11,7 @@ import { TaskProvider } from '../src/context/TaskContext';
 import { HarvestProvider } from '../src/context/HarvestContext';
 import { SoilRecordProvider } from '../src/context/SoilRecordContext';
 import Head from 'next/head';
+import { BASE_PATH } from '../src/constants/basePath';
 
 Modal.setAppElement('#__next');
 
@@ -19,7 +20,11 @@ const App = ({ Component, pageProps }: AppProps) => {
     <>
       <Head>
         <title>Grow & Tell</title>
-        <link rel='icon' href='/images/favicon-32x32.png' type='image/png' />
+        <link
+          rel='icon'
+          href={`${BASE_PATH}/images/favicon-32x32.png`}
+          type='image/png'
+        />
         <meta
           name='description'
           content='Plan, track, and reflect on your garden with Grow & Tell.'

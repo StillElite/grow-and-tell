@@ -1,3 +1,4 @@
+import { BASE_PATH } from '../constants/basePath';
 import { Bed, PlanningFeatureCard, Task, ViewKey } from '../types/types';
 
 export const getPlanningFeatureCards = (
@@ -13,7 +14,7 @@ export const getPlanningFeatureCards = (
     {
       title: 'Beds',
       description: `${beds.length} Active`,
-      image: '/images/garden-bed-icon.png',
+      image: `${BASE_PATH}/images/garden-bed-icon.png`,
       viewKey: ViewKey.Beds,
     },
     {
@@ -21,7 +22,7 @@ export const getPlanningFeatureCards = (
       description: `${plantingRecordCount} ${
         plantingRecordCount === 1 ? 'Entry' : 'Entries'
       }`,
-      image: '/images/planting-icon.png',
+      image: `${BASE_PATH}/images/planting-icon.png`,
       viewKey: ViewKey.PlantLog,
     },
     {
@@ -29,7 +30,7 @@ export const getPlanningFeatureCards = (
       description: `${compostBinCount} ${
         compostBinCount === 1 ? 'Bin' : 'Bins'
       }`,
-      image: '/images/compost-icon3.png',
+      image: `${BASE_PATH}/images/compost-icon3.png`,
       viewKey: ViewKey.Compost,
     },
     {
@@ -38,7 +39,7 @@ export const getPlanningFeatureCards = (
         taskCount === 0
           ? 'All caught up'
           : `${taskCompleteCount} of ${taskCount} Done`,
-      image: '/images/task-icon.png',
+      image: `${BASE_PATH}/images/task-icon.png`,
       viewKey: ViewKey.Tasks,
     },
   ];

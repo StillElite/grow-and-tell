@@ -1,11 +1,12 @@
 import Link from 'next/link';
+import { BASE_PATH } from '../../constants/basePath';
 
 const Hero: React.FC = () => {
   return (
     <section
       className='relative bg-cover bg-center bg-no-repeat md:min-h-[800px] lg:min-h-[1000px] flex items-center'
       style={{
-        backgroundImage: "url('/images/seedling-hero2.png')",
+        backgroundImage: `url(${BASE_PATH}/images/seedling-hero2.png)`,
         backgroundPosition: 'top',
       }}
     >
