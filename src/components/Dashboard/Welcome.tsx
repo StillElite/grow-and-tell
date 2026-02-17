@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import { BASE_PATH } from '../../constants/basePath';
 
 const Welcome: React.FC = () => {
   return (
@@ -7,7 +8,7 @@ const Welcome: React.FC = () => {
         {/* Illustration */}
 
         <Image
-          src='/images/dashboard-icon.png'
+          src={`${BASE_PATH}/images/logo.png`}
           alt='Decorative illustration of garden tools'
           width={256}
           height={256}
