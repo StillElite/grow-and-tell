@@ -8,12 +8,13 @@ const Welcome: React.FC = () => {
         {/* Illustration */}
 
         <Image
-          src={`${BASE_PATH}/images/dashboard-icon.png`}
+          src={`${BASE_PATH}/images/dashboard-icon.webp`}
           alt='Decorative illustration of garden tools'
           width={256}
           height={256}
-          className='w-[256px] h-[256px] object-contain hidden lg:block'
+          className='w-[256px] h-[256px] object-contain hidden lg:block antialiased image-rendering'
           priority
+          fetchPriority='high'
         />
 
         {/* Welcome message */}

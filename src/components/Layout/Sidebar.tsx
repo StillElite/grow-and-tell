@@ -52,6 +52,7 @@ const Sidebar: React.FC<SidebarProps> = ({
           width={140}
           height={40}
           priority
+          fetchPriority='high'
           className='w-[140px] h-[40px] object-contain'
         />
       </Link>

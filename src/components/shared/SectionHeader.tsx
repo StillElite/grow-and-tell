@@ -25,6 +25,8 @@ const SectionHeader: React.FC<SectionHeaderProps> = ({
         className='w-[128px] h-[128px] object-contain'
         aria-hidden='true'
         role='presentation'
+        priority
+        fetchPriority='high'
       />
       <div>
         <h1 id={headingId} className='text-3xl font-bold text-[#2a452c] mb-2'>

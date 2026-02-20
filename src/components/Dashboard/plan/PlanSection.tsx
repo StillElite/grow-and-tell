@@ -72,6 +72,8 @@ const PlanSection: React.FC<PlanSectionProps> = ({ onSelect }) => {
                   height={48}
                   role='presentation'
                   aria-hidden='true'
+                  priority
+                  fetchPriority='high'
                 />
                 <div>
                   <h3 className='text-lg font-semibold text-gray-800'>

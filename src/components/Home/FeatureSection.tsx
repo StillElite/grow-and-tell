@@ -43,7 +43,6 @@ const FeatureSection: React.FC = () => {
                   width={100}
                   height={100}
                   className='mb-4 md:mb-10 w-[100px] h-[100px] object-contain'
-                  priority
                 />
                 <h3 className='text-xl font-bold uppercase text-[#557C2D] mb-2'>
                   {feature.title}

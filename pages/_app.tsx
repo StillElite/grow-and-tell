@@ -29,6 +29,7 @@ const App = ({ Component, pageProps }: AppProps) => {
           rel='preload'
           as='image'
           href={`${BASE_PATH}/images/seedling-hero2.webp`}
+          fetchPriority='high'
         />
         <meta
           name='description'
