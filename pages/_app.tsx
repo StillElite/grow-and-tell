@@ -25,6 +25,11 @@ const App = ({ Component, pageProps }: AppProps) => {
           href={`${BASE_PATH}/images/favicon-32x32.png`}
           type='image/png'
         />
+        <link
+          rel='preload'
+          as='image'
+          href={`${BASE_PATH}/images/seedling-hero2.webp`}
+        />
         <meta
           name='description'
           content='Plan, track, and reflect on your garden with Grow & Tell.'

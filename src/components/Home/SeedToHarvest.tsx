@@ -11,7 +11,7 @@ const SeedToHarvest: React.FC = () => {
       {/* Left: Image with overlay */}
       <div className='relative'>
         <Image
-          src={`${BASE_PATH}/images/carrots.jpg`}
+          src={`${BASE_PATH}/images/carrots.webp`}
           alt='Freshly harvested carrots and leeks'
           className='w-full h-full object-cover'
           width={640}
