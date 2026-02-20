@@ -43,7 +43,7 @@ export const SoilNutrientStatus: React.FC = () => {
 
   return (
     <div className='rounded-lg border border-neutral-200 p-4'>
-      <h3 className='text-sm font-bold text-[#c28b3c]'>Nutrients Needed</h3>
+      <h3 className='text-sm font-bold text-[#986C2F]'>Nutrients Needed</h3>
 
       <ul className='mt-3 space-y-2'>
         {SOIL_NUTRIENTS.map((nutrient) => (

@@ -62,7 +62,7 @@ export const PlantingCard: React.FC<PlantingCardProps> = ({
     >
       {/* Title with icon */}
       <div className='mb-4 flex items-start justify-between border-b border-gray-300'>
-        <h3 className='text-lg font-semibold text-gray-900'>{cropName}</h3>
+        <h2 className='text-lg font-semibold text-gray-900'>{cropName}</h2>
 
         <div className='relative inline-block group text-sm'>
           <button

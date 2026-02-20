@@ -58,9 +58,9 @@ export const CropCard: React.FC<CropCardProps> = ({
     >
       {/* Title with icons */}
       <div className='mb-4 flex items-start justify-between border-b border-gray-300'>
-        <h3 className='text-lg font-semibold text-gray-900 truncate'>
+        <h2 className='text-lg font-semibold text-gray-900 truncate'>
           {crop.name}
-        </h3>
+        </h2>
         <div className='flex gap-3 text-sm'>
           <button
             type='button'

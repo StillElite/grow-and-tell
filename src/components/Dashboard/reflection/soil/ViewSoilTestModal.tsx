@@ -1,3 +1,4 @@
+import { useId } from 'react';
 import Modal from 'react-modal';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
@@ -15,10 +16,26 @@ export const VieWSoilTestModal: React.FC<VieWSoilTestModalProps> = ({
   onClose,
   soilTests,
 }) => {
+  const titleId = useId();
+  const descId = useId();
+
   const sortedTests = [...soilTests].sort(
     (a, b) =>
       new Date(b.dateTested).getTime() - new Date(a.dateTested).getTime(),
   );
+
+  const handleScrollKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
+    const scrollAmount = 50;
+    const { key, currentTarget } = e;
+
+    if (key === 'ArrowDown') {
+      e.preventDefault();
+      currentTarget.scrollTop += scrollAmount;
+    } else if (key === 'ArrowUp') {
+      e.preventDefault();
+      currentTarget.scrollTop -= scrollAmount;
+    }
+  };
 
   return (
     <Modal
@@ -26,87 +43,89 @@ export const VieWSoilTestModal: React.FC<VieWSoilTestModalProps> = ({
       onRequestClose={onClose}
       shouldCloseOnEsc
       shouldReturnFocusAfterClose
-      contentLabel='Soil Tests'
+      contentLabel='Soil Test History'
       aria={{
-        labelledby: 'manage-defaults-title',
-        describedby: 'manage-defaults-desc',
+        labelledby: titleId,
+        describedby: descId,
       }}
-      className='relative w-full max-w-md mx-auto mt-24 bg-white dark:bg-dark-bg p-6 rounded-lg shadow border border-gray-200 focus:outline-none'
-      overlayClassName='fixed inset-0 bg-black/40 z-50 flex items-start justify-center'
+      className='relative w-full max-w-md mx-auto bg-white dark:bg-dark-bg p-8 xs:rounded-lg shadow-xl border border-gray-200 dark:border-gray-800 focus:outline-none'
+      overlayClassName='fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center z-50'
     >
-      {/* Close */}
-      <button
-        type='button'
-        onClick={onClose}
-        aria-label='Close Manage Default Tasks'
-        className='absolute top-4 right-4 text-gray-500 hover:text-gray-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#2a452c] rounded-md w-5 h-5'
+      {/* Header */}
+      <div className='flex justify-between items-start mb-4'>
+        <div>
+          <h2
+            id={titleId}
+            className='text-xl font-bold text-[#1E6635] dark:text-[#79B040]'
+          >
+            Soil Test History
+          </h2>
+          <p
+            id={descId}
+            className='text-sm text-gray-500 dark:text-gray-400 mt-1 leading-snug'
+          >
+            Review past soil test results for this bed and see how your soil has
+            evolved over time.
+          </p>
+        </div>
+        <button
+          type='button'
+          onClick={onClose}
+          aria-label='Close'
+          className='text-gray-400 hover:text-gray-600 dark:hover:text-gray-200 focus:ring-2 focus:ring-[#1E6635] rounded-md outline-none transition-colors'
+        >
+          <FontAwesomeIcon icon={faTimes} className='w-5 h-5' />
+        </button>
+      </div>
+
+      <div
+        tabIndex={0}
+        role='region'
+        aria-label='Soil test list'
+        onKeyDown={handleScrollKeyDown}
+        className='max-h-[450px] overflow-y-auto pr-1 space-y-2 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#244225] focus-visible:ring-offset-4 rounded-lg'
       >
-        <FontAwesomeIcon icon={faTimes} aria-hidden='true' />
-      </button>
+        {sortedTests.map((test) => (
+          <div
+            key={test.id}
+            className='p-3 rounded-lg border border-gray-100 dark:border-gray-800 bg-white dark:bg-gray-900 shadow-sm flex items-center hover:border-gray-200 dark:hover:border-gray-700 transition-all'
+          >
+            {/* Date Section */}
+            <div className='w-24 shrink-0'>
+              <span className='text-sm font-bold text-gray-800 dark:text-gray-100'>
+                {formatDate(test.dateTested)}
+              </span>
+            </div>
 
-      {/* Header Section */}
-      <h2
-        id='manage-defaults-title'
-        className='text-xl font-bold text-[#1E6635] mb-1'
-      >
-        Soil Test History
-      </h2>
-      <p id='manage-defaults-desc' className='text-sm text-gray-600 mb-6'>
-        Review past soil test results for this bed and see how your soil has
-        evolved over time.
-      </p>
+            {/* Metrics Section */}
+            <div className='flex flex-1 items-center justify-around border-l border-gray-100 dark:border-gray-800 ml-3 pl-3'>
+              <div className='text-center'>
+                <span className='block text-[10px] font-bold text-[#557C2D]'>
+                  pH
+                </span>
+                <span className='font-mono '>{test.pH.toFixed(1)}</span>
+              </div>
+              <div className='text-center'>
+                <span className='block text-[10px] text-[#557C2D] '>N</span>
+                <span className='font-mono '>{test.nitrogen}</span>
+              </div>
+              <div className='text-center'>
+                <span className='block text-[10px] text-[#557C2D] '>P</span>
+                <span className='font-mono '>{test.phosphorus}</span>
+              </div>
+              <div className='text-center'>
+                <span className='block text-[10px] text-[#557C2D] '>K</span>
+                <span className='font-mono '>{test.potassium}</span>
+              </div>
+            </div>
+          </div>
+        ))}
 
-      <div className='max-h-[400px] overflow-y-auto rounded-xl border border-gray-200 shadow-sm relative'>
-        <table className='w-full text-sm border-collapse'>
-          <thead className='sticky top-0 z-20 bg-[#F4F7F2]'>
-            <tr className='text-[#1E6635]'>
-              <th className='px-6 py-4 text-left text-xs font-bold uppercase tracking-widest border-b border-gray-200'>
-                Date
-              </th>
-              <th className='px-4 py-4 text-center text-xs font-bold uppercase tracking-widest border-b border-gray-200'>
-                pH
-              </th>
-              <th className='px-4 py-4 text-right text-xs font-bold uppercase tracking-widest border-b border-gray-200'>
-                N
-              </th>
-              <th className='px-4 py-4 text-right text-xs font-bold uppercase tracking-widest border-b border-gray-200'>
-                P
-              </th>
-              <th className='px-4 py-4 text-right text-xs font-bold uppercase tracking-widest border-b border-gray-200'>
-                K
-              </th>
-            </tr>
-          </thead>
-
-          <tbody className='divide-y divide-gray-100 bg-white'>
-            {sortedTests.map((test) => (
-              <tr
-                key={test.id}
-                className='hover:bg-[#79B040]/5 transition-colors group'
-              >
-                <td className='px-6 py-4 whitespace-nowrap font-semibold '>
-                  {formatDate(test.dateTested)}
-                </td>
-
-                <td className='px-4 py-4 text-center'>
-                  <span className='inline-flex items-center px-3 py-1 rounded-md bg-[#79B040]/10 text-[#5C8233] font-mono text-xs font-bold border border-[#79B040]/20'>
-                    {test.pH.toFixed(1)}
-                  </span>
-                </td>
-
-                <td className='px-4 py-4 text-right font-mono text-gray-600 group-hover:text-gray-900'>
-                  {test.nitrogen}
-                </td>
-                <td className='px-4 py-4 text-right font-mono text-gray-600 group-hover:text-gray-900'>
-                  {test.phosphorus}
-                </td>
-                <td className='px-4 py-4 text-right font-mono text-gray-600 group-hover:text-gray-900'>
-                  {test.potassium}
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+        {sortedTests.length === 0 && (
+          <p className='text-center py-8 text-gray-400 text-sm'>
+            No records found.
+          </p>
+        )}
       </div>
     </Modal>
   );

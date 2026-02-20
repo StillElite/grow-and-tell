@@ -27,9 +27,9 @@ const SectionHeader: React.FC<SectionHeaderProps> = ({
         role='presentation'
       />
       <div>
-        <h2 id={headingId} className='text-3xl font-bold text-[#2a452c] mb-2'>
+        <h1 id={headingId} className='text-3xl font-bold text-[#2a452c] mb-2'>
           {title}
-        </h2>
+        </h1>
         <p className='text-gray-800 max-w-xl'>{description}</p>
       </div>
     </div>

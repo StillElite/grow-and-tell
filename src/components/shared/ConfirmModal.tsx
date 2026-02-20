@@ -84,7 +84,7 @@ const ConfirmModal: React.FC<ConfirmModalProps> = ({
           <button
             type='button'
             onClick={onConfirm}
-            className='px-4 py-1.5 text-sm bg-[#e9541e] text-white rounded hover:bg-[#d34712]'
+            className='px-4 py-1.5 text-sm bg-orange-700 text-white rounded hover:bg-orange-800'
           >
             {confirmLabel}
           </button>

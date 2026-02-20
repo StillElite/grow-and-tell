@@ -23,20 +23,14 @@ export const TaskSummary: React.FC = () => {
 
       {/* Content */}
       <div className='flex-1 overflow-y-auto px-6 space-y-4'>
-        <section
-          className='rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-dark-bg p-4'
-          aria-labelledby='summary-progress-title'
-        >
-          <p
-            id='summary-progress-title'
-            className='text-sm text-gray-700 dark:text-gray-300 mb-2'
-          >
+        <div className='rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-dark-bg p-4'>
+          <p className='text-sm text-gray-700 dark:text-gray-300 mb-2'>
             Completed: {completedTasks} / {totalTasks} ({percentage.toFixed(0)}
             %)
           </p>
           <div
             role='progressbar'
-            aria-labelledby='summary-progress-title'
+            aria-label='Task completion progress'
             aria-valuemin={0}
             aria-valuemax={100}
             aria-valuenow={Math.round(percentage)}
@@ -47,8 +41,8 @@ export const TaskSummary: React.FC = () => {
               style={{ width: `${percentage}%` }}
             />
           </div>
-        </section>
-        <section className='rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-dark-bg p-4'>
+        </div>
+        <div className='rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-dark-bg p-4'>
           <h3 className='text-md font-medium text-gray-900 dark:text-gray-100 mb-2'>
             Remaining by Frequency
           </h3>
@@ -57,12 +51,12 @@ export const TaskSummary: React.FC = () => {
             <li>Weekly - {taskFrequencyNotComplete.weekly}</li>
             <li>Monthly - {taskFrequencyNotComplete.monthly}</li>
           </ul>
-        </section>
+        </div>
         <div className='mt-4'>
           <button
             type='button'
             onClick={() => setIsTaskManagementModalOpen(true)}
-            className='w-full text-sm px-4 py-2 rounded-md text-white bg-[#7fb347] hover:bg-[#6ea13e] shadow-sm'
+            className='w-full text-sm px-4 py-2 rounded-md text-white bg-[#557C2D] hover:bg-[#6ea13e] shadow-sm'
           >
             Manage Defaults
           </button>

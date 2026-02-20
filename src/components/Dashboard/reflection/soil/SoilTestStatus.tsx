@@ -10,7 +10,7 @@ export const SoilTestStatus: React.FC = () => {
 
   return (
     <div className='rounded-lg border border-neutral-200 p-4 flex flex-col n'>
-      <h3 className='text-sm font-bold text-[#c28b3c]'> Tests</h3>
+      <h3 className='text-sm font-bold text-[#986C2F]'> Tests</h3>
 
       <ul className='mt-3 space-y-2 text-sm text-neutral-800'>
         <li className='flex justify-between'>

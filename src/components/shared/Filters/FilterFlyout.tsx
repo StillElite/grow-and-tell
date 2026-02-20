@@ -101,6 +101,7 @@ export const FilterFlyout: React.FC<GenericFilterFlyoutProps> = ({
         className={getPanelClasses(animateIn)}
         role='dialog'
         aria-modal='true'
+        aria-labelledby='dialog-title'
       >
         <button
           type='button'
@@ -111,7 +112,9 @@ export const FilterFlyout: React.FC<GenericFilterFlyoutProps> = ({
           <FontAwesomeIcon icon={faTimes} />
         </button>
 
-        <h2 className='text-xl font-semibold mb-6'>All Filters</h2>
+        <h2 id='dialog-title' className='text-xl font-semibold mb-6'>
+          All Filters
+        </h2>
 
         <div className='flex-1 overflow-y-auto pr-2'>
           {groups.map((group) => {
@@ -167,7 +170,7 @@ export const FilterFlyout: React.FC<GenericFilterFlyoutProps> = ({
           <button
             type='button'
             onClick={handleApply}
-            className={`text-white ${bgAccent} px-6 py-2 rounded-lg font-medium shadow-md hover:brightness-110 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-lime-500`}
+            className={`text-white bg-[#557C2D] px-6 py-2 rounded-lg font-medium shadow-md hover:brightness-110 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-lime-500`}
           >
             Apply
           </button>

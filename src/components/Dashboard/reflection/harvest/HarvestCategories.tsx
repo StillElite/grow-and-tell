@@ -74,7 +74,7 @@ export const HarvestCategories: React.FC<HarvestCategoriesProps> = ({
 
   return (
     <div className='rounded-lg border border-neutral-200 p-4'>
-      <h3 className='text-sm font-bold text-[#c28b3c]'>Categories</h3>
+      <h3 className='text-sm font-bold text-[#986C2F]'>Categories</h3>
 
       <ul className='mt-3 space-y-2'>
         {HARVEST_CATEGORIES.map((category) => {

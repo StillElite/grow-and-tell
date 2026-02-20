@@ -59,7 +59,7 @@ export const FilterBar: React.FC<FilterBarProps> = ({
             label={`All ${group.label}s`}
             value={(controller.values[group.key] as string) ?? null}
             options={group.options}
-            bgAccent={bgAccent}
+            bgAccent='bg-[#557C2D]'
             onChange={(newSelection) =>
               controller.setValue(group.key, newSelection)
             }

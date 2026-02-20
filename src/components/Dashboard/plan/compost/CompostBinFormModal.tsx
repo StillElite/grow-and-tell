@@ -191,7 +191,7 @@ export const CompostBinFormModal: React.FC<CompostBinFormModalProps> = ({
         />
         <button
           type='submit'
-          className='mt-2 w-full bg-[#e9541e] text-white font-semibold text-sm py-2 rounded hover:bg-[#d34712] transition flex items-center justify-center'
+          className='mt-2 w-full bg-orange-700 text-white font-semibold text-sm py-2 rounded hover:bg-orange-800 transition flex items-center justify-center'
         >
           <FontAwesomeIcon icon={faPlus} className='mr-2' aria-hidden='true' />
           {modalText.button}

@@ -14,7 +14,7 @@ export const HarvestRecentEntries: React.FC<HarvestRecentEntriesProps> = ({
 
   return (
     <div className='rounded-lg border border-neutral-200 p-4 flex flex-col n'>
-      <h3 className='text-sm font-bold text-[#c28b3c]'>Recent entries</h3>
+      <h3 className='text-sm font-bold text-[#986C2F]'>Recent entries</h3>
 
       <p className='mt-3 text-sm text-neutral-700'>
         <strong>{harvests.length}</strong> {entriesLogged} logged

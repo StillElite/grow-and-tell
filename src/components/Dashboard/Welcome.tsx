@@ -18,9 +18,9 @@ const Welcome: React.FC = () => {
 
         {/* Welcome message */}
         <div className='text-left'>
-          <h2 className='text-2xl xl:text-4xl font-bold text-[#b45309] drop-shadow-sm mb-4'>
+          <h1 className='text-2xl xl:text-4xl font-bold text-[#b45309] drop-shadow-sm mb-4'>
             Welcome to your garden log
-          </h2>
+          </h1>
           <p className='text-gray-700 text-base md:text-lg max-w-xl'>
             Plan, reflect, and grow all in one place. Use the tools below to
             manage your beds, track plantings, and nurture your compost.

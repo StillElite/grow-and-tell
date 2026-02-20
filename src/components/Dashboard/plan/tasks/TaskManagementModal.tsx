@@ -177,7 +177,7 @@ export const TaskManagementModal: React.FC<TaskManagementModalProps> = ({
       <div className='mt-4 flex items-center justify-between'>
         <button
           type='button'
-          className='text-sm px-3 py-2 rounded-md border border-gray-300 bg-white hover:bg-gray-50 text-[#e9541e] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#2a452c]'
+          className='text-sm px-3 py-2 rounded-md border border-gray-300 bg-white hover:bg-gray-50 text-orange-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#2a452c]'
           onClick={handleRestoreFactory}
         >
           Reset defaults
@@ -193,7 +193,7 @@ export const TaskManagementModal: React.FC<TaskManagementModalProps> = ({
           </button>
           <button
             type='button'
-            className='text-sm px-4 py-2 rounded-md text-white bg-[#7fb347] hover:bg-[#6ea13e] shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#2a452c]'
+            className='text-sm px-4 py-2 rounded-md text-white bg-[#557C2D] hover:bg-[#6ea13e] shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#2a452c]'
             onClick={handleSave}
           >
             Save changes

@@ -47,7 +47,7 @@ export const Dropdown: React.FC<DropdownProps> = ({
   const displayLabel = value ?? label;
 
   const buttonClass = `${BUTTON_BASE} ${
-    isActive ? `${bgAccent} border-transparent text-white` : BUTTON_INACTIVE
+    isActive ? 'bg-[#557C2D] border-transparent text-white' : BUTTON_INACTIVE
   }`;
 
   const handleOptionClick = (option: string) => {
