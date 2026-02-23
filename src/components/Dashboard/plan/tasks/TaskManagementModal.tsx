@@ -93,7 +93,7 @@ export const TaskManagementModal: React.FC<TaskManagementModalProps> = ({
         labelledby: 'manage-defaults-title',
         describedby: 'manage-defaults-desc',
       }}
-      className='relative w-full max-w-md mx-auto mt-24 bg-white dark:bg-dark-bg p-6 rounded-lg shadow border border-gray-200 focus:outline-none'
+      className='relative w-full max-w-md mx-auto mt-24 bg-white p-6 rounded-lg shadow border border-gray-200 focus:outline-none'
       overlayClassName='fixed inset-0 bg-black/40 z-50 flex items-start justify-center'
     >
       {/* Close */}
@@ -113,10 +113,7 @@ export const TaskManagementModal: React.FC<TaskManagementModalProps> = ({
       >
         Manage Default Tasks
       </h2>
-      <p
-        id='manage-defaults-desc'
-        className='text-sm text-gray-600 dark:text-gray-300 mb-4'
-      >
+      <p id='manage-defaults-desc' className='text-sm text-gray-600 mb-4'>
         Uncheck any default tasks you do not want to appear in your list. You
         can re-enable them anytime.
       </p>
@@ -145,10 +142,10 @@ export const TaskManagementModal: React.FC<TaskManagementModalProps> = ({
       <fieldset
         id='manage-defaults-fieldset'
         aria-labelledby='manage-defaults-title'
-        className='max-h-72 overflow-auto rounded-md border border-gray-200 dark:border-gray-700'
+        className='max-h-72 overflow-auto rounded-md border border-gray-200'
       >
         <legend className='sr-only'>Default tasks</legend>
-        <ul className='divide-y divide-gray-200 dark:divide-gray-700'>
+        <ul className='divide-y divide-gray-200'>
           {defaultTasks.map((task) => (
             <li
               key={task.id}
@@ -156,7 +153,7 @@ export const TaskManagementModal: React.FC<TaskManagementModalProps> = ({
             >
               <label className='flex-1 cursor-pointer'>
                 <span className='block text-sm font-medium'>{task.name}</span>
-                <span className='block text-xs text-gray-600 dark:text-gray-400'>
+                <span className='block text-xs text-gray-600'>
                   {task.category} &bull; {task.frequency}
                 </span>
               </label>

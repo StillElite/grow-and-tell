@@ -134,9 +134,7 @@ const TaskSection: React.FC<PlantingSectionProps> = ({
             type='button'
             disabled={!hasCompletedTasks}
             onClick={() => setIsConfirmOpen(true)}
-            className={`text-sm px-3 py-2 rounded-md border border-gray-300
-              focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#2a452c]
-              ${buttonClasses}`}
+            className={`text-sm px-4 py-2 rounded-md border border-gray-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#2a452c] ${buttonClasses}`}
             aria-label='Clear all completed task checkmarks'
           >
             Reset Progress
@@ -159,7 +157,7 @@ const TaskSection: React.FC<PlantingSectionProps> = ({
         <button
           type='button'
           onClick={handleAddTask}
-          className='h-9 bg-[#244225] text-white text-sm px-4 rounded-md hover:bg-[#356a3c] transition'
+          className='text-sm text-white px-4 py-2 rounded-md bg-[#244225] hover:bg-[#356a3c] border border-[#244225] hover:border-[#356a3c] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#2a452c]'
         >
           + Add Task
         </button>
@@ -168,8 +166,7 @@ const TaskSection: React.FC<PlantingSectionProps> = ({
           onClick={() => setIsSummaryOpen(true)}
           aria-haspopup='dialog'
           aria-expanded={isSummaryOpen}
-          className='text-sm px-4 py-2 rounded-md border border-gray-300 bg-white hover:bg-gray-50
-             dark:bg-dark-bg dark:border-gray-600 dark:hover:bg-gray-800 lg:hidden'
+          className={`text-sm px-4 py-2 rounded-md border border-gray-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#2a452c] ${buttonClasses}`}
         >
           Task Summary
         </button>

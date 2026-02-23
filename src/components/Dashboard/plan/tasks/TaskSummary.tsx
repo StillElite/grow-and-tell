@@ -23,8 +23,8 @@ export const TaskSummary: React.FC = () => {
 
       {/* Content */}
       <div className='flex-1 overflow-y-auto px-6 space-y-4'>
-        <div className='rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-dark-bg p-4'>
-          <p className='text-sm text-gray-700 dark:text-gray-300 mb-2'>
+        <div className='rounded-lg border border-gray-200 bg-white p-4'>
+          <p className='text-sm text-gray-700 mb-2'>
             Completed: {completedTasks} / {totalTasks} ({percentage.toFixed(0)}
             %)
           </p>
@@ -42,11 +42,11 @@ export const TaskSummary: React.FC = () => {
             />
           </div>
         </div>
-        <div className='rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-dark-bg p-4'>
-          <h3 className='text-md font-medium text-gray-900 dark:text-gray-100 mb-2'>
+        <div className='rounded-lg border border-gray-200 bg-white p-4'>
+          <h3 className='text-md font-medium text-gray-900 mb-2'>
             Remaining by Frequency
           </h3>
-          <ul className='text-sm text-gray-700 dark:text-gray-300 space-y-2'>
+          <ul className='text-sm text-gray-700 space-y-2'>
             <li>Daily - {taskFrequencyNotComplete.daily}</li>
             <li>Weekly - {taskFrequencyNotComplete.weekly}</li>
             <li>Monthly - {taskFrequencyNotComplete.monthly}</li>

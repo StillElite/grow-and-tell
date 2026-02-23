@@ -77,7 +77,7 @@ export const TaskCard: React.FC<TaskCardProps> = ({
 
           <div
             id={`task-${task.id}-meta`}
-            className='flex flex-wrap items-center gap-2 text-xs text-gray-600 dark:text-gray-300'
+            className='flex flex-wrap items-center gap-2 text-xs text-gray-600'
           >
             <span className='flex items-center gap-1'>
               <span
@@ -90,7 +90,7 @@ export const TaskCard: React.FC<TaskCardProps> = ({
 
             <span>&bull;</span>
 
-            <span className='rounded-full border px-2 bg-gray-100 text-gray-700 dark:bg-gray-800 dark:text-gray-200'>
+            <span className='rounded-full border px-2 bg-gray-100 text-gray-700'>
               {getFrequencyLabel(task.frequency)}
             </span>
             {task.type === 'default' && (

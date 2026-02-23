@@ -36,7 +36,7 @@ export const FormField: React.FC<FormFieldProps> = ({
   //   'relative z-0 peer w-full bg-white border border-gray-300 rounded-md p-4 text-base text-gray-900 placeholder-transparent shadow-sm focus:outline-none focus:border-[#2a452c] focus-visible:ring-2 focus-visible:ring-[#2a452c] focus-visible:ring-offset-2 focus-visible:ring-offset-white';
 
   const inputBaseClasses =
-    'relative z-0 peer w-full bg-white border border-gray-300 rounded-md p-4 text-base text-gray-900 placeholder-transparent shadow-sm focus:outline-none focus:border-[#2a452c] focus-visible:ring-2 focus-visible:ring-[#2a452c] focus-visible:ring-offset-2 focus-visible:ring-offset-white appearance-none flex items-center';
+    'relative z-0 peer w-full bg-white border border-gray-300 rounded-md p-4 text-base text-gray-900 placeholder-transparent shadow-sm focus:outline-none focus:border-[#2a452c] focus-visible:ring-2 focus-visible:ring-[#2a452c] focus-visible:ring-offset-2 focus-visible:ring-offset-white appearance-none flex items-center h-[58px]';
 
   const isEmptyDate = type === 'date' && !String(value ?? '');
   const handleChange = (

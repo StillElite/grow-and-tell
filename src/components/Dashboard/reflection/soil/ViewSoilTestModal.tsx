@@ -48,22 +48,16 @@ export const VieWSoilTestModal: React.FC<VieWSoilTestModalProps> = ({
         labelledby: titleId,
         describedby: descId,
       }}
-      className='relative w-full max-w-md mx-auto bg-white dark:bg-dark-bg p-8 xs:rounded-lg shadow-xl border border-gray-200 dark:border-gray-800 focus:outline-none'
+      className='relative w-full max-w-md mx-auto bg-white p-8 xs:rounded-lg shadow-xl border border-gray-200 focus:outline-none'
       overlayClassName='fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center z-50'
     >
       {/* Header */}
       <div className='flex justify-between items-start mb-4'>
         <div>
-          <h2
-            id={titleId}
-            className='text-xl font-bold text-[#1E6635] dark:text-[#79B040]'
-          >
+          <h2 id={titleId} className='text-xl font-bold text-[#1E6635]'>
             Soil Test History
           </h2>
-          <p
-            id={descId}
-            className='text-sm text-gray-500 dark:text-gray-400 mt-1 leading-snug'
-          >
+          <p id={descId} className='text-sm text-gray-500 mt-1 leading-snug'>
             Review past soil test results for this bed and see how your soil has
             evolved over time.
           </p>
@@ -72,7 +66,7 @@ export const VieWSoilTestModal: React.FC<VieWSoilTestModalProps> = ({
           type='button'
           onClick={onClose}
           aria-label='Close'
-          className='text-gray-400 hover:text-gray-600 dark:hover:text-gray-200 focus:ring-2 focus:ring-[#1E6635] rounded-md outline-none transition-colors'
+          className='text-gray-400 hover:text-gray-600 focus:ring-2 focus:ring-[#1E6635] rounded-md outline-none transition-colors'
         >
           <FontAwesomeIcon icon={faTimes} className='w-5 h-5' />
         </button>
@@ -88,17 +82,17 @@ export const VieWSoilTestModal: React.FC<VieWSoilTestModalProps> = ({
         {sortedTests.map((test) => (
           <div
             key={test.id}
-            className='p-3 rounded-lg border border-gray-100 dark:border-gray-800 bg-white dark:bg-gray-900 shadow-sm flex items-center hover:border-gray-200 dark:hover:border-gray-700 transition-all'
+            className='p-3 rounded-lg border border-gray-100 bg-white shadow-sm flex items-center hover:border-gray-200 transition-all'
           >
             {/* Date Section */}
             <div className='w-24 shrink-0'>
-              <span className='text-sm font-bold text-gray-800 dark:text-gray-100'>
+              <span className='text-sm font-bold text-gray-800'>
                 {formatDate(test.dateTested)}
               </span>
             </div>
 
             {/* Metrics Section */}
-            <div className='flex flex-1 items-center justify-around border-l border-gray-100 dark:border-gray-800 ml-3 pl-3'>
+            <div className='flex flex-1 items-center justify-around border-l border-gray-100 ml-3 pl-3'>
               <div className='text-center'>
                 <span className='block text-[10px] font-bold text-[#557C2D]'>
                   pH

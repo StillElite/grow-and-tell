@@ -82,6 +82,9 @@ input[type='date'].date-empty:focus::-webkit-datetime-edit,
 input[type='date']::-webkit-date-and-time-value {
   text-align: left;
   width: 100%;
+  min-height: 1.5em;
+  display: flex;
+  align-items: center;
 }
 
 /* Pushes the calendar icon to the far right */
