@@ -57,7 +57,7 @@ const Sidebar: React.FC<SidebarProps> = ({
         />
       </Link>
 
-      <nav className='space-y-2 text-sm'>
+      <nav className='space-y-2 text-base'>
         {sidebarItems.map((item) => {
           const buttonClasses = `block hover:underline ${activeView === item.viewKey ? 'font-bold text-[#FCD583]' : ''}`;
 

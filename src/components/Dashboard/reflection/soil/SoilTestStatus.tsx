@@ -1,5 +1,5 @@
 import { useSoilRecordContext } from '../../../../context/SoilRecordContext';
-import { getSoilTestStatusCounts } from '../../../../utils/getSoilTestStatusCounts ';
+import { getSoilTestStatusCounts } from '../../../../utils/getSoilTestStatusCounts';
 
 export const SoilTestStatus: React.FC = () => {
   const { soilRecords } = useSoilRecordContext();

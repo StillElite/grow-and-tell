@@ -75,3 +75,17 @@ input[type='date'].date-empty:focus::-webkit-datetime-edit,
 .group:focus-within input[type='date'].date-empty::-webkit-datetime-edit {
   color: inherit;
 }
+
+/*--Added--*/
+
+/* Aligns the date text (the 'mm/dd/yyyy' part) to the left */
+input[type='date']::-webkit-date-and-time-value {
+  text-align: left;
+  width: 100%;
+}
+
+/* Pushes the calendar icon to the far right */
+input[type='date']::-webkit-calendar-picker-indicator {
+  display: block;
+  margin-left: auto;
+}
