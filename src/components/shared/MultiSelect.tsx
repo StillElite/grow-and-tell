@@ -111,7 +111,7 @@ export const MultiSelect: React.FC<MultiSelectProps> = ({
           role='listbox'
           aria-labelledby={buttonId}
           aria-multiselectable='true'
-          className='absolute right-0 top-full mt-1 w-56 z-50 bg-white rounded-md shadow-lg'
+          className='absolute left-0 top-full mt-1 w-52 z-50 bg-white rounded-md shadow-lg'
         >
           {options.length > 0 ? (
             <div className='py-1 max-h-60 overflow-y-auto'>

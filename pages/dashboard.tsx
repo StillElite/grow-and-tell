@@ -37,7 +37,7 @@ const Dashboard: React.FC = () => {
 `;
 
   return (
-    <div className='min-h-screen flex bg-[#f3f5f2]'>
+    <div className='min-h-dvh flex bg-[#f3f5f2]'>
       {/* Sidebar wrapper */}
       <div className={sidebarWrapperClasses}>
         <Sidebar
