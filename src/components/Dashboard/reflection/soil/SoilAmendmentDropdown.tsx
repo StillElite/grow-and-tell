@@ -96,7 +96,7 @@ export const SoilAmendmentDropdown: React.FC<SoilAmendmentDropdownProps> = ({
           role='listbox'
           aria-label='Soil amendments'
           aria-multiselectable='true'
-          className='absolute left-0 top-full z-[99] mt-2 w-64 rounded-md border bg-white shadow-lg'
+          className='absolute left-0 top-full z-[99] mt-2 w-44 rounded-md border bg-white shadow-lg'
         >
           <div className='py-1 max-h-60 overflow-y-auto'>
             {options.map((amendment) => {

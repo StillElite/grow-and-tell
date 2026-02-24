@@ -77,7 +77,7 @@ export const PlantingCard: React.FC<PlantingCardProps> = ({
 
           {isCropStillActive && (
             <span
-              className={`absolute left-1/2 -translate-x-1/2 bottom-full mb-1 whitespace-nowrap rounded ${bgAccent} px-2 py-1 text-xs text-white opacity-0 translate-y-1 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-200 ease-out z-10`}
+              className={`absolute right-0 bottom-full mb-2 w-max max-w-[150px] whitespace-normal rounded ${bgAccent} px-2 py-1 text-xs text-white opacity-0 translate-y-1 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-200 ease-out z-10 shadow-lg`}
             >
               Cannot delete while crop is active in a bed
             </span>

@@ -69,13 +69,13 @@ export const MultiSelect: React.FC<MultiSelectProps> = ({
   const toggleId = (id: string) => {
     const isSelected = selectedSet.has(id);
     onChange(
-      isSelected ? selectedIds.filter((x) => x !== id) : [...selectedIds, id]
+      isSelected ? selectedIds.filter((x) => x !== id) : [...selectedIds, id],
     );
   };
 
   const handleOptionKeyDown = (
     e: React.KeyboardEvent<HTMLDivElement>,
-    id: string
+    id: string,
   ) => {
     if (e.key === 'Enter' || e.key === ' ') {
       e.preventDefault();
@@ -111,7 +111,7 @@ export const MultiSelect: React.FC<MultiSelectProps> = ({
           role='listbox'
           aria-labelledby={buttonId}
           aria-multiselectable='true'
-          className='absolute z-[99] mt-2 w-64 rounded-md border bg-white shadow-lg flex flex-col'
+          className='absolute right-0 top-full mt-1 w-56 z-50 bg-white rounded-md shadow-lg'
         >
           {options.length > 0 ? (
             <div className='py-1 max-h-60 overflow-y-auto'>
@@ -129,7 +129,6 @@ export const MultiSelect: React.FC<MultiSelectProps> = ({
                   >
                     <div className='flex items-center gap-2'>
                       <span className='relative w-5 h-5 flex-shrink-0'>
-                        {/* visual checkbox only (avoid double focus) */}
                         <input
                           type='checkbox'
                           checked={selected}
