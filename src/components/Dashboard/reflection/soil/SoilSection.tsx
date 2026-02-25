@@ -1,6 +1,6 @@
 import PageHeader from '../../../shared/PageHeader';
 import SectionHeader from '../../../shared/SectionHeader';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useSoilRecordContext } from '../../../../context/SoilRecordContext';
 import { SoilRecordFormModal } from './SoilRecordFormModal';
 import { SoilCard } from './SoilCard';
@@ -24,6 +24,11 @@ const SoilSection: React.FC<SoilSectionProps> = ({
   const [soilRecordToEdit, setSoilRecordToEdit] = useState<SoilRecord | null>(
     null,
   );
+
+  // Reset scroll to top when this component mounts
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   const isEditSoilRecordFormModalOpen = soilRecordToEdit !== null;
 

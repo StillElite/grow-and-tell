@@ -29,7 +29,7 @@ const Breadcrumb: React.FC<BreadcrumbProps> = ({ items }) => {
                 </button>
               ) : (
                 <span
-                  className='text-[#1b3b2f] font-semibold'
+                  className='text-[#1b3b2f] font-semibold block w-28 xs:w-auto truncate md:whitespace-normal'
                   aria-current={isLast ? 'page' : undefined}
                 >
                   {item.label}
