@@ -28,7 +28,7 @@ const PlantingSection: React.FC<PlantingSectionProps> = ({
       <SectionHeader
         title='Plant Log'
         description='Review past plantings to learn what worked where.'
-        imageSrc={`${BASE_PATH}/images/planting.png`}
+        imageSrc={`${BASE_PATH}/images/seed-icon2.png`}
         imageAlt='sprout icon'
       />
       <PlantingHistoryFilterWrapper />

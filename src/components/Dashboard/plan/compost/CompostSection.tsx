@@ -61,7 +61,7 @@ const CompostSection: React.FC<CompostSectionProps> = ({
       <SectionHeader
         title='Compost'
         description='Manage your composting activities and track compost usage.'
-        imageSrc={`${BASE_PATH}/images/compost.png`}
+        imageSrc={`${BASE_PATH}/images/compost-icon2.webp`}
         imageAlt='compost bin icon'
       />
       <CompostList

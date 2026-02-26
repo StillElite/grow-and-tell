@@ -60,7 +60,7 @@ const HarvestSection: React.FC<HarvestSectionProps> = ({
       <SectionHeader
         title='Harvest'
         description='Review your harvests and track your garden productivity.'
-        imageSrc={`${BASE_PATH}/images/basket-icon.png`}
+        imageSrc={`${BASE_PATH}/images/basket-icon.webp`}
         imageAlt='basket icon'
       />
 

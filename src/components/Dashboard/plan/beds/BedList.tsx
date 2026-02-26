@@ -43,7 +43,7 @@ export const BedList: React.FC<BedListProps> = ({
       <SectionHeader
         title='Beds'
         description='View and manage your garden beds in one place. Each bed displays its size and the crops currently planted. Stay organized as you grow!'
-        imageSrc={`${BASE_PATH}/images/bed-icon2.png`}
+        imageSrc={`${BASE_PATH}/images/bed-icon2.webp`}
         imageAlt='garden bed icon'
         headingId='beds-heading'
       />

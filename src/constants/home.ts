@@ -6,14 +6,14 @@ export const features: Feature[] = [
     title: 'Beds',
     description:
       "Create and organize your garden beds, and track exactly what's planted in each one. Build a clear structure so you always know what's growing where.",
-    image: `${BASE_PATH}/images/bed-icon2.png`,
+    image: `${BASE_PATH}/images/bed-icon2.webp`,
     alt: 'Garden bed fence icon',
   },
   {
     title: 'Compost',
     description:
       'Keep track of your composting efforts — log layers, turning, and moisture updates. Build healthier soil by managing your bins the smart way.',
-    image: `${BASE_PATH}/images/compost-icon2.png`,
+    image: `${BASE_PATH}/images/compost-icon2.webp`,
     alt: 'Wheelbarrow icon for composting',
   },
   {

@@ -56,7 +56,6 @@ export const CropCard: React.FC<CropCardProps> = ({
       aria-label={`Crop card for ${crop.name}`}
       className='rounded-lg border border-gray-200 bg-white p-5 shadow-sm transition flex flex-col'
     >
-      {/* Title with icons */}
       <div className='mb-4 flex items-start justify-between border-b border-gray-300'>
         <h2 className='text-lg font-semibold text-gray-900 truncate'>
           {crop.name}
@@ -92,7 +91,6 @@ export const CropCard: React.FC<CropCardProps> = ({
         />
       </div>
 
-      {/* Details */}
       <div className='text-sm text-gray-700 space-y-2'>
         <p className='flex items-center gap-2 mb-2'>
           <FontAwesomeIcon

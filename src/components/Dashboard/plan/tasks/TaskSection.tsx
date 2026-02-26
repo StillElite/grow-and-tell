@@ -101,18 +101,13 @@ const TaskSection: React.FC<PlantingSectionProps> = ({
   };
 
   useEffect(() => {
-    // Guard for SSR
     if (typeof window === 'undefined') return;
-
-    // Use matchMedia instead of window.innerWidth so this only fires when crossing Tailwind's lg breakpoint
-    // and stays in sync with CSS media queries (less noisy than resize)
 
     const mql = window.matchMedia('(min-width: 1024px)');
     const onChange = (e: MediaQueryListEvent) => {
       if (e.matches) setIsSummaryOpen(false);
     };
 
-    // If we land on desktop while open, close immediately
     if (mql.matches) setIsSummaryOpen(false);
 
     mql.addEventListener('change', onChange);
@@ -125,7 +120,7 @@ const TaskSection: React.FC<PlantingSectionProps> = ({
       <SectionHeader
         title='Tasks'
         description='Manage your gardening tasks and to-dos.'
-        imageSrc={`${BASE_PATH}/images/clock-icon2.png`}
+        imageSrc={`${BASE_PATH}/images/clock-icon2.webp`}
         imageAlt='clock icon'
       />
       <div className='flex justify-end items-center gap-2 mb-4'>
